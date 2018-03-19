@@ -29,7 +29,8 @@ class DTE {
 
                 .razonsocial {
                     margin: 0px;
-                      padding: 0px;
+                    padding: 0px;
+                    font-weight: bold;
                 }
                 
                 .masinfo {

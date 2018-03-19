@@ -77,6 +77,9 @@ class DTE {
                 }
 
                 .info-emisor .logo img {
+                    position:absolute;
+                    top:50%;
+                    left:50%;
                     width: 100%;
                 }
 

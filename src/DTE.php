@@ -1,10 +1,8 @@
 <?php
 
 namespace SolucionTotal\CorePDF;
-use \Mpdf;
 
-
-class DTE extends Mpdf {
+class DTE extends \Mpdf\Mpdf {
 
     private $html;
 

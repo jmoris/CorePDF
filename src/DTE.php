@@ -2,22 +2,23 @@
 
 namespace SolucionTotal\CorePDF;
 
-class DTE extends \Mpdf\Mpdf {
+class DTE {
 
     private $html;
-
+    private $pdf;
 
     public function __construct(){
-        $this ->SetDisplayMode('fullpage');
-        $this->writeHTML($this->setCss(), 1);
+        $this->pdf = new \Mpdf\Mpdf();
+        $this->pdf->SetDisplayMode('fullpage');
+        $this->pdf->writeHTML($this->setCss(), 1);
         $this->html = '<div clas="factura">';
         $this->html .= $this->setInfoSuperior();
-        $this->WriteHTML($this->html);
+        $this->pdf->WriteHTML($this->html);
         $this->html .= '</div>';
     }
 
     public function generar(){
-        $this->Output();
+        $this->pdf->Output();
     }
 
     private function setCss(){

@@ -86,6 +86,13 @@ class DTE {
                     display: inline-block;
                 }
 
+                .info-emisor .cuadro .cuadro-rojo {
+                    border-left: 1px solid red;
+                    border-right: 1px solid red;
+                    border-top: 1px solid red;
+                    border-bottom: 1px solid red;
+                }
+
                 .espacio {
                     padding-bottom: 5px;
                 }
@@ -113,12 +120,12 @@ class DTE {
             <p class="masinfo">LAS ARAUCARIAS #25, TENO, CURICO</p>
             <p class="masinfo">Email: contacto@soluciontotal.cl</p>
         ';
-        return $hmtl;
+        return $html;
     }
 
     private function setCuadro(){
         $html = '
-            <div style="line-height: 0.7; heigth: 20px; font-size:10px; text-align: center; border-bottom-style: solid; border-top-style: solid; border-left-style: solid; border-right-style: solid; border-width: 1px;">
+            <div class="cuadro-rojo">
                 <p><b>R.U.T.: 19.587.757-2</b></p>
                 <p><b>FACTURA ELECTRONICA</b></p>
                 <p><b>Nº 1000</b></p>

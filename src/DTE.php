@@ -72,18 +72,22 @@ class DTE {
                 }
 
                 .info-emisor .logo {
-                    width: 30%;
                     display: inline-block;
+                    width: 28%;
+                }
+
+                .info-emisor .logo img {
+                    width: 100%;
                 }
 
                 .info-emisor .info {
-                    width: 40%;
                     display: inline-block;
+                    width: 40%;
                 }
 
                 .info-emisor .cuadro {
-                    width: 30%;
                     display: inline-block;
+                    width: 30%;
                 }
 
                 .info-emisor .cuadro .cuadro-rojo {

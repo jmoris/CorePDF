@@ -1,0 +1,14 @@
+{
+    "name": "soluciontotal/corepdf",
+    "description": "Libreria PHP para generar DTE en formato PDF.",
+    "type": "library",
+    "require": {
+        "mpdf/mpdf": "^7.0"
+    },
+    "authors": [
+        {
+            "name": "Jesus Moris",
+            "email": "jesus@soluciontotal.cl"
+        }
+    ]
+}

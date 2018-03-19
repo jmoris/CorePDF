@@ -27,6 +27,17 @@ class DTE {
                     font-size: 8pt;
                 }
 
+                .razonsocial {
+                    margin: 0px;
+                      padding: 0px;
+                }
+                
+                .masinfo {
+                      margin: 0px;
+                      padding: 0px;
+                      font-size: 10px;
+                }
+
                 .bordes {
                     border-left: 1px solid black;
                     border-right: 1px solid black;
@@ -85,8 +96,10 @@ class DTE {
     private function setInfoSuperior(){
         $html = '
             <div class="info-emisor">
-                <div class="logo"></div>
-                <div class="info"></div>
+                <div class="logo">
+                    <img src="https://soluciontotal.s3.sa-east-1.amazonaws.com/contribuyentes/1/1.png">
+                </div>
+                <div class="info">'.$this->setEmisor().'</div>
                 <div class="cuadro">'.$this->setCuadro().'</div>
             </div>
         ';
@@ -94,7 +107,13 @@ class DTE {
     }
 
     private function setEmisor(){
-
+        $html = '
+            <p class="razonsocial">JESUS EDUARDO MORIS HERNANDEZ</p>
+            <p class="masinfo">SERVICIOS INTEGRALES DE INFORMATICA</p>
+            <p class="masinfo">LAS ARAUCARIAS #25, TENO, CURICO</p>
+            <p class="masinfo">Email: contacto@soluciontotal.cl</p>
+        ';
+        return $hmtl;
     }
 
     private function setCuadro(){

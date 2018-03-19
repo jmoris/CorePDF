@@ -10,10 +10,12 @@ class DTE extends Mpdf {
 
 
     public function __construct(){
-        $this->html = '';
-        $this->html .= $this->setCss();
+        $this ->SetDisplayMode('fullpage');
+        $this->writeHTML($this->setCss(), 1);
+        $this->html = '<div clas="factura">';
         $this->html .= $this->setInfoSuperior();
         $this->WriteHTML($this->html);
+        $this->html .= '</div>';
     }
 
     public function generar(){
@@ -22,7 +24,6 @@ class DTE extends Mpdf {
 
     private function setCss(){
         $css = '
-            <style>
                 .factura {
                     font-size: 8pt;
                 }
@@ -78,7 +79,6 @@ class DTE extends Mpdf {
                 .espacio {
                     padding-bottom: 5px;
                 }
-            </style>
         ';
         return $css;
     }

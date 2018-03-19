@@ -3,12 +3,16 @@
     "description": "Libreria PHP para generar DTE en formato PDF.",
     "type": "library",
     "require": {
-        "mpdf/mpdf": "^7.0"
+        "mpdf/mpdf": "^7.0",
+        "bigfish/pdf417": "^0.3.0"
     },
     "authors": [
         {
             "name": "Jesus Moris",
             "email": "jesus@soluciontotal.cl"
         }
-    ]
+    ],
+    "autoload": {
+        "psr-4": {"SolucionTotal\\CorePDF\\": "src/"}
+    }
 }

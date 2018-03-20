@@ -12,7 +12,7 @@ class DTE {
         $this->pdf->SetDisplayMode('fullpage');
         $this->pdf->writeHTML($this->setCss(), 1);
         $this->html = '<div clas="factura">';
-        $this->html .= $this->setInfoSuperior();
+        $this->html .= $this->setInfo();
         $this->html .= '</div>';
         $this->pdf->WriteHTML($this->html);
     }

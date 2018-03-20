@@ -8,10 +8,10 @@ class DTE {
     private $pdf;
 
     public function __construct(){
-        $this->pdf = new \Mpdf\Mpdf(['format' => 'A4']);
+        $this->pdf = new \Mpdf\Mpdf();
         $this->pdf->SetDisplayMode('fullpage');
         $this->pdf->writeHTML($this->setCss(), 1);
-        $this->html = '<div class="factura">';
+        $this->html = '<div clas="factura">';
         $this->html .= $this->setInfo();
         $this->html .= '</div>';
         $this->pdf->WriteHTML($this->html);
@@ -193,7 +193,7 @@ class DTE {
                 <p><b>FACTURA ELECTRONICA</b></p>
                 <p><b>Nº 1000</b></p>
             </div>
-            <p><b>S.I.I. - CURICÓ</b></p>
+            <p><b>S.I.I. - CURICÓ</b></p></div>
         ';
 
         return $html;
@@ -311,7 +311,7 @@ class DTE {
             ';
         } 
         $html .= '
-                </body>
+            </tbody>
             </table>
         ';
         return $html;

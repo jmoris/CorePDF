@@ -12,7 +12,7 @@ class DTE {
         $this->pdf->SetDisplayMode('fullpage');
         $this->pdf->writeHTML($this->setCss(), 1);
         $this->html = '<div clas="factura">';
-        $this->html .= $this->setInfo();
+        $this->html .= $this->setInfoSuperior();
         $this->html .= '</div>';
         $this->pdf->WriteHTML($this->html);
     }
@@ -298,21 +298,8 @@ class DTE {
                         <td>$ 990</td>
                         <td>$ 9.900</td>
                     </tr>
-        ';
-        for($i = 0; $i < 25; $i++){
-            $html .= '
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-            ';
-        } 
-        $html .= '
-            </tbody>
-            </table>
+                    </tbody>
+                    </table>
         ';
         return $html;
     }

@@ -33,6 +33,11 @@ class ComposerStaticInit9fdf825828380b28c3af33a6b579402f
         array (
             'GuzzleHttp\\Psr7\\' => 16,
         ),
+        'C' => 
+        array (
+            'Com\\Tecnick\\Color\\' => 18,
+            'Com\\Tecnick\\Barcode\\' => 20,
+        ),
         'B' => 
         array (
             'BigFish\\PDF417\\' => 15,
@@ -63,6 +68,14 @@ class ComposerStaticInit9fdf825828380b28c3af33a6b579402f
         'GuzzleHttp\\Psr7\\' => 
         array (
             0 => __DIR__ . '/..' . '/guzzlehttp/psr7/src',
+        ),
+        'Com\\Tecnick\\Color\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/tecnickcom/tc-lib-color/src',
+        ),
+        'Com\\Tecnick\\Barcode\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/tecnickcom/tc-lib-barcode/src',
         ),
         'BigFish\\PDF417\\' => 
         array (

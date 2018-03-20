@@ -242,6 +242,7 @@ class DTE {
                 </tbody>
             </table>
         ';
+        return $html;
     }
 
     private function setReferencias(){
@@ -274,6 +275,7 @@ class DTE {
                 </tbody>
             </table>
         ';
+        return $html;
     }
 
     private function setDetalle(){
@@ -312,6 +314,7 @@ class DTE {
                 </body>
             </table>
         ';
+        return $html;
     }
 
     private function setTotales(){

@@ -13,8 +13,8 @@ class DTE {
         $this->pdf->writeHTML($this->setCss(), 1);
         $this->html = '<div class="factura">';
         $this->html .= $this->setInfo();
-        $this->pdf->WriteHTML($this->html);
         $this->html .= '</div>';
+        $this->pdf->WriteHTML($this->html);
     }
 
     public function generar(){

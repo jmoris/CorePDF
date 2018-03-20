@@ -193,7 +193,7 @@ class DTE {
                 <p><b>FACTURA ELECTRONICA</b></p>
                 <p><b>Nº 1000</b></p>
             </div>
-            <p><b>S.I.I. - CURICÓ</b></p></div>
+            <p><b>S.I.I. - CURICÓ</b></p>
         ';
 
         return $html;

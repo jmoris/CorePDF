@@ -430,7 +430,7 @@ class DTE {
 
     private function setAcuseRecibo(){
         $html = '
-            <table style="border: 1px solid black;">
+            <table style="font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;border: 1px solid black;">
                 <tr>
                     <td style="padding-left: 5px; padding-top: 10px;" width="10%">Nombre</td>
                     <td style="padding-top: 10px" width="40%">: _____________________________________________________</td>

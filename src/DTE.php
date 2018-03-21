@@ -6,8 +6,12 @@ class DTE {
 
     private $html;
     private $pdf;
+    private $acuse = false;
 
-    public function __construct(){
+    public function __construct($acuse){
+
+        $this->acuse = $acuse;
+
         $this->pdf = new \Mpdf\Mpdf(['format' => 'A4']);
         $this->pdf->SetDisplayMode('fullpage');
         $this->html = '<body><head><style>';
@@ -249,7 +253,7 @@ class DTE {
             <div class="espacio-2"></div>
             <div class="detalle">'.$this->setDetalle().'</div>
             <div class="espacio-5"></div>
-            '.$this->setAcuseRecibo().'
+            '.($this->acuse) ? $this->setAcuseRecibo() : ''.'
         ';
         return $html;
     }

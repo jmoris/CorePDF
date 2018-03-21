@@ -327,43 +327,29 @@ class DTE {
     private function setReferencias(){
         $html = '
             <div class="espacio-5"></div>
-            <table class="bordes">
+            <table>
+                <thead>
+                    <tr>
+                        <th align="left">TIPO DOCUMENTO</th>
+                        <th>FOLIO</th>
+                        <th>FECHA</th>
+                    </tr>
+                </thead>
                 <tbody>
                     <tr>
-                        <td class="titulo">SEÑOR(ES)</td>
-                        <td>: EDUAROD JAIME MORIS OLIVARES</td>
-                        <td class="titulo">FECHA EMISION</td>
-                        <td>: 20-03-2018</td>
+                        <td align="left">Factura electronica</td>
+                        <td>100</td>
+                        <td>23/02/2019</td>
                     </tr>
                     <tr>
-                        <td class="titulo">DIRECCION</td>
-                        <td>: LAS ARAUCARIAS #25</td>
-                        <td class="titulo">FECHA VENCIMIENTO</td>
-                        <td>: 20-03-2018</td>
+                        <td align="left">&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
                     </tr>
                     <tr>
-                        <td class="titulo">COMUNA</td>
-                        <td>: TENO</td>
-                        <td class="titulo">CIUDAD</td>
-                        <td>: CURICO</td>
-                    </tr>
-                    <tr>
-                        <td class="titulo">GIRO</td>
-                        <td>: CASINO</td>
-                        <td class="titulo">R.U.T.</td>
-                        <td>: 16.262.265-K</td>                        
-                    </tr>
-                    <tr>
-                        <td class="titulo">MEDIO DE PAGO</td>
-                        <td>:</td>
-                        <td class="titulo">TELEFONO</td>
-                        <td>:</td>
-                    </tr>
-                    <tr>
-                        <td class="titulo">CONDICION DE PAGO</td>
-                        <td>: CREDITO</td>
-                        <td class="titulo">PATENTE</td>
-                        <td>:</td>
+                        <td align="left">&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
                     </tr>
                 </tbody>
             </table>

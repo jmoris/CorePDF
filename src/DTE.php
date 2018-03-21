@@ -253,8 +253,7 @@ class DTE {
             <div class="espacio-2"></div>
             <div class="detalle">'.$this->setDetalle().'</div>
             <div class="espacio-5"></div>
-            '.($this->acuse) ? $this->setAcuseRecibo() : ''.'
-        ';
+            '.(($this->acuse) ? $this->setAcuseRecibo() : '');
         return $html;
     }
 

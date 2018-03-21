@@ -14,9 +14,12 @@ class DTE {
 
         $this->pdf = new \Mpdf\Mpdf(['format' => 'A4']);
         $this->pdf->SetDisplayMode('fullpage');
-        $this->html = '<body><head><style>';
+        $this->html = '<head>
+                        <style>';
         $this->html .= $this->setCss();
-        $this->html .= '</style></head><body><div class="factura">';
+        $this->html .= '</style>
+                        </head>
+                        <body><div class="factura">';
         $this->html .= $this->setInfo();
         $this->html .= '</div></body>';
         $this->pdf->WriteHTML($this->html);
@@ -430,7 +433,7 @@ class DTE {
 
     private function setAcuseRecibo(){
         $html = '
-            <table style="font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;border: 1px solid black;">
+            <table style="border: 1px solid black;">
                 <tr>
                     <td style="padding-left: 5px; padding-top: 10px;" width="10%">Nombre</td>
                     <td style="padding-top: 10px" width="40%">: _____________________________________________________</td>

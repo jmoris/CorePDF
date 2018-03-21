@@ -10,8 +10,9 @@ class DTE {
     public function __construct(){
         $this->pdf = new \Mpdf\Mpdf(['format' => 'A4']);
         $this->pdf->SetDisplayMode('fullpage');
-        $this->pdf->writeHTML($this->setCss(), 1);
-        $this->html = '<div class="factura">';
+        $this->html = '<body><head><style>';
+        $this->html .= $this->setCss();
+        $this->html .= '</style></head><body><div class="factura">';
         $this->html .= $this->setInfo();
         $this->html .= '</div>';
         $this->pdf->WriteHTML($this->html);

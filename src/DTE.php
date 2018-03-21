@@ -400,7 +400,7 @@ class DTE {
                     </tr>
                     <tr>
                         <td style="border-left: 0; border-bottom: 0; padding-right: 70px; text-align: center;" rowspan="6" colspan="3">
-                            '.$timbre.'
+                            '.$this->setTimbre().'
                             <p>Timbre Electronico SII</p>
                             <p>Resolucion 0 de 2014</p>
                             <p>Verifique documento: www.sii.cl</p>
@@ -466,7 +466,20 @@ class DTE {
     }
 
     private function setTimbre(){
+        $pdf417 = new \Com\Tecnick\Barcode\Barcode();
+        $ecl = version_compare(phpversion(), '7.0.0', '<') ? -1 : 5;
+        $bobj = $pdf417->getBarcodeObj(
+        'PDF417,,'.$ecl,                     
+        '<TED></TED>',
+        -1,
+        -1,
+        'black',
+        array(0, 0, 0, 0)
+        )->setBackgroundColor('white');
 
+        $timbre = '<img style="width: 8cm; height: 2.5cm;"src="data:image/png;base64,'.base64_encode($bobj->getPngData()).'">';
+
+        return $timbre;
     }
 
 }

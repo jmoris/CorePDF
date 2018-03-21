@@ -14,7 +14,7 @@ class DTE {
         $this->html .= $this->setCss();
         $this->html .= '</style></head><body><div class="factura">';
         $this->html .= $this->setInfo();
-        $this->html .= '</div>';
+        $this->html .= '</div></body>';
         $this->pdf->WriteHTML($this->html);
     }
 

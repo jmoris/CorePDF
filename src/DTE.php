@@ -399,6 +399,7 @@ class DTE {
     }
 
     private function setDetalle(){
+        $detalles = $this->dte['Documento']['Detalle'];
         $html = '
             <table>
                 <thead>

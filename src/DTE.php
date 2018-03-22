@@ -8,7 +8,15 @@ class DTE {
     private $pdf;
     private $acuse = false;
 
-    public function __construct($acuse){
+    private $no_cedible = [33,34,52];
+    private $tipo_dte = [
+        33 => 'FACTURA ELECTRÓNICA',
+        34 => 'FACTURA NO AFECTA O EXENTA ELECTRÓNIC',
+        52 => 'GUÍA DE DESPACHO ELECTRÓNICA',
+        56 => 'NOTA DE CRÉDITO ELECTRÓNICA',
+        61 => 'NOTA DE DÉBITO ELECTRÓNICA'
+    ];
+    public function __construct($DTE){
 
         $this->acuse = $acuse;
 
@@ -21,7 +29,7 @@ class DTE {
                         </head>
                         <body>
                         <div class="factura">';
-        $this->html .= $this->setInfo();
+        $this->html .= $this->setInfo($DTE);
         $this->html .= '</div>
                         </body>';
         $this->pdf->WriteHTML($this->html);
@@ -259,32 +267,32 @@ class DTE {
         return $this->html;
     }
 
-    private function setInfo(){
+    private function setInfo($DTE){
         $html = '
             <div class="info-emisor">
                 <div class="logo">
                     <img src="https://soluciontotal.s3.sa-east-1.amazonaws.com/contribuyentes/1/1.png">
                     <div class="espacio-5"></div>
-                    '.$this->setEmisor().'
+                    '.$this->setEmisor($DTE['Documento']['Encabezado']['Emisor']).'
                 </div>
                 <div class="info"></div>
-                <div class="cuadro">'.$this->setCuadro().'</div>
+                <div class="cuadro">'.$this->setCuadro($DTE['Documento']['Encabezado']['IdDoc']).'</div>
             </div>
             <div class="espacio-5"></div>
-            <div class="receptor">'.$this->setReceptor().'</div>
+            <div class="receptor">'.$this->setReceptor($DTE['Documento']['Encabezado']['Receptor']).'</div>
             <div class="referencias">'.$this->setReferencias().'</div>
             <div class="espacio-2"></div>
-            <div class="detalle">'.$this->setDetalle().'</div>
+            <div class="detalle">'.$this->setDetalle($DTE['Documento']['Detalle']).'</div>
             <div class="espacio-5"></div>
-            '.(($this->acuse) ? $this->setAcuseRecibo() : '');
+            '.((array_key_exists($DTE['Documento']['Encabezado']['IdDoc']['TipoDTE'], $this->no_cedible)) ? '' : $this->setAcuseRecibo());
         return $html;
     }
 
-    private function setEmisor(){
+    private function setEmisor($emisor){
         $html = '
-            <p class="razonsocial">JESÚS EDUARDO MORIS HERNÁNDEZ </p>
-            <p class="masinfo">SERVICIOS INTEGRALES DE INFORMATICA</p>
-            <p class="masinfo">LAS ARAUCARIAS #25, TENO, CURICO</p>
+            <p class="razonsocial">'.$emisor['RznSoc'].'</p>
+            <p class="masinfo">'.$emisor['GiroEmis'].'</p>
+            <p class="masinfo">'.$emisor['DirOrigen'].','.$emisor['CmnaOrigen'].','.$$emisor['CiudadOrigen'].'</p>
             <p class="masinfo">Telefono: (75) 2 412479</p>
             <p class="masinfo">Email: contacto@soluciontotal.cl</p>
             <p class="masinfo">Web: www.soluciontotal.cl</p>
@@ -292,12 +300,12 @@ class DTE {
         return $html;
     }
 
-    private function setCuadro(){
+    private function setCuadro($info){
         $html = '
             <div class="cuadro-rojo">
                 <p><b>R.U.T.: 19.587.757-2</b></p>
-                <p><b>GUÍA DE DESPACHO ELECTRÓNICA</b></p>
-                <p><b>Nº 1000</b></p>
+                <p><b>'.$this->tipo_dte[$info['TipoDTE']].'</b></p>
+                <p><b>Nº '.$info['Folio'].'</b></p>
             </div>
             <p style="margin:0;padding:0;"><b>S.I.I. - CURICÓ</b></p></div>
         ';
@@ -305,7 +313,7 @@ class DTE {
         return $html;
     }
 
-    private function setReceptor(){
+    private function setReceptor($receptor){
         $html = '
             <table class="bordes">
                 <tbody>
@@ -384,7 +392,7 @@ class DTE {
         return $html;
     }
 
-    private function setDetalle(){
+    private function setDetalle($detalles){
         $html = '
             <table>
                 <thead>
@@ -397,13 +405,13 @@ class DTE {
                     </tr>
                 </thead>
                 <tbody>';
-                    for($i = 0; $i < 30; $i++){
+                    foreach($detalles as $detalle){
                         $html.='<tr class="producto">
-                        <td class="numero">'.($i+1).'</td>
-                        <td style="text-align: center">Kg</td>
-                        <td>Articulo de prueba 1</td>
-                        <td class="numero">990</td>
-                        <td class="numero">9.900</td>
+                        <td class="numero">'.$detalle['QtyItem'].'</td>
+                        <td style="text-align: center">'.$detalle['UnmdItem'].'</td>
+                        <td>'.$detalle['NmbItem'].'</td>
+                        <td class="numero">'.$detalle['PrcItem'].'</td>
+                        <td class="numero">'.$detalle['MontoItem'].'</td>
                     </tr>';
                     }
                     $html.='<tr>
@@ -445,10 +453,6 @@ class DTE {
             </table>
         ';
         return $html;
-    }
-
-    private function setTotales(){
-
     }
 
     private function setAcuseRecibo(){

@@ -6,6 +6,7 @@ class DTE {
 
     private $html;
     private $pdf;
+    private $dtE;
 
     private $no_cedible = [33,34,52];
     private $tipo_dte = [
@@ -16,7 +17,7 @@ class DTE {
         '61' => 'NOTA DE DÉBITO ELECTRÓNICA'
     ];
     public function __construct($DTE){
-
+        $this->dte = $DTE;
         $this->pdf = new \Mpdf\Mpdf(['format' => 'A4']);
         $this->pdf->SetDisplayMode('fullpage');
         $this->html = '<head>
@@ -26,7 +27,7 @@ class DTE {
                         </head>
                         <body>
                         <div class="factura">';
-        $this->html .= $this->setInfo($DTE);
+        $this->html .= $this->setInfo();
         $this->html .= '</div>
                         </body>';
         $this->pdf->WriteHTML($this->html);
@@ -264,32 +265,32 @@ class DTE {
         return $this->html;
     }
 
-    private function setInfo($DTE){
+    private function setInfo(){
         $html = '
             <div class="info-emisor">
                 <div class="logo">
                     <img src="https://soluciontotal.s3.sa-east-1.amazonaws.com/contribuyentes/1/1.png">
                     <div class="espacio-5"></div>
-                    '.$this->setEmisor($DTE['Documento']['Encabezado']['Emisor']).'
+                    '.$this->setEmisor().'
                 </div>
                 <div class="info"></div>
-                <div class="cuadro">'.$this->setCuadro($DTE['Documento']['Encabezado']['IdDoc']).'</div>
+                <div class="cuadro">'.$this->setCuadro().'</div>
             </div>
             <div class="espacio-5"></div>
-            <div class="receptor">'.$this->setReceptor($DTE['Documento']['Encabezado']['Receptor']).'</div>
+            <div class="receptor">'.$this->setReceptor().'</div>
             <div class="referencias">'.$this->setReferencias().'</div>
             <div class="espacio-2"></div>
-            <div class="detalle">'.$this->setDetalle($DTE['Documento']['Detalle']).'</div>
+            <div class="detalle">'.$this->setDetalle().'</div>
             <div class="espacio-5"></div>
-            '.((array_key_exists($DTE['Documento']['Encabezado']['IdDoc']['TipoDTE'], $this->no_cedible)) ? '' : $this->setAcuseRecibo());
+            '.((array_key_exists($this->dte['Documento']['Encabezado']['IdDoc']['TipoDTE'], $this->no_cedible)) ? '' : $this->setAcuseRecibo());
         return $html;
     }
 
-    private function setEmisor($emisor){
+    private function setEmisor(){
         $html = '
-            <p class="razonsocial">'.$emisor['RznSoc'].'</p>
-            <p class="masinfo">'.$emisor['GiroEmis'].'</p>
-            <p class="masinfo">'.$emisor['DirOrigen'].','.$emisor['CmnaOrigen'].','.$emisor['CiudadOrigen'].'</p>
+            <p class="razonsocial">'.$this->dte['Documento']['Encabezado']['Emisor']['RznSoc'].'</p>
+            <p class="masinfo">'.$this->dte['Documento']['Encabezado']['Emisor']['GiroEmis'].'</p>
+            <p class="masinfo">'.$this->dte['Documento']['Encabezado']['Emisor']['DirOrigen'].','.$this->dte['Documento']['Encabezado']['Emisor']['CmnaOrigen'].','.$this->dte['Documento']['Encabezado']['Emisor']['CiudadOrigen'].'</p>
             <p class="masinfo">Telefono: (75) 2 412479</p>
             <p class="masinfo">Email: contacto@soluciontotal.cl</p>
             <p class="masinfo">Web: www.soluciontotal.cl</p>
@@ -297,12 +298,12 @@ class DTE {
         return $html;
     }
 
-    private function setCuadro($info){
+    private function setCuadro(){
         $html = '
             <div class="cuadro-rojo">
                 <p><b>R.U.T.: 19.587.757-2</b></p>
-                <p><b>'.$this->tipo_dte[$info['TipoDTE']].'</b></p>
-                <p><b>Nº '.$info['Folio'].'</b></p>
+                <p><b>'.$this->tipo_dte[$this->dte['Documento']['Encabezado']['IdDoc']['TipoDTE']].'</b></p>
+                <p><b>Nº '.$this->dte['Documento']['Encabezado']['IdDoc']['Folio'].'</b></p>
             </div>
             <p style="margin:0;padding:0;"><b>S.I.I. - CURICÓ</b></p></div>
         ';
@@ -310,33 +311,33 @@ class DTE {
         return $html;
     }
 
-    private function setReceptor($receptor){
+    private function setReceptor(){
         $html = '
             <table class="bordes">
                 <tbody>
                     <tr>
                         <td class="titulo">SEÑOR(ES)</td>
-                        <td>: EDUAROD JAIME MORIS OLIVARES</td>
+                        <td>: '.$this->dte['Documento']['Encabezado']['Receptor']['RznSocRecep'].'</td>
                         <td class="titulo">FECHA EMISION</td>
                         <td>: 20-03-2018</td>
                     </tr>
                     <tr>
                         <td class="titulo">DIRECCION</td>
-                        <td>: LAS ARAUCARIAS #25</td>
+                        <td>: '.$this->dte['Documento']['Encabezado']['Receptor']['RutRecep'].'</td>
                         <td class="titulo">FECHA VENCIMIENTO</td>
                         <td>: 20-03-2018</td>
                     </tr>
                     <tr>
                         <td class="titulo">COMUNA</td>
-                        <td>: TENO</td>
+                        <td>: '.$this->dte['Documento']['Encabezado']['Receptor']['CmnaRecep'].'</td>
                         <td class="titulo">CIUDAD</td>
-                        <td>: CURICO</td>
+                        <td>: '.$this->dte['Documento']['Encabezado']['Receptor']['CiudadRecep'].'</td>
                     </tr>
                     <tr>
                         <td class="titulo">GIRO</td>
-                        <td>: CASINO</td>
+                        <td>: '.$this->dte['Documento']['Encabezado']['Receptor']['GiroRecep'].'</td>
                         <td class="titulo">R.U.T.</td>
-                        <td>: 16.262.265-K</td>                        
+                        <td>: '.$this->dte['Documento']['Encabezado']['Receptor']['RutRecep'].'</td>                        
                     </tr>
                     <tr>
                         <td class="titulo">MEDIO DE PAGO</td>
@@ -389,7 +390,7 @@ class DTE {
         return $html;
     }
 
-    private function setDetalle($detalles){
+    private function setDetalle(){
         $html = '
             <table>
                 <thead>

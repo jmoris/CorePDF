@@ -289,7 +289,7 @@ class DTE {
         $html = '
             <p class="razonsocial">'.$emisor['RznSoc'].'</p>
             <p class="masinfo">'.$emisor['GiroEmis'].'</p>
-            <p class="masinfo">'.$emisor['DirOrigen'].','.$emisor['CmnaOrigen'].','.$$emisor['CiudadOrigen'].'</p>
+            <p class="masinfo">'.$emisor['DirOrigen'].','.$emisor['CmnaOrigen'].','.$emisor['CiudadOrigen'].'</p>
             <p class="masinfo">Telefono: (75) 2 412479</p>
             <p class="masinfo">Email: contacto@soluciontotal.cl</p>
             <p class="masinfo">Web: www.soluciontotal.cl</p>

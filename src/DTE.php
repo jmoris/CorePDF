@@ -426,7 +426,7 @@ class DTE {
                     }
 
                     for($i = 0; $i < 30-count($detalles); $i++){
-                        $html .= '<tr class="producto"><td></td><td></td><td></td><td></td><td></td></tr>';
+                        $html .= '<tr class="producto"><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>';
                     }
 
                     $html.='<tr>

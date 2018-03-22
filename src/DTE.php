@@ -6,7 +6,6 @@ class DTE {
 
     private $html;
     private $pdf;
-    private $acuse = false;
 
     private $no_cedible = [33,34,52];
     private $tipo_dte = [
@@ -17,8 +16,6 @@ class DTE {
         61 => 'NOTA DE DÉBITO ELECTRÓNICA'
     ];
     public function __construct($DTE){
-
-        $this->acuse = $acuse;
 
         $this->pdf = new \Mpdf\Mpdf(['format' => 'A4']);
         $this->pdf->SetDisplayMode('fullpage');

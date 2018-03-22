@@ -60,6 +60,7 @@ class DTE {
             font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
             font-size: 14px;
             text-align: right;
+            font-weight: bold;
         }
 
         .info-emisor {
@@ -472,7 +473,7 @@ class DTE {
                     <td style="padding-left: 10px"><b>Firma:</b> ____________________________________________</td>
                 </tr>
             </table>
-            <div class="texto-acuse">CEDIBLE</div>
+            <div class="texto-cedible">CEDIBLE</div>
         ';
         return $html;
     }

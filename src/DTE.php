@@ -17,7 +17,7 @@ class DTE {
         '61' => 'NOTA DE DÉBITO ELECTRÓNICA'
     ];
 
-    public function __construct($DTE){
+    public function __construct(array $DTE){
         $this->dte = $DTE;
         $this->pdf = new \Mpdf\Mpdf(['format' => 'A4']);
         $this->pdf->SetDisplayMode('fullpage');

@@ -43,12 +43,15 @@ class DTE {
             background-color:#ffffff;
         }
 
-        body {
+        .factura {
             font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
-            font-size: 9.5px;            
+            font-size: 9.5px;
+            width: 100%;
         }
 
-        .factura {
+        .acuse-recibo {
+            font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+            font-size: 9.5px;
             width: 100%;
         }
         
@@ -442,7 +445,7 @@ class DTE {
 
     private function setAcuseRecibo(){
         $html = '
-            <table style="font-size: 9.5px; border: 1px solid black;">
+            <table class="acuse-recibo">
                 <tr>
                     <td style="padding-left: 5px; padding-top: 10px;" width="10%">Nombre</td>
                     <td style="padding-top: 10px" width="40%">: _____________________________________________________</td>

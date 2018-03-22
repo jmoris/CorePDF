@@ -50,6 +50,7 @@ class DTE {
         }
 
         .acuse-recibo {
+            border: 1px solid black;
             font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
             font-size: 9.5px;
             width: 100%;

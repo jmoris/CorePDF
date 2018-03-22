@@ -331,7 +331,7 @@ class DTE {
                     </tr>
                     <tr>
                         <td class="titulo">DIRECCION</td>
-                        <td>: '.$this->dte['Encabezado']['Receptor']['RutRecep'].'</td>
+                        <td>: '.$this->dte['Encabezado']['Receptor']['DirRecep'].'</td>
                         <td class="titulo">FECHA VENCIMIENTO</td>
                         <td>: 20-03-2018</td>
                     </tr>
@@ -345,7 +345,7 @@ class DTE {
                         <td class="titulo">GIRO</td>
                         <td>: '.$this->dte['Encabezado']['Receptor']['GiroRecep'].'</td>
                         <td class="titulo">R.U.T.</td>
-                        <td>: '.$this->dte['Encabezado']['Receptor']['RutRecep'].'</td>                        
+                        <td>: '.$this->dte['Encabezado']['Receptor']['RUTRecep'].'</td>                        
                     </tr>
                     <tr>
                         <td class="titulo">MEDIO DE PAGO</td>

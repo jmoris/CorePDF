@@ -16,6 +16,7 @@ class DTE {
         '56' => 'NOTA DE CRÉDITO ELECTRÓNICA',
         '61' => 'NOTA DE DÉBITO ELECTRÓNICA'
     ];
+
     public function __construct($DTE){
         $this->dte = $DTE;
         $this->pdf = new \Mpdf\Mpdf(['format' => 'A4']);
@@ -35,6 +36,13 @@ class DTE {
 
     public function generar(){
         $this->pdf->Output();
+    }
+
+    private function getTipo($tipo)
+    {
+        if (!is_numeric($tipo) and !isset($this->tipo_dte[$tipo]))
+            return $tipo;
+        return isset($this->tipo_dte[$tipo]) ? strtoupper($this->tipo_dte[$tipo]) : 'Documento '.$tipo;
     }
 
     private function setCss(){
@@ -302,7 +310,7 @@ class DTE {
         $html = '
             <div class="cuadro-rojo">
                 <p><b>R.U.T.: 19.587.757-2</b></p>
-                <p><b>'.$this->tipo_dte[$this->dte['Documento']['Encabezado']['IdDoc']['TipoDTE']].'</b></p>
+                <p><b>'.getTipo($this->dte['Documento']['Encabezado']['IdDoc']['TipoDTE']).'</b></p>
                 <p><b>Nº '.$this->dte['Documento']['Encabezado']['IdDoc']['Folio'].'</b></p>
             </div>
             <p style="margin:0;padding:0;"><b>S.I.I. - CURICÓ</b></p></div>

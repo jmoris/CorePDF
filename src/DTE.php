@@ -41,6 +41,9 @@ class DTE {
             margin-header: 8mm;
             margin-footer: 8mm;
             background-color:#ffffff;
+        }
+
+        body {
             font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
         }
 

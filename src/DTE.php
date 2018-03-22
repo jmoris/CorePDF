@@ -412,7 +412,8 @@ class DTE {
                     </tr>
                 </thead>
                 <tbody>';
-                try{
+                if($detalles == null)
+                    return '';
                     foreach($detalles as $detalle){
                         $html.='<tr class="producto">
                         <td class="numero">'.$detalle['QtyItem'].'</td>
@@ -422,9 +423,6 @@ class DTE {
                         <td class="numero">'.$detalle['MontoItem'].'</td>
                     </tr>';
                     }
-                }catch(\Exception $ex){
-                    return $ex;
-                }
                     $html.='<tr>
                         <td style="border-top: 1px solid black; border-left: 1px solid black; border-right: 1px solid black;" colspan="3"></td>
                         <td style="border-top: 1px solid black; border-left: 1px solid black; border-right: 1px solid black;"></td>

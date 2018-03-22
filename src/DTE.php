@@ -45,10 +45,10 @@ class DTE {
 
         body {
             font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+            font-size: 9.5px;            
         }
 
         .factura {
-            font-size: 9.5px;
             width: 100%;
         }
         

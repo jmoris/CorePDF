@@ -414,6 +414,7 @@ class DTE {
                 <tbody>';
                 if($detalles == null)
                     return '';
+                    
                     foreach($detalles as $detalle){
                         $html.='<tr class="producto">
                         <td class="numero">'.$detalle['QtyItem'].'</td>
@@ -423,6 +424,11 @@ class DTE {
                         <td class="numero">'.$detalle['MontoItem'].'</td>
                     </tr>';
                     }
+
+                    for($i = 0; $i < 30-count($detalles); $i++){
+                        $html .= '<tr class="producto"><td></td><td></td><td></td><td></td><td></td></tr>';
+                    }
+
                     $html.='<tr>
                         <td style="border-top: 1px solid black; border-left: 1px solid black; border-right: 1px solid black;" colspan="3"></td>
                         <td style="border-top: 1px solid black; border-left: 1px solid black; border-right: 1px solid black;"></td>

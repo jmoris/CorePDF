@@ -6,7 +6,7 @@ class DTE {
 
     private $html;
     private $pdf;
-    private $dtE;
+    private $dte;
 
     private $no_cedible = [33,34,52];
     private $tipo_dte = [

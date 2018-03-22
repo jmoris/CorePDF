@@ -399,7 +399,6 @@ class DTE {
     }
 
     private function setDetalle(){
-        $detalles = $this->dte['Documento']['Detalle'];
         $html = '
             <table>
                 <thead>
@@ -412,7 +411,7 @@ class DTE {
                     </tr>
                 </thead>
                 <tbody>';
-                    foreach($detalles as $detalle){
+                    foreach($this->dte['Documento']['Detalle'] as $detalle){
                         $html.='<tr class="producto">
                         <td class="numero">'.$detalle['QtyItem'].'</td>
                         <td style="text-align: center">'.$detalle['UnmdItem'].'</td>

@@ -310,7 +310,7 @@ class DTE {
         $html = '
             <div class="cuadro-rojo">
                 <p><b>R.U.T.: 19.587.757-2</b></p>
-                <p><b>'.getTipo($this->dte['Documento']['Encabezado']['IdDoc']['TipoDTE']).'</b></p>
+                <p><b>'.$this->getTipo($this->dte['Documento']['Encabezado']['IdDoc']['TipoDTE']).'</b></p>
                 <p><b>Nº '.$this->dte['Documento']['Encabezado']['IdDoc']['Folio'].'</b></p>
             </div>
             <p style="margin:0;padding:0;"><b>S.I.I. - CURICÓ</b></p></div>

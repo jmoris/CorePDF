@@ -56,6 +56,12 @@ class DTE {
             width: 100%;
         }
         
+        .texto-cedible {
+            font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+            font-size: 14px;
+            text-align: right;
+        }
+
         .info-emisor {
             width: 100%;
         }
@@ -466,7 +472,7 @@ class DTE {
                     <td style="padding-left: 10px"><b>Firma:</b> ____________________________________________</td>
                 </tr>
             </table>
-            <div align="right" style="font-size: 14px">CEDIBLE</div>
+            <div class="texto-acuse">CEDIBLE</div>
         ';
         return $html;
     }

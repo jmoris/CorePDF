@@ -290,15 +290,15 @@ class DTE {
             <div class="espacio-2"></div>
             <div class="detalle">'.$this->setDetalle().'</div>
             <div class="espacio-5"></div>
-            '.((array_key_exists($this->dte['Documento']['Encabezado']['IdDoc']['TipoDTE'], $this->no_cedible)) ? '' : $this->setAcuseRecibo());
+            '.((array_key_exists($this->dte['Encabezado']['IdDoc']['TipoDTE'], $this->no_cedible)) ? '' : $this->setAcuseRecibo());
         return $html;
     }
 
     private function setEmisor(){
         $html = '
-            <p class="razonsocial">'.$this->dte['Documento']['Encabezado']['Emisor']['RznSoc'].'</p>
-            <p class="masinfo">'.$this->dte['Documento']['Encabezado']['Emisor']['GiroEmis'].'</p>
-            <p class="masinfo">'.$this->dte['Documento']['Encabezado']['Emisor']['DirOrigen'].','.$this->dte['Documento']['Encabezado']['Emisor']['CmnaOrigen'].','.$this->dte['Documento']['Encabezado']['Emisor']['CiudadOrigen'].'</p>
+            <p class="razonsocial">'.$this->dte['Encabezado']['Emisor']['RznSoc'].'</p>
+            <p class="masinfo">'.$this->dte['Encabezado']['Emisor']['GiroEmis'].'</p>
+            <p class="masinfo">'.$this->dte['Encabezado']['Emisor']['DirOrigen'].','.$this->dte['Encabezado']['Emisor']['CmnaOrigen'].','.$this->dte['Encabezado']['Emisor']['CiudadOrigen'].'</p>
             <p class="masinfo">Telefono: (75) 2 412479</p>
             <p class="masinfo">Email: contacto@soluciontotal.cl</p>
             <p class="masinfo">Web: www.soluciontotal.cl</p>
@@ -310,8 +310,8 @@ class DTE {
         $html = '
             <div class="cuadro-rojo">
                 <p><b>R.U.T.: 19.587.757-2</b></p>
-                <p><b>'.$this->getTipo($this->dte['Documento']['Encabezado']['IdDoc']['TipoDTE']).'</b></p>
-                <p><b>Nº '.$this->dte['Documento']['Encabezado']['IdDoc']['Folio'].'</b></p>
+                <p><b>'.$this->getTipo($this->dte['Encabezado']['IdDoc']['TipoDTE']).'</b></p>
+                <p><b>Nº '.$this->dte['Encabezado']['IdDoc']['Folio'].'</b></p>
             </div>
             <p style="margin:0;padding:0;"><b>S.I.I. - CURICÓ</b></p></div>
         ';
@@ -325,27 +325,27 @@ class DTE {
                 <tbody>
                     <tr>
                         <td class="titulo">SEÑOR(ES)</td>
-                        <td>: '.$this->dte['Documento']['Encabezado']['Receptor']['RznSocRecep'].'</td>
+                        <td>: '.$this->dte['Encabezado']['Receptor']['RznSocRecep'].'</td>
                         <td class="titulo">FECHA EMISION</td>
                         <td>: 20-03-2018</td>
                     </tr>
                     <tr>
                         <td class="titulo">DIRECCION</td>
-                        <td>: '.$this->dte['Documento']['Encabezado']['Receptor']['RutRecep'].'</td>
+                        <td>: '.$this->dte['Encabezado']['Receptor']['RutRecep'].'</td>
                         <td class="titulo">FECHA VENCIMIENTO</td>
                         <td>: 20-03-2018</td>
                     </tr>
                     <tr>
                         <td class="titulo">COMUNA</td>
-                        <td>: '.$this->dte['Documento']['Encabezado']['Receptor']['CmnaRecep'].'</td>
+                        <td>: '.$this->dte['Encabezado']['Receptor']['CmnaRecep'].'</td>
                         <td class="titulo">CIUDAD</td>
-                        <td>: '.$this->dte['Documento']['Encabezado']['Receptor']['CiudadRecep'].'</td>
+                        <td>: '.$this->dte['Encabezado']['Receptor']['CiudadRecep'].'</td>
                     </tr>
                     <tr>
                         <td class="titulo">GIRO</td>
-                        <td>: '.$this->dte['Documento']['Encabezado']['Receptor']['GiroRecep'].'</td>
+                        <td>: '.$this->dte['Encabezado']['Receptor']['GiroRecep'].'</td>
                         <td class="titulo">R.U.T.</td>
-                        <td>: '.$this->dte['Documento']['Encabezado']['Receptor']['RutRecep'].'</td>                        
+                        <td>: '.$this->dte['Encabezado']['Receptor']['RutRecep'].'</td>                        
                     </tr>
                     <tr>
                         <td class="titulo">MEDIO DE PAGO</td>
@@ -399,7 +399,7 @@ class DTE {
     }
 
     private function setDetalle(){
-        $detalles = $this->dte['Documento']['Detalle'];
+        $detalles = $this->dte['Detalle'];
         $html = '
             <table>
                 <thead>

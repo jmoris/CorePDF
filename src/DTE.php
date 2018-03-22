@@ -41,10 +41,10 @@ class DTE {
             margin-header: 8mm;
             margin-footer: 8mm;
             background-color:#ffffff;
+            font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
         }
 
         .factura {
-            font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
             font-size: 9.5px;
             width: 100%;
         }

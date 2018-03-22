@@ -399,6 +399,7 @@ class DTE {
     }
 
     private function setDetalle(){
+        $detalles = $this->dte['Documento']['Detalle'];
         $html = '
             <table>
                 <thead>
@@ -411,7 +412,8 @@ class DTE {
                     </tr>
                 </thead>
                 <tbody>';
-                    foreach($this->dte['Documento']['Detalle'] as $detalle){
+                try{
+                    foreach($detalles as $detalle){
                         $html.='<tr class="producto">
                         <td class="numero">'.$detalle['QtyItem'].'</td>
                         <td style="text-align: center">'.$detalle['UnmdItem'].'</td>
@@ -420,6 +422,9 @@ class DTE {
                         <td class="numero">'.$detalle['MontoItem'].'</td>
                     </tr>';
                     }
+                }catch(\Exception $ex){
+                    return $ex;
+                }
                     $html.='<tr>
                         <td style="border-top: 1px solid black; border-left: 1px solid black; border-right: 1px solid black;" colspan="3"></td>
                         <td style="border-top: 1px solid black; border-left: 1px solid black; border-right: 1px solid black;"></td>

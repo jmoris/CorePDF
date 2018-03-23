@@ -367,7 +367,9 @@ class DTE {
     }
 
     private function setReferencias(){
-        $referencias = (array)$this->dte['Referencia'];
+        $referencias = $this->dte['Referencia'];
+        if (!isset($referencias[0]))
+            $referencias = [$referencias];
         if($referencias == null)
             return '';
         $html = '
@@ -384,7 +386,7 @@ class DTE {
                 foreach($referencias as $ref){
                     $html .= '
                     <tr>
-                        <td align="left"></td>
+                        <td align="left">'.$ref['TpoDocRef'].'</td>
                         <td>'.$ref['FolioRef'].'</td>
                         <td>'.$ref['FchRef'].'</td>
                     </tr>

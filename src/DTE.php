@@ -382,14 +382,14 @@ class DTE {
                 </thead>
                 <tbody>';
                 foreach($referencias as $ref){
-                    /*$html .= '
+                    $html .= '
                     <tr>
-                        <td align="left">'.$this->getTipo( $ref['TpoDocRef'] ).'</td>
+                        <td align="left"></td>
                         <td>'.$ref['FolioRef'].'</td>
                         <td>'.$ref['FchRef'].'</td>
                     </tr>
-                    ';*/
-                $html = print_r($ref);
+                    ';
+                
                 }
                 for($i = 0; $i < 3-count($referencias); $i++){
                     $html .= '

@@ -342,20 +342,20 @@ class DTE {
                     <tr>
                         <td class="titulo">SEÑOR(ES)</td>
                         <td>: '.$this->dte['Encabezado']['Receptor']['RznSocRecep'].'</td>
-                        <td class="titulo">FECHA EMISION</td>
-                        <td>: '.$fecha_emision.'</td>
+                        <td class="titulo">R.U.T.</td>
+                        <td>: '.$this->formatRut($this->dte['Encabezado']['Receptor']['RUTRecep']).'</td>
                     </tr>
                     <tr>
                         <td class="titulo">DIRECCION</td>
                         <td>: '.$this->dte['Encabezado']['Receptor']['DirRecep'].'</td>
-                        <td class="titulo">FECHA VENCIMIENTO</td>
+                        <td class="titulo">FECHA EMISION</td>
                         <td>: '.$fecha_emision.'</td>
                     </tr>
                     <tr>
                         <td class="titulo">GIRO</td>
                         <td>: '.$this->dte['Encabezado']['Receptor']['GiroRecep'].'</td>
-                        <td class="titulo">R.U.T.</td>
-                        <td>: '.$this->formatRut($this->dte['Encabezado']['Receptor']['RUTRecep']).'</td>                        
+                        <td class="titulo">FECHA VENCIMIENTOR.U.T.</td>
+                        <td>: '.$fecha_emision.'</td>                        
                     </tr>
                     <tr>
                         <td class="titulo">COMUNA</td>
@@ -384,9 +384,7 @@ class DTE {
     private function setReferencias(){
         $referencias = (isset($this->dte['Referencia'])) ? $this->dte['Referencia'] : null;
         
-        if($referencias == null)
-            return '';
-        if (!isset($referencias[0]))
+        if ($referencias!=null&&!isset($referencias[0]))
             $referencias = [$referencias];
         $html = '
             <div class="espacio-5"></div>

@@ -421,6 +421,8 @@ class DTE {
     private function setDetalle(){
         $subtotal = 0;
         $detalles = $this->dte['Detalle'];
+        if (!isset($detalles[0]))
+            $detalles = [$detalles];
         $descuento = (isset($this->dte['DscRcgGlobal'])) ? $this->dte['DscRcgGlobal']['ValorDR'] : 0;
         $exento = (isset($this->dte['Encabezado']['Totales']['MntExe'])) ? $this->dte['Encabezado']['Totales']['MntExe'] : 0;
         $html = '

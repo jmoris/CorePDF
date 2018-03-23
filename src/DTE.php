@@ -382,10 +382,11 @@ class DTE {
     }
 
     private function setReferencias(){
-        $referencias = (isset($this->dte['Referencia'])) ? $this->dte['Referencia'] : null;
+        $referencias = (isset($this->dte['Referencia'])) ? $this->dte['Referencia'] : [];
         
-        if ($referencias!=null&&!isset($referencias[0]))
-            $referencias = [$referencias];
+        if (!isset($referencias[0]))
+            $referencias = [$referencias];        
+            
         $html = '
             <div class="espacio-5"></div>
             <table>

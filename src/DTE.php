@@ -10,11 +10,11 @@ class DTE {
 
     private $no_cedible = [33,34,52];
     private $tipo_dte = [
-        '33' => 'FACTURA ELECTRÓNICA',
-        '34' => 'FACTURA NO AFECTA O EXENTA ELECTRÓNIC',
-        '52' => 'GUÍA DE DESPACHO ELECTRÓNICA',
-        '56' => 'NOTA DE CRÉDITO ELECTRÓNICA',
-        '61' => 'NOTA DE DÉBITO ELECTRÓNICA'
+        33 => 'FACTURA ELECTRÓNICA',
+        34 => 'FACTURA NO AFECTA O EXENTA ELECTRÓNIC',
+        52 => 'GUÍA DE DESPACHO ELECTRÓNICA',
+        56 => 'NOTA DE CRÉDITO ELECTRÓNICA',
+        61 => 'NOTA DE DÉBITO ELECTRÓNICA'
     ];
 
     public function __construct(array $DTE){
@@ -368,6 +368,8 @@ class DTE {
 
     private function setReferencias(){
         $referencias = $this->dte['Referencia'];
+        if($referencias == null)
+            return '';
         $html = '
             <div class="espacio-5"></div>
             <table>

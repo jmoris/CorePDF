@@ -299,6 +299,12 @@ class DTE {
         return $html;
     }
 
+    private function formatRut($rut){
+        $rutE = explode('-', $rut);
+        $rutF = substr($rutE[0], 0, 2).'.'.substr($rutE[0], 2, 3).'.'.substr($rutE[0], 5, 3).'-'.$rutE[1];
+        return $rutF;
+    }
+
     private function formatNumber($numero){
         return number_format(intval($numero), 0, ",", ".");
     }
@@ -318,7 +324,7 @@ class DTE {
     private function setCuadro(){
         $html = '
             <div class="cuadro-rojo">
-                <p><b>R.U.T.: 19.587.757-2</b></p>
+                <p><b>R.U.T.: '.$this->formatRut($this->dte['Encabezado']['Emisor']['RUTEmisor']).'</b></p>
                 <p><b>'.$this->getTipo($this->dte['Encabezado']['IdDoc']['TipoDTE']).'</b></p>
                 <p><b>Nº '.$this->dte['Encabezado']['IdDoc']['Folio'].'</b></p>
             </div>
@@ -349,7 +355,7 @@ class DTE {
                         <td class="titulo">GIRO</td>
                         <td>: '.$this->dte['Encabezado']['Receptor']['GiroRecep'].'</td>
                         <td class="titulo">R.U.T.</td>
-                        <td>: '.$this->dte['Encabezado']['Receptor']['RUTRecep'].'</td>                        
+                        <td>: '.$this->formatRut($this->dte['Encabezado']['Receptor']['RUTRecep']).'</td>                        
                     </tr>
                     <tr>
                         <td class="titulo">COMUNA</td>
@@ -397,7 +403,7 @@ class DTE {
                     <tr>
                         <td align="left">'.$this->getTipo( $ref['TpoDocRef'] ).'</td>
                         <td>'.$ref['FolioRef'].'</td>
-                        <td>'.$ref['FchRef'].'</td>
+                        <td>'.date('d-m-Y', strtotime($ref['FchRef'])).'</td>
                     </tr>
                     ';
                 

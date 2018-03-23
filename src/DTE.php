@@ -384,7 +384,7 @@ class DTE {
     private function setReferencias(){
         $referencias = (isset($this->dte['Referencia'])) ? $this->dte['Referencia'] : [];
         
-        if (!isset($referencias[0]))
+        if (!empty($referencias)&&!isset($referencias[0]))
             $referencias = [$referencias];        
             
         $html = '

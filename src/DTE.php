@@ -9,13 +9,15 @@ class DTE {
     private $dte;
     private $ted;
 
-    private $no_cedible = [33,34,52];
+    private $no_cedible = [61, 56];
     private $tipo_dte = [
         33 => 'FACTURA ELECTRÓNICA',
-        34 => 'FACTURA NO AFECTA O EXENTA ELECTRÓNIC',
+        34 => 'FACTURA NO AFECTA O EXENTA ELECTRÓNICA',
         52 => 'GUÍA DE DESPACHO ELECTRÓNICA',
         56 => 'NOTA DE CRÉDITO ELECTRÓNICA',
-        61 => 'NOTA DE DÉBITO ELECTRÓNICA'
+        61 => 'NOTA DE DÉBITO ELECTRÓNICA',
+        801 => 'ORDEN DE COMPRA',
+        802 => 'NOTA DE PEDIDO'
     ];
 
     public function __construct(array $DTE, $ted = null){
@@ -297,6 +299,10 @@ class DTE {
         return $html;
     }
 
+    private function formatNumber($numero){
+        return number_format(intval($numero), 0, ",", ".");
+    }
+
     private function setEmisor(){
         $html = '
             <p class="razonsocial">'.$this->dte['Encabezado']['Emisor']['RznSoc'].'</p>
@@ -340,16 +346,16 @@ class DTE {
                         <td>: '.$fecha_emision.'</td>
                     </tr>
                     <tr>
-                        <td class="titulo">COMUNA</td>
-                        <td>: '.$this->dte['Encabezado']['Receptor']['CmnaRecep'].'</td>
-                        <td class="titulo">CIUDAD</td>
-                        <td>: '.$this->dte['Encabezado']['Receptor']['CiudadRecep'].'</td>
-                    </tr>
-                    <tr>
                         <td class="titulo">GIRO</td>
                         <td>: '.$this->dte['Encabezado']['Receptor']['GiroRecep'].'</td>
                         <td class="titulo">R.U.T.</td>
                         <td>: '.$this->dte['Encabezado']['Receptor']['RUTRecep'].'</td>                        
+                    </tr>
+                    <tr>
+                        <td class="titulo">COMUNA</td>
+                        <td>: '.$this->dte['Encabezado']['Receptor']['CmnaRecep'].'</td>
+                        <td class="titulo">CIUDAD</td>
+                        <td>: '.$this->dte['Encabezado']['Receptor']['CiudadRecep'].'</td>
                     </tr>
                     <tr>
                         <td class="titulo">MEDIO DE PAGO</td>
@@ -460,27 +466,27 @@ class DTE {
                             <p>Verifique documento: www.sii.cl</p>
                         </td>
                         <td style="padding-top: 5px;" class="total titulo">SUBTOTAL</td>
-                        <td class="total valor">$'.$subtotal.'</td>
+                        <td class="total valor">$'.$this->formatNumber($subtotal).'</td>
                     </tr>
                     <tr>
                         <td class="total titulo">DESCUENTO</td>
-                        <td class="total valor">'.$descuento.'%</td>
+                        <td class="total valor">'.$this->formatNumber($descuento).'%</td>
                     </tr>
                     <tr>
                         <td class="total titulo">EXENTO</td>
-                        <td class="total valor">$'.$exento.'</td>
+                        <td class="total valor">$'.$this->formatNumber($exento).'</td>
                     </tr>
                     <tr>
                         <td class="total titulo">NETO</td>
-                        <td class="total valor">$'.$this->dte['Encabezado']['Totales']['MntNeto'].'</td>
+                        <td class="total valor">$'.$this->formatNumber($this->dte['Encabezado']['Totales']['MntNeto']).'</td>
                     </tr>
                     <tr>
                         <td class="total titulo">I.V.A</td>
-                        <td class="total valor">$'.$this->dte['Encabezado']['Totales']['IVA'].'</td>
+                        <td class="total valor">$'.$this->formatNumber($this->dte['Encabezado']['Totales']['IVA']).'</td>
                     </tr>
                     <tr>
                         <td class="total titulo" style="border-bottom: 1px solid black">TOTAL</td>
-                        <td class="total valor" style="border-bottom: 1px solid black">$'.$this->dte['Encabezado']['Totales']['MntTotal'].'</td>
+                        <td class="total valor" style="border-bottom: 1px solid black">$'.$this->formatNumber($this->dte['Encabezado']['Totales']['MntTotal']).'</td>
                     </tr>
                 </tbody>
             </table>
@@ -489,6 +495,7 @@ class DTE {
     }
 
     private function setAcuseRecibo(){
+        $leyenda = ($this->dte['Encabezado']['IdDoc']['TipoDTE']==52) ? 'CEDIBLE CON SU FACTURA' : 'CEDIBLE';
         $html = '
             <table class="acuse-recibo">
                 <tr>
@@ -510,7 +517,7 @@ class DTE {
                     <td style="padding-left: 10px"><b>Firma:</b> ____________________________________________</td>
                 </tr>
             </table>
-            <div class="texto-cedible">CEDIBLE</div>
+            <div class="texto-cedible">'.$leyenda.'</div>
         ';
         return $html;
     }
@@ -520,7 +527,7 @@ class DTE {
         $ecl = version_compare(phpversion(), '7.0.0', '<') ? -1 : 5;
         $bobj = $pdf417->getBarcodeObj(
         'PDF417,,'.$ecl,                     
-        '<TED>'.$this->ted.'</TED>',
+        $this->ted,
         -1,
         -1,
         'black',

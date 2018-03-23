@@ -7,6 +7,7 @@ class DTE {
     private $html;
     private $pdf;
     private $dte;
+    private $ted;
 
     private $no_cedible = [33,34,52];
     private $tipo_dte = [
@@ -17,8 +18,9 @@ class DTE {
         61 => 'NOTA DE DÉBITO ELECTRÓNICA'
     ];
 
-    public function __construct(array $DTE){
+    public function __construct(array $DTE, $ted = null){
         $this->dte = $DTE;
+        $this->ted = $ted;
         $this->pdf = new \Mpdf\Mpdf(['format' => 'A4']);
         $this->pdf->SetDisplayMode('fullpage');
         $this->html = '<head>
@@ -89,6 +91,7 @@ class DTE {
         
         .info-emisor .logo img {
             width: 100%;
+            max-height: 1.5cm;
             vertical-align: middle;
         }
 
@@ -386,7 +389,7 @@ class DTE {
                 foreach($referencias as $ref){
                     $html .= '
                     <tr>
-                        <td align="left">'.$ref['TpoDocRef'].'</td>
+                        <td align="left">'.$this->getTipo( $ref['TpoDocRef'] ).'</td>
                         <td>'.$ref['FolioRef'].'</td>
                         <td>'.$ref['FchRef'].'</td>
                     </tr>
@@ -517,7 +520,7 @@ class DTE {
         $ecl = version_compare(phpversion(), '7.0.0', '<') ? -1 : 5;
         $bobj = $pdf417->getBarcodeObj(
         'PDF417,,'.$ecl,                     
-        '<TED></TED>',
+        '<TED>'.$ted.'</TED>',
         -1,
         -1,
         'black',

@@ -367,6 +367,7 @@ class DTE {
     }
 
     private function setReferencias(){
+        $referencias = $this->dte['Referencia'];
         $html = '
             <div class="espacio-5"></div>
             <table>
@@ -377,22 +378,26 @@ class DTE {
                         <th>FECHA</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody>';
+                foreach($referencias as $referencia){
+                    $html .= '
                     <tr>
-                        <td align="left">Factura electronica</td>
-                        <td>100</td>
-                        <td>23/02/2019</td>
+                        <td align="left">'.$this->getTipo($referencia['TpoDocRef']).'</td>
+                        <td>'.$referencia['FolioRef'].'</td>
+                        <td>'.$referencia['FchRef'].'</td>
                     </tr>
+                    ';
+                }
+                for($i = 0; $i < 3-count($referencias); $i++){
+                    $html .= '
                     <tr>
                         <td align="left">&nbsp;</td>
                         <td>&nbsp;</td>
                         <td>&nbsp;</td>
                     </tr>
-                    <tr>
-                        <td align="left">&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                    </tr>
+                    ';
+                }
+                $html .=' 
                 </tbody>
             </table>
         ';

@@ -400,6 +400,8 @@ class DTE {
 
     private function setDetalle(){
         $detalles = $this->dte['Detalle'];
+        $descuento = (isset($this->dte['DscRcgGlobal'])) ? $this->dte['DscRcgGlobal']['ValorDR'] : 0;
+        $exento = (isset($this->dte['Encabezado']['Totales']['MntExe'])) ? $this->dte['Encabezado']['Totales']['MntExe'] : 0;
         $html = '
             <table>
                 <thead>
@@ -442,27 +444,27 @@ class DTE {
                             <p>Verifique documento: www.sii.cl</p>
                         </td>
                         <td style="padding-top: 5px;" class="total titulo">SUBTOTAL</td>
-                        <td class="total valor">$0</td>
+                        <td class="total valor">$'.$this->dte['Encabezado']['Totales']['MntNeto'].'</td>
                     </tr>
                     <tr>
                         <td class="total titulo">DESCUENTO</td>
-                        <td class="total valor">$0</td>
+                        <td class="total valor">'.$descuento.'%</td>
                     </tr>
                     <tr>
                         <td class="total titulo">EXENTO</td>
-                        <td class="total valor">$0</td>
+                        <td class="total valor">$'.$exento.'</td>
                     </tr>
                     <tr>
                         <td class="total titulo">NETO</td>
-                        <td class="total valor">$0</td>
+                        <td class="total valor">$'.$this->dte['Encabezado']['Totales']['MntNeto'].'</td>
                     </tr>
                     <tr>
                         <td class="total titulo">I.V.A</td>
-                        <td class="total valor">$0</td>
+                        <td class="total valor">$'.$this->dte['Encabezado']['Totales']['IVA'].'</td>
                     </tr>
                     <tr>
                         <td class="total titulo" style="border-bottom: 1px solid black">TOTAL</td>
-                        <td class="total valor" style="border-bottom: 1px solid black">$0</td>
+                        <td class="total valor" style="border-bottom: 1px solid black">$'.$this->dte['Encabezado']['Totales']['MntTotal'].'</td>
                     </tr>
                 </tbody>
             </table>

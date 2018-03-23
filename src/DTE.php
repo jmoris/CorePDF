@@ -354,7 +354,7 @@ class DTE {
                     <tr>
                         <td class="titulo">GIRO</td>
                         <td>: '.$this->dte['Encabezado']['Receptor']['GiroRecep'].'</td>
-                        <td class="titulo">FECHA VENCIMIENTOR.U.T.</td>
+                        <td class="titulo">FECHA VENCIMIENTO</td>
                         <td>: '.$fecha_emision.'</td>                        
                     </tr>
                     <tr>

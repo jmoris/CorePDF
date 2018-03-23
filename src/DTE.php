@@ -383,10 +383,11 @@ class DTE {
 
     private function setReferencias(){
         $referencias = (isset($this->dte['Referencia'])) ? $this->dte['Referencia'] : null;
-        if (!isset($referencias[0]))
-            $referencias = [$referencias];
+        
         if($referencias == null)
             return '';
+        if (!isset($referencias[0]))
+            $referencias = [$referencias];
         $html = '
             <div class="espacio-5"></div>
             <table>
@@ -406,7 +407,6 @@ class DTE {
                         <td>'.date('d-m-Y', strtotime($ref['FchRef'])).'</td>
                     </tr>
                     ';
-                
                 }
                 for($i = 0; $i < 3-count($referencias); $i++){
                     $html .= '

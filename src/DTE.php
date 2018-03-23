@@ -320,6 +320,7 @@ class DTE {
     }
 
     private function setReceptor(){
+        $fecha_emision = date('d-m-Y', strtotime($this->dte['Encabezado']['IdDoc']['FchEmis']));
         $html = '
             <table class="bordes">
                 <tbody>
@@ -327,13 +328,13 @@ class DTE {
                         <td class="titulo">SEÑOR(ES)</td>
                         <td>: '.$this->dte['Encabezado']['Receptor']['RznSocRecep'].'</td>
                         <td class="titulo">FECHA EMISION</td>
-                        <td>: 20-03-2018</td>
+                        <td>: '.$fecha_emision.'</td>
                     </tr>
                     <tr>
                         <td class="titulo">DIRECCION</td>
                         <td>: '.$this->dte['Encabezado']['Receptor']['DirRecep'].'</td>
                         <td class="titulo">FECHA VENCIMIENTO</td>
-                        <td>: 20-03-2018</td>
+                        <td>: '.$fecha_emision.'</td>
                     </tr>
                     <tr>
                         <td class="titulo">COMUNA</td>
@@ -399,6 +400,7 @@ class DTE {
     }
 
     private function setDetalle(){
+        $subtotal = 0;
         $detalles = $this->dte['Detalle'];
         $descuento = (isset($this->dte['DscRcgGlobal'])) ? $this->dte['DscRcgGlobal']['ValorDR'] : 0;
         $exento = (isset($this->dte['Encabezado']['Totales']['MntExe'])) ? $this->dte['Encabezado']['Totales']['MntExe'] : 0;
@@ -418,6 +420,7 @@ class DTE {
                     return '';
                     
                     foreach($detalles as $detalle){
+                        $subtotal += intval($detalle['MontoItem']);
                         $html.='<tr class="producto">
                         <td class="numero">'.$detalle['QtyItem'].'</td>
                         <td style="text-align: center">'.$detalle['UnmdItem'].'</td>
@@ -444,7 +447,7 @@ class DTE {
                             <p>Verifique documento: www.sii.cl</p>
                         </td>
                         <td style="padding-top: 5px;" class="total titulo">SUBTOTAL</td>
-                        <td class="total valor">$'.$this->dte['Encabezado']['Totales']['MntNeto'].'</td>
+                        <td class="total valor">$'.$subtotal.'</td>
                     </tr>
                     <tr>
                         <td class="total titulo">DESCUENTO</td>

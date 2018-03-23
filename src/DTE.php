@@ -520,7 +520,7 @@ class DTE {
         $ecl = version_compare(phpversion(), '7.0.0', '<') ? -1 : 5;
         $bobj = $pdf417->getBarcodeObj(
         'PDF417,,'.$ecl,                     
-        '<TED>'.$ted.'</TED>',
+        '<TED>'.$this->ted.'</TED>',
         -1,
         -1,
         'black',

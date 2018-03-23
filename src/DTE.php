@@ -444,8 +444,8 @@ class DTE {
                         <td class="numero">'.$detalle['QtyItem'].'</td>
                         <td style="text-align: center">'.$detalle['UnmdItem'].'</td>
                         <td>'.$detalle['NmbItem'].'</td>
-                        <td class="numero">'.$detalle['PrcItem'].'</td>
-                        <td class="numero">'.$detalle['MontoItem'].'</td>
+                        <td class="numero">'.$this->formatNumber($detalle['PrcItem']).'</td>
+                        <td class="numero">'.$this->formatNumber($detalle['MontoItem']).'</td>
                     </tr>';
                     }
 
@@ -470,7 +470,7 @@ class DTE {
                     </tr>
                     <tr>
                         <td class="total titulo">DESCUENTO</td>
-                        <td class="total valor">'.$this->formatNumber($descuento).'%</td>
+                        <td class="total valor">'.$descuento.'%</td>
                     </tr>
                     <tr>
                         <td class="total titulo">EXENTO</td>

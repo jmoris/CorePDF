@@ -21,10 +21,10 @@ class DTE {
     ];
 
     private $cols = [
-        'CANTIDAD' => ['width' => 12],
+        'CANTIDAD' => ['width' => 10],
         'UNIDAD' => ['width' => 10],
-        'DETALLE' => ['width' => 43],
-        'P. UNITARIO' => ['width' => 15],
+        'DETALLE' => ['width' => 48],
+        'P. UNITARIO' => ['width' => 12],
         'DSCTO' => ['width' => 8],
         'TOTAL' => ['width' => 12]
     ];

@@ -469,7 +469,7 @@ class DTE {
                     }
 
                     for($i = 0; $i < 30-count($detalles); $i++){
-                        $html .= '<tr class="producto"><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>';
+                        $html .= '<tr class="producto"><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>';
                     }
 
                     $html.='<tr>
@@ -488,7 +488,7 @@ class DTE {
                         <td class="total valor" colspan="2">$'.$this->formatNumber($subtotal).'</td>
                     </tr>
                     <tr>
-                        <td class="total titulo">DESCUENTO</td>
+                        <td class="total titulo">DSCTO</td>
                         <td class="total valor" colspan="2">'.$descuento.'%</td>
                     </tr>
                     <tr>

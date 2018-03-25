@@ -465,7 +465,7 @@ class DTE {
                         <td width="'.$this->cols['DETALLE']['width'].'">'.$detalle['NmbItem'].'</td>
                         <td width="'.$this->cols['P. UNITARIO']['width'].'" class="numero">'.$this->formatNumber($detalle['PrcItem']).'</td>
                         <td width="'.$this->cols['DSCTO']['width'].'" class="numero">'.$this->formatNumber($dscto).'</td>
-                        <td width="'.$this->cols['total']['width'].'" class="numero">'.$this->formatNumber($detalle['MontoItem']).'</td>
+                        <td width="'.$this->cols['TOTAL']['width'].'" class="numero">'.$this->formatNumber($detalle['MontoItem']).'</td>
                     </tr>';
                     }
 

@@ -485,27 +485,27 @@ class DTE {
                             <p>Verifique documento: www.sii.cl</p>
                         </td>
                         <td style="padding-top: 5px;" class="total titulo">SUBTOTAL</td>
-                        <td class="total valor">$'.$this->formatNumber($subtotal).'</td>
+                        <td class="total valor" colspan="2">$'.$this->formatNumber($subtotal).'</td>
                     </tr>
                     <tr>
                         <td class="total titulo">DESCUENTO</td>
-                        <td class="total valor">'.$descuento.'%</td>
+                        <td class="total valor" colspan="2">'.$descuento.'%</td>
                     </tr>
                     <tr>
                         <td class="total titulo">EXENTO</td>
-                        <td class="total valor">$'.$this->formatNumber($exento).'</td>
+                        <td class="total valor" colspan="2">$'.$this->formatNumber($exento).'</td>
                     </tr>
                     <tr>
                         <td class="total titulo">NETO</td>
-                        <td class="total valor">$'.$this->formatNumber($this->dte['Encabezado']['Totales']['MntNeto']).'</td>
+                        <td class="total valor" colspan="2">$'.$this->formatNumber($this->dte['Encabezado']['Totales']['MntNeto']).'</td>
                     </tr>
                     <tr>
                         <td class="total titulo">I.V.A</td>
-                        <td class="total valor">$'.$this->formatNumber($this->dte['Encabezado']['Totales']['IVA']).'</td>
+                        <td class="total valor" colspan="2">$'.$this->formatNumber($this->dte['Encabezado']['Totales']['IVA']).'</td>
                     </tr>
                     <tr>
                         <td class="total titulo" style="border-bottom: 1px solid black">TOTAL</td>
-                        <td class="total valor" style="border-bottom: 1px solid black">$'.$this->formatNumber($this->dte['Encabezado']['Totales']['MntTotal']).'</td>
+                        <td class="total valor"  colspan="2" style="border-bottom: 1px solid black">$'.$this->formatNumber($this->dte['Encabezado']['Totales']['MntTotal']).'</td>
                     </tr>
                 </tbody>
             </table>

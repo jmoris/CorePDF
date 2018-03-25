@@ -20,6 +20,15 @@ class DTE {
         802 => 'NOTA DE PEDIDO'
     ];
 
+    private $cols = [
+        'CANTIDAD' => ['width' => '15'],
+        'UNIDAD' => ['width' => '15'],
+        'DETALLE' => ['width' => '35'],
+        'P. UNITARIO' => ['width' => '15'],
+        'DSCTO' => ['width' => '10'],
+        'TOTAL' => ['width' => '10']
+    ];
+
     public function __construct(array $DTE, $ted = null){
         $this->dte = $DTE;
         $this->ted = $ted;
@@ -361,7 +370,7 @@ class DTE {
                         <td class="titulo">COMUNA</td>
                         <td>: '.$this->dte['Encabezado']['Receptor']['CmnaRecep'].'</td>
                         <td class="titulo">CIUDAD</td>
-                        <td>: '.$this->dte['Encabezado']['Receptor']['CiudadRecep'].'</td>
+                        <td>: '.$this->dte['Encabezado']['Receptor']['CmnaRecep'].'</td>
                     </tr>
                     <tr>
                         <td class="titulo">MEDIO DE PAGO</td>
@@ -426,6 +435,7 @@ class DTE {
     private function setDetalle(){
         $subtotal = 0;
         $detalles = $this->dte['Detalle'];
+
         if (!isset($detalles[0]))
             $detalles = [$detalles];
         $descuento = (isset($this->dte['DscRcgGlobal'])) ? $this->dte['DscRcgGlobal']['ValorDR'] : 0;
@@ -433,25 +443,26 @@ class DTE {
         $html = '
             <table>
                 <thead>
-                    <tr>
-                        <th width="10%">CANTIDAD</th>
-                        <th width="10%">UNIDAD</th>
-                        <th width="50%">DETALLE</th>
-                        <th width="15%">P. UNITARIO</th>
-                        <th width="15%" class="fintd">TOTAL</th>
-                    </tr>
+                    <tr>';
+                    foreach($this->cols as $key => $value){
+                        $html.' = <th width="'.$value['width'].'">'.$key.'</th>';
+                    }
+        $html .= '
+            </tr>
                 </thead>
-                <tbody>';
+                    <tbody>';
                 if($detalles == null)
                     return '';
                     
                     foreach($detalles as $detalle){
                         $subtotal += intval($detalle['MontoItem']);
+                        $dscto = (!isset($detalle['DescuentoPct']) ? 0 :  $detalle['DescuentoPct']); 
                         $html.='<tr class="producto">
                         <td class="numero">'.$detalle['QtyItem'].'</td>
                         <td style="text-align: center">'.$detalle['UnmdItem'].'</td>
                         <td>'.$detalle['NmbItem'].'</td>
                         <td class="numero">'.$this->formatNumber($detalle['PrcItem']).'</td>
+                        <td class="numero">'.$this->formatNumber($dscto).'</td>
                         <td class="numero">'.$this->formatNumber($detalle['MontoItem']).'</td>
                     </tr>';
                     }

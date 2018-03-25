@@ -21,12 +21,12 @@ class DTE {
     ];
 
     private $cols = [
-        'CANTIDAD' => ['width' => '15'],
-        'UNIDAD' => ['width' => '15'],
-        'DETALLE' => ['width' => '35'],
-        'P. UNITARIO' => ['width' => '15'],
-        'DSCTO' => ['width' => '10'],
-        'TOTAL' => ['width' => '10']
+        'CANTIDAD' => ['width' => 15],
+        'UNIDAD' => ['width' => 15],
+        'DETALLE' => ['width' => 35],
+        'P. UNITARIO' => ['width' => 15],
+        'DSCTO' => ['width' => 10],
+        'TOTAL' => ['width' => 10]
     ];
 
     public function __construct(array $DTE, $ted = null){
@@ -458,6 +458,7 @@ class DTE {
                         $subtotal += intval($detalle['MontoItem']);
                         $und = (!isset($detalle['UnmdItem'])) ? 'Und' : $detalle['UnmdItem'];
                         $dscto = (!isset($detalle['DescuentoPct']) ? 0 :  $detalle['DescuentoPct']); 
+
                         $html.='<tr class="producto">
                         <td class="numero">'.$detalle['QtyItem'].'</td>
                         <td style="text-align: center">'.$und.'</td>

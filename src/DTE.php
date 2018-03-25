@@ -322,7 +322,7 @@ class DTE {
         $html = '
             <p class="razonsocial">'.$this->dte['Encabezado']['Emisor']['RznSoc'].'</p>
             <p class="masinfo">'.$this->dte['Encabezado']['Emisor']['GiroEmis'].'</p>
-            <p class="masinfo">'.$this->dte['Encabezado']['Emisor']['DirOrigen'].','.$this->dte['Encabezado']['Emisor']['CmnaOrigen'].','.$this->dte['Encabezado']['Emisor']['CmnaOrigen'].'</p>
+            <p class="masinfo">'.$this->dte['Encabezado']['Emisor']['DirOrigen'].', '.$this->dte['Encabezado']['Emisor']['CmnaOrigen'].', '.$this->dte['Encabezado']['Emisor']['CmnaOrigen'].'</p>
             <p class="masinfo">Telefono: (75) 2 412479</p>
             <p class="masinfo">Email: contacto@soluciontotal.cl</p>
             <p class="masinfo">Web: www.soluciontotal.cl</p>
@@ -337,7 +337,7 @@ class DTE {
                 <p><b>'.$this->getTipo($this->dte['Encabezado']['IdDoc']['TipoDTE']).'</b></p>
                 <p><b>Nº '.$this->dte['Encabezado']['IdDoc']['Folio'].'</b></p>
             </div>
-            <p style="margin:0;padding:0;"><b>S.I.I. - CURICÓ</b></p></div>
+            <p style="margin:0;padding:0;"><b>S.I.I. - '.\SolucionTotal\CorePDF\SII::getDireccionRegional($this->dte['Encabezado']['Emisor']['CmnaOrigen']).'</b></p></div>
         ';
 
         return $html;

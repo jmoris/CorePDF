@@ -445,7 +445,7 @@ class DTE {
                 <thead>
                     <tr>';
                     foreach($this->cols as $key => $value){
-                        $html.' = <th width="'.$value['width'].'">'.$key.'</th>';
+                        $html .= '<th width="'.$value['width'].'">'.$key.'</th>';
                     }
         $html .= '
             </tr>

@@ -475,7 +475,7 @@ class DTE {
                     $html.='<tr>
                         <td style="border-top: 1px solid black; border-left: 1px solid black; border-right: 1px solid black;" colspan="3"></td>
                         <td style="border-top: 1px solid black; border-left: 1px solid black; border-right: 1px solid black;"></td>
-                        <td style="border-top: 1px solid black; border-left: 1px solid black; border-right: 1px solid black;"></td>
+                        <td style="border-top: 1px solid black; border-left: 1px solid black; border-right: 1px solid black;" colspan="2"></td>
                     </tr>
                     <tr>
                         <td style="border-left: 0; border-bottom: 0; padding-right: 70px; text-align: center;" rowspan="6" colspan="3">

@@ -460,12 +460,12 @@ class DTE {
                         $dscto = (!isset($detalle['DescuentoPct']) ? 0 :  $detalle['DescuentoPct']); 
 
                         $html.='<tr class="producto">
-                        <td class="numero">'.$detalle['QtyItem'].'</td>
-                        <td style="text-align: center">'.$und.'</td>
-                        <td>'.$detalle['NmbItem'].'</td>
-                        <td class="numero">'.$this->formatNumber($detalle['PrcItem']).'</td>
-                        <td class="numero">'.$this->formatNumber($dscto).'</td>
-                        <td class="numero">'.$this->formatNumber($detalle['MontoItem']).'</td>
+                        <td width="'.$this->cols['CANTIDAD']['width'].'" class="numero">'.$detalle['QtyItem'].'</td>
+                        <td width="'.$this->cols['UNIDAD']['width'].'" style="text-align: center">'.$und.'</td>
+                        <td width="'.$this->cols['DETALLE']['width'].'">'.$detalle['NmbItem'].'</td>
+                        <td width="'.$this->cols['P. UNITARIO']['width'].'" class="numero">'.$this->formatNumber($detalle['PrcItem']).'</td>
+                        <td width="'.$this->cols['DSCTO']['width'].'" class="numero">'.$this->formatNumber($dscto).'</td>
+                        <td width="'.$this->cols['total']['width'].'" class="numero">'.$this->formatNumber($detalle['MontoItem']).'</td>
                     </tr>';
                     }
 

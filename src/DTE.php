@@ -456,10 +456,11 @@ class DTE {
                     
                     foreach($detalles as $detalle){
                         $subtotal += intval($detalle['MontoItem']);
+                        $und = (!isset($detalle['UnmdItem'])) ? 'Und' : $detalle['UnmdItem'];
                         $dscto = (!isset($detalle['DescuentoPct']) ? 0 :  $detalle['DescuentoPct']); 
                         $html.='<tr class="producto">
                         <td class="numero">'.$detalle['QtyItem'].'</td>
-                        <td style="text-align: center">'.$detalle['UnmdItem'].'</td>
+                        <td style="text-align: center">'.$und.'</td>
                         <td>'.$detalle['NmbItem'].'</td>
                         <td class="numero">'.$this->formatNumber($detalle['PrcItem']).'</td>
                         <td class="numero">'.$this->formatNumber($dscto).'</td>

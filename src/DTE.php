@@ -21,12 +21,12 @@ class DTE {
     ];
 
     private $cols = [
-        'CANTIDAD' => ['width' => 15],
-        'UNIDAD' => ['width' => 15],
-        'DETALLE' => ['width' => 35],
+        'CANTIDAD' => ['width' => 12],
+        'UNIDAD' => ['width' => 10],
+        'DETALLE' => ['width' => 43],
         'P. UNITARIO' => ['width' => 15],
-        'DSCTO' => ['width' => 10],
-        'TOTAL' => ['width' => 10]
+        'DSCTO' => ['width' => 8],
+        'TOTAL' => ['width' => 12]
     ];
 
     public function __construct(array $DTE, $ted = null){

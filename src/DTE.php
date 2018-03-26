@@ -538,7 +538,7 @@ class DTE {
                     </tr>
                     <tr>
                         <td class="total titulo">NETO</td>
-                        <td class="total valor" colspan="2">$'.$this->formatNumber($this->dte['Encabezado']['Totales']['MntNeto']).'</td>
+                        <td class="total valor" colspan="2">$'.$this->formatNumber($neto).'</td>
                     </tr>
                     <tr>
                         <td class="total titulo">I.V.A</td>

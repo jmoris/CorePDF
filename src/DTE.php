@@ -397,9 +397,9 @@ class DTE {
                         <td>:</td>
                     </tr>
                     <tr>
-                        <td class="titulo">'.$opctext[0].'</td>
+                        <td class="titulo">'.$opctexto[0].'</td>
                         <td>: '.$opcvalor[0].'</td>
-                        <td class="titulo">'.$opctext[1].'</td>
+                        <td class="titulo">'.$opctexto[1].'</td>
                         <td>: '.$opcvalor[1].'</td>
                     </tr>
                 </tbody>

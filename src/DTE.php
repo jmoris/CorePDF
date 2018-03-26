@@ -472,6 +472,7 @@ class DTE {
         $detalles = $this->dte['Detalle'];
 
         $iva = (isset($this->dte['Encabezado']['Totales']['IVA'])) ? $this->dte['Encabezado']['Totales']['IVA'] : 0;
+        $neto = (isset($this->dte['Encabezado']['Totales']['MntNeto'])) ? $this->dte['Encabezado']['Totales']['MntNeto'] : 0;
 
         if (!isset($detalles[0]))
             $detalles = [$detalles];

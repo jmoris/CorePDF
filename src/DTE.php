@@ -47,8 +47,8 @@ class DTE {
         $this->pdf->WriteHTML($this->html);
     }
 
-    public function generar(){
-        $this->pdf->Output();
+    public function generar($descarga = false){
+        ($descarga) ? $this->pdf->Output(\Mpdf\Output\Destination::DOWNLOAD) : $this->pdf->Output();
     }
 
     private function getTipo($tipo)

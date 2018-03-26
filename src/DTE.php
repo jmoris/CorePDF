@@ -344,15 +344,15 @@ class DTE {
     }
 
     private function setReceptor(){
-        $opcguia = [
-            'TIPO TRASLADO',
-            'TIPO DESPACHO'
+        $textoguia = [
+            'TIPO TRASLADO' => (!isset($this->dte['Encabezado']['IdDoc']['IndTraslado']))?'':$this->dte['Encabezado']['IdDoc']['IndTraslado'],
+            'TIPO DESPACHO' => (!isset($this->dte['Encabezado']['IdDoc']['TipoDespacho']))?'':$this->dte['Encabezado']['IdDoc']['TipoDespacho'],
         ];
-        $opcfactura = [
-            'MEDIO DE PAGO',
-            'CONDICION DE PAGO'
+        $textodoc = [
+            'MEDIO DE PAGO' => (!isset($this->dte['Encabezado']['IdDoc']['MedioPago']))?'':$this->dte['Encabezado']['IdDoc']['MedioPago'],
+            'CONDICION DE PAGO' => (!isset($this->dte['Encabezado']['IdDoc']['FmaPago']))?'':$this->dte['Encabezado']['IdDoc']['FmaPago']
         ];
-        $opc = ($this->dte['Encabezado']['IdDoc']['TipoDTE']!=52) ? $opcfactura : $opcguia;
+        $opc = ($this->dte['Encabezado']['IdDoc']['TipoDTE']!=52) ? $textodoc : $textoguia;
         $fecha_emision = date('d-m-Y', strtotime($this->dte['Encabezado']['IdDoc']['FchEmis']));
         $html = '
             <table class="bordes">
@@ -389,9 +389,9 @@ class DTE {
                     </tr>
                     <tr>
                         <td class="titulo">'.$opc[0].'</td>
-                        <td>:</td>
+                        <td>: '.$opc[0][0].'</td>
                         <td class="titulo">'.$opc[1].'</td>
-                        <td>:</td>
+                        <td>: '.$opc[1][0].'</td>
                     </tr>
                 </tbody>
             </table>

@@ -471,6 +471,8 @@ class DTE {
         $subtotal = 0;
         $detalles = $this->dte['Detalle'];
 
+        $iva = (isset($this->dte['Encabezado']['Totales']['IVA'])) ? $this->dte['Encabezado']['Totales']['IVA'] : 0;
+
         if (!isset($detalles[0]))
             $detalles = [$detalles];
         $descuento = (isset($this->dte['DscRcgGlobal'])) ? $this->dte['DscRcgGlobal']['ValorDR'] : 0;

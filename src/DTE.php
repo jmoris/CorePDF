@@ -541,7 +541,7 @@ class DTE {
                     </tr>
                     <tr>
                         <td class="total titulo">I.V.A</td>
-                        <td class="total valor" colspan="2">$'.$this->formatNumber($this->dte['Encabezado']['Totales']['IVA']).'</td>
+                        <td class="total valor" colspan="2">$'.$this->formatNumber($iva).'</td>
                     </tr>
                     <tr>
                         <td class="total titulo" style="border-bottom: 1px solid black">TOTAL</td>

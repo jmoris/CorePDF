@@ -48,7 +48,7 @@ class DTE {
     }
 
     public function generar($descarga = false){
-        ($descarga) ? $this->pdf->Output(\Mpdf\Output\Destination::DOWNLOAD) : $this->pdf->Output();
+        ($descarga) ? $this->pdf->Output($this->dte['@attributes']['ID'], \Mpdf\Output\Destination::DOWNLOAD) : $this->pdf->Output($this->dte['@attributes']['ID']);
     }
 
     private function getTipo($tipo)

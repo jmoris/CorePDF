@@ -345,14 +345,23 @@ class DTE {
 
     private function setReceptor(){
         $textoguia = [
-            'TIPO TRASLADO' => (!isset($this->dte['Encabezado']['IdDoc']['IndTraslado']))?'':$this->dte['Encabezado']['IdDoc']['IndTraslado'],
-            'TIPO DESPACHO' => (!isset($this->dte['Encabezado']['IdDoc']['TipoDespacho']))?'':$this->dte['Encabezado']['IdDoc']['TipoDespacho'],
+            'TIPO TRASLADO',
+            'TIPO DESPACHO'
+        ];
+        $valorguia = [
+            (!isset($this->dte['Encabezado']['IdDoc']['IndTraslado']))?'':$this->dte['Encabezado']['IdDoc']['IndTraslado'],
+            (!isset($this->dte['Encabezado']['IdDoc']['TipoDespacho']))?'':$this->dte['Encabezado']['IdDoc']['TipoDespacho']
         ];
         $textodoc = [
-            'MEDIO DE PAGO' => (!isset($this->dte['Encabezado']['IdDoc']['MedioPago']))?'':$this->dte['Encabezado']['IdDoc']['MedioPago'],
-            'CONDICION DE PAGO' => (!isset($this->dte['Encabezado']['IdDoc']['FmaPago']))?'':$this->dte['Encabezado']['IdDoc']['FmaPago']
+            'MEDIO DE PAGO',
+            'CONDICION DE PAGO'
         ];
-        $opc = ($this->dte['Encabezado']['IdDoc']['TipoDTE']!=52) ? $textodoc : $textoguia;
+        $valordoc = [
+            (!isset($this->dte['Encabezado']['IdDoc']['MedioPago']))?'':$this->dte['Encabezado']['IdDoc']['MedioPago'],
+            (!isset($this->dte['Encabezado']['IdDoc']['FmaPago']))?'':$this->dte['Encabezado']['IdDoc']['FmaPago']
+        ]; 
+        $opctexto = ($this->dte['Encabezado']['IdDoc']['TipoDTE']!=52) ? $textodoc : $textoguia;
+        $opcvalor = ($this->dte['Encabezado']['IdDoc']['TipoDTE']!=52) ? $valordoc : $valorguia;
         $fecha_emision = date('d-m-Y', strtotime($this->dte['Encabezado']['IdDoc']['FchEmis']));
         $html = '
             <table class="bordes">
@@ -388,10 +397,10 @@ class DTE {
                         <td>:</td>
                     </tr>
                     <tr>
-                        <td class="titulo">'.$opc[0].'</td>
-                        <td>: '.$opc[0][0].'</td>
-                        <td class="titulo">'.$opc[1].'</td>
-                        <td>: '.$opc[1][0].'</td>
+                        <td class="titulo">'.$opctext[0].'</td>
+                        <td>: '.$opcvalor[0].'</td>
+                        <td class="titulo">'.$opctext[1].'</td>
+                        <td>: '.$opcvalor[1].'</td>
                     </tr>
                 </tbody>
             </table>

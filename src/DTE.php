@@ -492,13 +492,15 @@ class DTE {
                     foreach($detalles as $detalle){
                         $subtotal += intval($detalle['MontoItem']);
                         $und = (!isset($detalle['UnmdItem'])) ? 'Und' : $detalle['UnmdItem'];
+                        $cantidad = (!isset($detalle['QtyItem'])) ? 1 : $detalle['QtyItem'];
+                        $precio = (!isset($detalle['PrcItem'])) ? 0 : $detalle['PrcItem'];
                         $dscto = (!isset($detalle['DescuentoPct']) ? 0 :  $detalle['DescuentoPct']); 
 
                         $html.='<tr class="producto">
-                        <td width="'.$this->cols['CANTIDAD']['width'].'%" class="numero">'.$detalle['QtyItem'].'</td>
+                        <td width="'.$this->cols['CANTIDAD']['width'].'%" class="numero">'.$cantidad.'</td>
                         <td width="'.$this->cols['UNIDAD']['width'].'%" style="text-align: center">'.$und.'</td>
                         <td width="'.$this->cols['DETALLE']['width'].'%">'.$detalle['NmbItem'].'</td>
-                        <td width="'.$this->cols['P. UNITARIO']['width'].'%" class="numero">'.$this->formatNumber($detalle['PrcItem']).'</td>
+                        <td width="'.$this->cols['P. UNITARIO']['width'].'%" class="numero">'.$this->formatNumber($precio).'</td>
                         <td width="'.$this->cols['DSCTO']['width'].'%" style="text-align: center">'.$this->formatNumber($dscto).'%</td>
                         <td width="'.$this->cols['TOTAL']['width'].'%" class="numero">'.$this->formatNumber($detalle['MontoItem']).'</td>
                     </tr>';

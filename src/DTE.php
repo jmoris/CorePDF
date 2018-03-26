@@ -344,6 +344,15 @@ class DTE {
     }
 
     private function setReceptor(){
+        $opcguia = [
+            'TIPO TRASLADO',
+            'TIPO DESPACHO'
+        ];
+        $opcfactura = [
+            'MEDIO DE PAGO',
+            'CONDICION DE PAGO'
+        ];
+        $opc = ($this->dte['Encabezado']['IdDoc']['TipoDTE']!=52) ? $opcfactura : $opcguia;
         $fecha_emision = date('d-m-Y', strtotime($this->dte['Encabezado']['IdDoc']['FchEmis']));
         $html = '
             <table class="bordes">
@@ -373,15 +382,15 @@ class DTE {
                         <td>: '.$this->dte['Encabezado']['Receptor']['CmnaRecep'].'</td>
                     </tr>
                     <tr>
-                        <td class="titulo">MEDIO DE PAGO</td>
+                        <td class="titulo">PATENTE</td>
                         <td>:</td>
                         <td class="titulo">TELEFONO</td>
                         <td>:</td>
                     </tr>
                     <tr>
-                        <td class="titulo">CONDICION DE PAGO</td>
-                        <td>: CREDITO</td>
-                        <td class="titulo">PATENTE</td>
+                        <td class="titulo">'.$opc[0].'</td>
+                        <td>:</td>
+                        <td class="titulo">'.$opc[1].'</td>
                         <td>:</td>
                     </tr>
                 </tbody>

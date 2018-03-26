@@ -301,6 +301,10 @@ class DTE {
     }
 
     private function setInfo($acuse = false){
+        $txtacuse = '';
+        if($acuse)
+            if(!array_key_exists($this->dte['Encabezado']['IdDoc']['TipoDTE'], $this->no_cedible))
+                $txtacuse = $this->setAcuseRecibo();
         $html = '
             <div class="info-emisor">
                 <div class="logo">
@@ -317,7 +321,7 @@ class DTE {
             <div class="espacio-2"></div>
             <div class="detalle">'.$this->setDetalle().'</div>
             <div class="espacio-5"></div>
-            '.($acuse) ? ((array_key_exists($this->dte['Encabezado']['IdDoc']['TipoDTE'], $this->no_cedible)) ? '' : $this->setAcuseRecibo()):'';
+            '.$txtacuse;
         return $html;
     }
 

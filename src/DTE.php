@@ -45,6 +45,19 @@ class DTE {
         $this->html .= '</div>
                         </body>';
         $this->pdf->WriteHTML($this->html);
+        $this->html = '';
+        $this->pdf->AddPage();
+        $this->html = '<head>
+                        <style>';
+        $this->html .= $this->setCss();
+        $this->html .= '</style>
+                        </head>
+                        <body>
+                        <div class="factura">';
+        $this->html .= $this->setInfo(true);
+        $this->html .= '</div>
+                        </body>';
+        $this->pdf->WriteHTML($this->html);        
     }
 
     public function generar($descarga = false){
@@ -287,7 +300,7 @@ class DTE {
         return $this->html;
     }
 
-    private function setInfo(){
+    private function setInfo($acuse = false){
         $html = '
             <div class="info-emisor">
                 <div class="logo">
@@ -304,7 +317,7 @@ class DTE {
             <div class="espacio-2"></div>
             <div class="detalle">'.$this->setDetalle().'</div>
             <div class="espacio-5"></div>
-            '.((array_key_exists($this->dte['Encabezado']['IdDoc']['TipoDTE'], $this->no_cedible)) ? '' : $this->setAcuseRecibo());
+            '.($acuse) ? ((array_key_exists($this->dte['Encabezado']['IdDoc']['TipoDTE'], $this->no_cedible)) ? '' : $this->setAcuseRecibo()):'';
         return $html;
     }
 

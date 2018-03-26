@@ -3,7 +3,7 @@
 namespace SolucionTotal\CorePDF;
 
 class SII {
-    
+
     private static $direcciones_regionales = [
         'ARICA' => 'ARICA',
         'CAMARONES' => 'ARICA',
@@ -350,6 +350,16 @@ class SII {
         'PAINE' => 'BUIN',
     ];
 
+    private static $texto_traslado = [
+        1 => 'Operación Constituye Venta',
+        2 => 'Venta por Efectuar',
+        3 => 'Consignación',
+        4 => 'Promoción  o Donación',
+        5 => 'Traslado Interno',
+        6 => 'Otros Traslados que no Constituyen Venta',
+        7 => 'Guia de Devolución'
+    ];
+
     public static function getDireccionRegional($comuna)
     {
         if (!$comuna) {
@@ -360,6 +370,10 @@ class SII {
             return isset(self::$direcciones_regionales[$direccion]) ? self::$direcciones_regionales[$direccion] : $direccion;
         }
         return 'SUC '.$comuna;
+    }
+
+    public static function getTipoTraslado($traslado){
+        return self::$texto_traslado[$traslado];
     }
 
 }

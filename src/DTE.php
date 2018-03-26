@@ -349,7 +349,7 @@ class DTE {
             'TIPO DESPACHO'
         ];
         $valorguia = [
-            (!isset($this->dte['Encabezado']['IdDoc']['IndTraslado']))?'':$this->dte['Encabezado']['IdDoc']['IndTraslado'],
+            (!isset($this->dte['Encabezado']['IdDoc']['IndTraslado']))?'':\SolucionTotal\CorePDF\SII::getTipoTraslado($this->dte['Encabezado']['IdDoc']['IndTraslado']),
             (!isset($this->dte['Encabezado']['IdDoc']['TipoDespacho']))?'':$this->dte['Encabezado']['IdDoc']['TipoDespacho']
         ];
         $textodoc = [

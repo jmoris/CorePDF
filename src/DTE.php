@@ -570,7 +570,7 @@ class DTE {
     }
 
     private function setTimbre(){
-        $b2d = \Milon\Barcode\DNS2D();
+        $b2d = new \Milon\Barcode\DNS2D();
         $b2d->setStorPath(__DIR__."/cache/");
         /*$pdf417 = new \Com\Tecnick\Barcode\Barcode();
         $bobj = $pdf417->getBarcodeObj(

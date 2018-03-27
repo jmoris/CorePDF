@@ -579,7 +579,6 @@ class DTE {
         'black',
         array(0, 0, 0, 0)
         )->setBackgroundColor('white');
-        $bobj->ecl = 5;
         $timbre = '<img style="width: 8cm; height: 2.5cm;"src="data:image/png;base64,'.base64_encode($bobj->getPngData()).'">';
             
         return $timbre;

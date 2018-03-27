@@ -570,7 +570,9 @@ class DTE {
     }
 
     private function setTimbre(){
-        $pdf417 = new \Com\Tecnick\Barcode\Barcode();
+        $b2d = \Milon\Barcode\DNS2D();
+        $b2d->setStorPath(__DIR__."/cache/");
+        /*$pdf417 = new \Com\Tecnick\Barcode\Barcode();
         $bobj = $pdf417->getBarcodeObj(
         'PDF417',                     
         $this->ted,
@@ -578,8 +580,8 @@ class DTE {
         -1,
         'black',
         array(0, 0, 0, 0)
-        )->setBackgroundColor('white');
-        $timbre = '<img style="width: 8cm; height: 2.5cm;"src="data:image/png;base64,'.base64_encode($bobj->getPngData()).'">';
+        )->setBackgroundColor('white');*/
+        $timbre = '<img style="width: 8cm; height: 2.5cm;"src="data:image/png;base64,'.$b2d->getBarcodePNG($this->ted, "PDF417,,5").'">';
             
         return $timbre;
     }

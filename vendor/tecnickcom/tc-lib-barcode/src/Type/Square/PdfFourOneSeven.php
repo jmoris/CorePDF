@@ -87,7 +87,7 @@ class PdfFourOneSeven extends \Com\Tecnick\Barcode\Type\Square\PdfFourOneSeven\C
      *
      * @var int
      */
-    protected $ecl = -1;
+    protected $ecl = 5;
     
     /**
      * Information for macro block

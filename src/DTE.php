@@ -29,7 +29,7 @@ class DTE {
         'TOTAL' => ['width' => 12]
     ];
 
-    public function __construct(array $DTE, $ted = null){
+    public function __construct(array $DTE, $ted = null, $cedible = false){
         $this->dte = $DTE;
         $this->ted = $ted;
         $this->pdf = new \Mpdf\Mpdf(['format' => 'A4']);
@@ -41,23 +41,10 @@ class DTE {
                         </head>
                         <body>
                         <div class="factura">';
-        $this->html .= $this->setInfo();
+        $this->html .= $this->setInfo($cedible);
         $this->html .= '</div>
                         </body>';
-        $this->pdf->WriteHTML($this->html);
-        $this->html = '';
-        $this->pdf->AddPage();
-        $this->html = '<head>
-                        <style>';
-        $this->html .= $this->setCss();
-        $this->html .= '</style>
-                        </head>
-                        <body>
-                        <div class="factura">';
-        $this->html .= $this->setInfo(true);
-        $this->html .= '</div>
-                        </body>';
-        $this->pdf->WriteHTML($this->html);        
+        $this->pdf->WriteHTML($this->html);   
     }
 
     public function generar($descarga = false){
@@ -584,9 +571,8 @@ class DTE {
 
     private function setTimbre(){
         $pdf417 = new \Com\Tecnick\Barcode\Barcode();
-        $ecl = version_compare(phpversion(), '7.0.0', '<') ? -1 : 5;
         $bobj = $pdf417->getBarcodeObj(
-        'PDF417,,'.$ecl,                     
+        'PDF417',                     
         $this->ted,
         -1,
         -1,
@@ -595,7 +581,7 @@ class DTE {
         )->setBackgroundColor('white');
 
         $timbre = '<img style="width: 8cm; height: 2.5cm;"src="data:image/png;base64,'.base64_encode($bobj->getPngData()).'">';
-
+            
         return $timbre;
     }
 

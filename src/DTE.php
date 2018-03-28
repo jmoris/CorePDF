@@ -8,7 +8,7 @@ class DTE {
     private $pdf;
     private $dte;
     private $ted;
-    private $resolucion = [];
+    private $resolucion = [1970, 0];
 
 
     private $no_cedible = [61, 56];

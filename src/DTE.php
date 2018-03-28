@@ -467,11 +467,13 @@ class DTE {
         $subtotal = 0;
         $detalles = $this->dte['Detalle'];
 
-        $nro_totales = count($this->dte['Encabezado']['Totales']);
         $iva = (isset($this->dte['Encabezado']['Totales']['IVA'])) ? $this->dte['Encabezado']['Totales']['IVA'] : 0;
         $neto = (isset($this->dte['Encabezado']['Totales']['MntNeto'])) ? $this->dte['Encabezado']['Totales']['MntNeto'] : 0;
         $descuento = (isset($this->dte['DscRcgGlobal'])) ? $this->dte['DscRcgGlobal']['ValorDR'] : 0;
         $exento = (isset($this->dte['Encabezado']['Totales']['MntExe'])) ? $this->dte['Encabezado']['Totales']['MntExe'] : 0;
+
+        $nro_totales = count($this->dte['Encabezado']['Totales'])+1; // El que se agrega es el SUBTOTAL que es un total calculado aparte.
+        $nro_totales += ($descuento != 0) ? 1:0; // Si el descuento != 0 se agrega en el documento, de lo contrario, se quita.
 
         if (!isset($detalles[0]))
             $detalles = [$detalles];
@@ -524,12 +526,14 @@ class DTE {
                         </td>
                         <td style="padding-top: 5px;" class="total titulo">SUBTOTAL</td>
                         <td class="total valor" colspan="2">$'.$this->formatNumber($subtotal).'</td>
-                    </tr>
-                    <tr>
-                        <td class="total titulo">DSCTO</td>
-                        <td class="total valor" colspan="2">'.$descuento.'%</td>
-                    </tr>
-                    <tr>
+                    </tr>';
+                    if($descuento != 0){
+                        $html .= '
+                            <tr>
+                                '.$this->formatValor('DSCTO', $descuento).'
+                            </tr>';
+                    }
+                    $html .= '<tr>
                         <td class="total titulo">EXENTO</td>
                         <td class="total valor" colspan="2">$'.$this->formatNumber($exento).'</td>
                     </tr>

@@ -33,6 +33,7 @@ class DTE {
         $this->dte = $DTE;
         $this->ted = $ted;
         $this->pdf = new \Mpdf\Mpdf(['format' => 'A4']);
+        $this->pdf->SetCompression(true); // forzamos la compresion del PDF
         $this->pdf->SetDisplayMode('fullpage');
         $this->html = '<head>
                         <style>';

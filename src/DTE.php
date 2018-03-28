@@ -8,6 +8,8 @@ class DTE {
     private $pdf;
     private $dte;
     private $ted;
+    private $resolucion = [];
+
 
     private $no_cedible = [61, 56];
     private $tipo_dte = [
@@ -57,6 +59,15 @@ class DTE {
         if (!is_numeric($tipo) and !isset($this->tipo_dte[$tipo]))
             return $tipo;
         return isset($this->tipo_dte[$tipo]) ? strtoupper($this->tipo_dte[$tipo]) : 'Documento '.$tipo;
+    }
+
+    public function setResolucion($ano, $nro){
+        $this->resolucion[0] = $ano;
+        $this->resolucion[1] = $nro;
+    }
+
+    private function getResolucion(){
+        return 'Resolución '.$this->resolucion[1].' de '.$this->resolucion[0];
     }
 
     private function setCss(){
@@ -327,7 +338,7 @@ class DTE {
         $html = '
             <p class="razonsocial">'.$this->dte['Encabezado']['Emisor']['RznSoc'].'</p>
             <p class="masinfo">'.$this->dte['Encabezado']['Emisor']['GiroEmis'].'</p>
-            <p class="masinfo">'.$this->dte['Encabezado']['Emisor']['DirOrigen'].', '.$this->dte['Encabezado']['Emisor']['CmnaOrigen'].', '.$this->dte['Encabezado']['Emisor']['CmnaOrigen'].'</p>
+            <p class="masinfo">'.$this->dte['Encabezado']['Emisor']['DirOrigen'].', '.$this->dte['Encabezado']['Emisor']['CmnaOrigen'].', '.$this->dte['Encabezado']['Emisor']['CiudadOrigen'].'</p>
             <p class="masinfo">Telefono: (75) 2 412479</p>
             <p class="masinfo">Email: contacto@soluciontotal.cl</p>
             <p class="masinfo">Web: www.soluciontotal.cl</p>
@@ -393,13 +404,7 @@ class DTE {
                         <td class="titulo">COMUNA</td>
                         <td>: '.$this->dte['Encabezado']['Receptor']['CmnaRecep'].'</td>
                         <td class="titulo">CIUDAD</td>
-                        <td>: '.$this->dte['Encabezado']['Receptor']['CmnaRecep'].'</td>
-                    </tr>
-                    <tr>
-                        <td class="titulo">PATENTE</td>
-                        <td>:</td>
-                        <td class="titulo">TELEFONO</td>
-                        <td>:</td>
+                        <td>: '.$this->dte['Encabezado']['Receptor']['CiudadRecep'].'</td>
                     </tr>
                     <tr>
                         <td class="titulo">'.$opctexto[0].'</td>
@@ -427,6 +432,7 @@ class DTE {
                         <th align="left">TIPO DOCUMENTO</th>
                         <th>FOLIO</th>
                         <th>FECHA</th>
+                        <th>RAZON</th>
                     </tr>
                 </thead>
                 <tbody>';
@@ -436,6 +442,7 @@ class DTE {
                         <td align="left">'.$this->getTipo( $ref['TpoDocRef'] ).'</td>
                         <td>'.$ref['FolioRef'].'</td>
                         <td>'.date('d-m-Y', strtotime($ref['FchRef'])).'</td>
+                        <td>'.$ref['RazonRef'].'</td>
                     </tr>
                     ';
                 }
@@ -443,6 +450,7 @@ class DTE {
                     $html .= '
                     <tr>
                         <td align="left">&nbsp;</td>
+                        <td>&nbsp;</td>
                         <td>&nbsp;</td>
                         <td>&nbsp;</td>
                     </tr>
@@ -459,13 +467,14 @@ class DTE {
         $subtotal = 0;
         $detalles = $this->dte['Detalle'];
 
+        $nro_totales = count($this->dte['Encabezado']['Totales']);
         $iva = (isset($this->dte['Encabezado']['Totales']['IVA'])) ? $this->dte['Encabezado']['Totales']['IVA'] : 0;
         $neto = (isset($this->dte['Encabezado']['Totales']['MntNeto'])) ? $this->dte['Encabezado']['Totales']['MntNeto'] : 0;
+        $descuento = (isset($this->dte['DscRcgGlobal'])) ? $this->dte['DscRcgGlobal']['ValorDR'] : 0;
+        $exento = (isset($this->dte['Encabezado']['Totales']['MntExe'])) ? $this->dte['Encabezado']['Totales']['MntExe'] : 0;
 
         if (!isset($detalles[0]))
             $detalles = [$detalles];
-        $descuento = (isset($this->dte['DscRcgGlobal'])) ? $this->dte['DscRcgGlobal']['ValorDR'] : 0;
-        $exento = (isset($this->dte['Encabezado']['Totales']['MntExe'])) ? $this->dte['Encabezado']['Totales']['MntExe'] : 0;
         $html = '
             <table>
                 <thead>
@@ -507,10 +516,10 @@ class DTE {
                         <td style="border-top: 1px solid black; border-left: 1px solid black; border-right: 1px solid black;" colspan="2"></td>
                     </tr>
                     <tr>
-                        <td style="border-left: 0; border-bottom: 0; padding-right: 70px; text-align: center;" rowspan="6" colspan="3">
+                        <td style="border-left: 0; border-bottom: 0; padding-right: 70px; text-align: center;" rowspan="'.$nro_totales.'" colspan="3">
                             '.$this->setTimbre().'
                             <p>Timbre Electronico SII</p>
-                            <p>Resolucion 0 de 2014</p>
+                            '.$this->getResolucion().'
                             <p>Verifique documento: www.sii.cl</p>
                         </td>
                         <td style="padding-top: 5px;" class="total titulo">SUBTOTAL</td>
@@ -539,6 +548,17 @@ class DTE {
                 </tbody>
             </table>
         ';
+        return $html;
+    }
+
+    private function formatValor($titulo, $valor){
+        $html = '';
+        if($valor != 0){
+            $html = '
+                <td class="total titulo">'.$titulo.'</td>
+                <td class="total valor" colspan="2">$'.$this->formatNumber($valor).'</td>
+            ';
+        }
         return $html;
     }
 
@@ -573,15 +593,7 @@ class DTE {
     private function setTimbre(){
         $b2d = new \Milon\Barcode\DNS2D();
         $b2d->setStorPath(__DIR__."/cache/");
-        /*$pdf417 = new \Com\Tecnick\Barcode\Barcode();
-        $bobj = $pdf417->getBarcodeObj(
-        'PDF417',                     
-        $this->ted,
-        -1,
-        -1,
-        'black',
-        array(0, 0, 0, 0)
-        )->setBackgroundColor('white');*/
+
         $timbre = '<img style="width: 8cm; height: 2.5cm;"src="data:image/png;base64,'.$b2d->getBarcodePNG($this->ted, "PDF417,,5").'">';
             
         return $timbre;

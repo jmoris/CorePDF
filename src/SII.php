@@ -351,13 +351,20 @@ class SII {
     ];
 
     private static $texto_traslado = [
-        1 => 'Operación Constituye Venta',
-        2 => 'Venta por Efectuar',
-        3 => 'Consignación',
-        4 => 'Promoción  o Donación',
-        5 => 'Traslado Interno',
-        6 => 'Otros Traslados que no Constituyen Venta',
-        7 => 'Guia de Devolución'
+        1 => 'OPERACIÓN CONSTITUYE VENTA',
+        2 => 'VENTA POR EFECTUAR',
+        3 => 'CONSIGNACIÓN',
+        4 => 'PROMOCIÓN O DONACIÓN',
+        5 => 'TRASLADO INTERNO',
+        6 => 'OTROS TRASLADOS QUE NO CONSTITUYEN VENTA',
+        7 => 'GUIA DE DEVOLUCIÓN'
+    ];
+
+
+    private static $texto_despacho = [
+        1 => 'COMPRADOR',
+        2 => 'EMISOR A INSTALACIONES DEL COMPRADOR',
+        3 => 'EMISOR A OTRAS INSTALACIONES'
     ];
 
     public static function getDireccionRegional($comuna)
@@ -374,6 +381,10 @@ class SII {
 
     public static function getTipoTraslado($traslado){
         return self::$texto_traslado[$traslado];
+    }
+
+    public static function getTipoDespacho($despacho){
+        return self::$texto_despacho($despacho);
     }
 
 }

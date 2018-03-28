@@ -472,9 +472,8 @@ class DTE {
         $descuento = (isset($this->dte['DscRcgGlobal'])) ? $this->dte['DscRcgGlobal']['ValorDR'] : 0;
         $exento = (isset($this->dte['Encabezado']['Totales']['MntExe'])) ? $this->dte['Encabezado']['Totales']['MntExe'] : 0;
 
-        $nro_totales = count($this->dte['Encabezado']['Totales'])+1; // El que se agrega es el SUBTOTAL que es un total calculado aparte.
+        $nro_totales = 5;
         $nro_totales += ($descuento != 0) ? 1:0; // Si el descuento != 0 se agrega en el documento, de lo contrario, se quita.
-        $nro_totales -= (isset($this->dte['Encabezado']['Totales']['TasaIVA'])) ? 1 : 0;
         if (!isset($detalles[0]))
             $detalles = [$detalles];
         $html = '

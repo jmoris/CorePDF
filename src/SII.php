@@ -384,7 +384,7 @@ class SII {
     }
 
     public static function getTipoDespacho($despacho){
-        return self::$texto_despacho($despacho);
+        return self::$texto_despacho[$despacho];
     }
 
 }

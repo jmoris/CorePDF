@@ -48,7 +48,7 @@ class DTE {
         $this->html .= '</div>
                         </body>';
         $this->pdf->WriteHTML($this->html);   
-        $mpdf->AddPage();
+        $this->pdf->AddPage();
         $this->pdf->WriteHMTL($this->html);
         if($cedible){
             $this->pdf->AddPage();

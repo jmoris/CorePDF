@@ -380,10 +380,14 @@ class SII {
     }
 
     public static function getTipoTraslado($traslado){
+        if($traslado == 0)
+            return;
         return self::$texto_traslado[$traslado];
     }
 
     public static function getTipoDespacho($despacho){
+        if($traslado == 0)
+            return;
         return self::$texto_despacho[$despacho];
     }
 

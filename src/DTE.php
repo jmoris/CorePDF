@@ -50,8 +50,14 @@ class DTE {
         $this->pdf->WriteHTML($this->html);   
     }
 
-    public function generar($descarga = false){
-        ($descarga) ? $this->pdf->Output($this->dte['@attributes']['ID'].'.pdf', \Mpdf\Output\Destination::DOWNLOAD) : $this->pdf->Output($this->dte['@attributes']['ID'].'.pdf', \Mpdf\Output\Destination::INLINE);
+    public function generar($descarga = 0, $filename = 'dte.pdf'){
+        if($descarga == 0){
+            $this->pdf->Output($this->dte['@attributes']['ID'].'.pdf', \Mpdf\Output\Destination::DOWNLOAD);
+         }else if($descarga == 1){ 
+            $this->pdf->Output($this->dte['@attributes']['ID'].'.pdf', \Mpdf\Output\Destination::INLINE);
+         }else if($descarga == 2){
+            $this->pdf->Output($filename, \Mpdf\Output\Destination::FILE);
+         }
     }
 
     private function getTipo($tipo)

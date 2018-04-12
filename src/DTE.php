@@ -51,7 +51,7 @@ class DTE {
         $mpdf->AddPage();
         $this->pdf->WriteHMTL($this->html);
         if($cedible){
-            $mpdf->AddPage();
+            $this->pdf->AddPage();
             $this->html = '<head>
             <style>';
             $this->html .= $this->setCss();

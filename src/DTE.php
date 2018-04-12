@@ -44,10 +44,26 @@ class DTE {
                         </head>
                         <body>
                         <div class="factura">';
-        $this->html .= $this->setInfo($cedible);
+        $this->html .= $this->setInfo(false);
         $this->html .= '</div>
                         </body>';
         $this->pdf->WriteHTML($this->html);   
+        $mpdf->AddPage();
+        $this->pdf->WriteHMTL($this->html);
+        if($cedible){
+            $mpdf->AddPage();
+            $this->html = '<head>
+            <style>';
+            $this->html .= $this->setCss();
+            $this->html .= '</style>
+                            </head>
+                            <body>
+                            <div class="factura">';
+            $this->html .= $this->setInfo(true);
+            $this->html .= '</div>
+                            </body>';
+            $this->pdf->WriteHMTL($this->html);      
+        }          
     }
 
     public function generar($descarga = 0, $filename = 'dte.pdf'){

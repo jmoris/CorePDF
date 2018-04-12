@@ -49,7 +49,7 @@ class DTE {
                         </body>';
         $this->pdf->WriteHTML($this->html);   
         $this->pdf->AddPage();
-        $this->pdf->WriteHMTL($this->html);
+        $this->pdf->WriteHTML($this->html);
         if($cedible){
             $this->pdf->AddPage();
             $this->html = '<head>
@@ -62,7 +62,7 @@ class DTE {
             $this->html .= $this->setInfo(true);
             $this->html .= '</div>
                             </body>';
-            $this->pdf->WriteHMTL($this->html);      
+            $this->pdf->WriteHTML($this->html);      
         }          
     }
 

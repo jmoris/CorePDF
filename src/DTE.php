@@ -16,8 +16,8 @@ class DTE {
         33 => 'FACTURA ELECTRÓNICA',
         34 => 'FACTURA NO AFECTA O EXENTA ELECTRÓNICA',
         52 => 'GUÍA DE DESPACHO ELECTRÓNICA',
-        56 => 'NOTA DE CRÉDITO ELECTRÓNICA',
-        61 => 'NOTA DE DÉBITO ELECTRÓNICA',
+        56 => 'NOTA DE DÉBITO ELECTRÓNICA',
+        61 => 'NOTA DE CRÉDITO ELECTRÓNICA',
         801 => 'ORDEN DE COMPRA',
         802 => 'NOTA DE PEDIDO'
     ];

@@ -37,7 +37,6 @@ class DTE {
         $this->pdf = new \Mpdf\Mpdf(['format' => 'A4']);
         $this->pdf->SetCompression(true); // forzamos la compresion del PDF
         $this->pdf->SetDisplayMode('fullpage');
-        $this->construir();
     }
 
     public function construir(){

@@ -9,7 +9,7 @@ class DTE {
     private $dte;
     private $ted;
     private $resolucion = [1970, 0];
-
+    private $cedible = false;
 
     private $no_cedible = [61, 56];
     private $tipo_dte = [
@@ -37,6 +37,7 @@ class DTE {
         $this->pdf = new \Mpdf\Mpdf(['format' => 'A4']);
         $this->pdf->SetCompression(true); // forzamos la compresion del PDF
         $this->pdf->SetDisplayMode('fullpage');
+        $this->cedible = $cedible;
     }
 
     public function construir(){
@@ -53,7 +54,7 @@ class DTE {
         $this->pdf->WriteHTML($this->html);   
         $this->pdf->AddPage();
         $this->pdf->WriteHTML($this->html);
-        if($cedible){
+        if($this->cedible){
             $this->pdf->AddPage();
             $this->html = '<head>
             <style>';

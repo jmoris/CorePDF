@@ -396,7 +396,7 @@ class DTE {
         ];
         $valordoc = [
             (!isset($this->dte['Encabezado']['IdDoc']['MedioPago']))?'':$this->dte['Encabezado']['IdDoc']['MedioPago'],
-            (!isset($this->dte['Encabezado']['IdDoc']['FmaPago']))?'':$this->dte['Encabezado']['IdDoc']['FmaPago']
+            (!isset($this->dte['Encabezado']['IdDoc']['FmaPago']))?'':\SolucionTotal\CorePDF\SII::getFormaPago($this->dte['Encabezado']['IdDoc']['FmaPago'])
         ]; 
         $opctexto = ($this->dte['Encabezado']['IdDoc']['TipoDTE']!=52) ? $textodoc : $textoguia;
         $opcvalor = ($this->dte['Encabezado']['IdDoc']['TipoDTE']!=52) ? $valordoc : $valorguia;

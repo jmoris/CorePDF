@@ -367,6 +367,12 @@ class SII {
         3 => 'EMISOR A OTRAS INSTALACIONES'
     ];
 
+    private static $texto_fmapago = [
+        1 => 'CONTADO',
+        2 => 'CREDITO',
+        3 => 'SIN COSTO'
+    ];
+
     public static function getDireccionRegional($comuna)
     {
         if (!$comuna) {
@@ -389,6 +395,12 @@ class SII {
         if($despacho == 0)
             return;
         return self::$texto_despacho[$despacho];
+    }
+
+    public static function getFormaPago($fmapago){
+        if($fmapago == 0)
+            return;
+        return self::$texto_fmapago[$fmapago];
     }
 
 }

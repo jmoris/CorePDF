@@ -621,7 +621,7 @@ class DTE {
 
     private function setTimbre(){
         $b2d = new \Milon\Barcode\DNS2D();
-        $b2d->setStorPath(dirname(__FILE__)."/cache/");
+        //$b2d->setStorPath(dirname(__FILE__)."/cache/");
 
         $timbre = '<img style="width: 8cm; height: 2.5cm;"src="data:image/png;base64,'.$b2d->getBarcodePNG($this->ted, "PDF417,,5").'">';
             

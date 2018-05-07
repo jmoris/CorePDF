@@ -364,7 +364,7 @@ class DTE {
         $html = '
             <p class="razonsocial">'.$this->dte['Encabezado']['Emisor']['RznSoc'].'</p>
             <p class="masinfo">'.$this->dte['Encabezado']['Emisor']['GiroEmis'].'</p>
-            <p class="masinfo">'.$this->dte['Encabezado']['Emisor']['DirOrigen'].', '.$this->dte['Encabezado']['Emisor']['CmnaOrigen'].', CURICO</p>
+            <p class="masinfo">'.$this->dte['Encabezado']['Emisor']['DirOrigen'].', '.$this->dte['Encabezado']['Emisor']['CmnaOrigen'].'</p>
             <p class="masinfo">Telefono: (75) 2 412479</p>
             <p class="masinfo">Email: contacto@soluciontotal.cl</p>
             <p class="masinfo">Web: www.soluciontotal.cl</p>
@@ -429,8 +429,8 @@ class DTE {
                     <tr>
                         <td class="titulo">COMUNA</td>
                         <td>: '.$this->dte['Encabezado']['Receptor']['CmnaRecep'].'</td>
-                        <td class="titulo">CIUDAD</td>
-                        <td>: CURICO</td>
+                        <td class="titulo"></td>
+                        <td></td>
                     </tr>
                     <tr>
                         <td class="titulo">'.$opctexto[0].'</td>

@@ -429,14 +429,14 @@ class DTE {
                     <tr>
                         <td class="titulo">COMUNA</td>
                         <td>: '.$this->dte['Encabezado']['Receptor']['CmnaRecep'].'</td>
-                        <td class="titulo"></td>
-                        <td></td>
+                        <td class="titulo">'.$opctexto[1].'</td>
+                        <td>: '.$opcvalor[1].'</td>
                     </tr>
                     <tr>
                         <td class="titulo">'.$opctexto[0].'</td>
                         <td>: '.$opcvalor[0].'</td>
-                        <td class="titulo">'.$opctexto[1].'</td>
-                        <td>: '.$opcvalor[1].'</td>
+                        <td class="titulo"></td>
+                        <td></td>
                     </tr>
                 </tbody>
             </table>

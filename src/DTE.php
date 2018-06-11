@@ -352,7 +352,13 @@ class DTE {
 
     private function formatRut($rut){
         $rutE = explode('-', $rut);
-        $rutF = substr($rutE[0], 0, 2).'.'.substr($rutE[0], 2, 3).'.'.substr($rutE[0], 5, 3).'-'.$rutE[1];
+        $primero = substr($rutE[0], 0, 2);
+        $fin = 2;
+        if(strlen($rutE[0]) == 7){
+            $primero = substr($rutE[0], 0, 1);
+            $fin = 1;
+        }
+        $rutF = $primero.'.'.substr($rutE[0], $fin, 3).'.'.substr($rutE[0], $fin+3, 3).'-'.$rutE[1];
         return $rutF;
     }
 
@@ -622,8 +628,11 @@ class DTE {
     private function setTimbre(){
         $b2d = new \Milon\Barcode\DNS2D();
         //$b2d->setStorPath(dirname(__FILE__)."/cache/");
-
-        $timbre = '<img style="width: 8cm; height: 2.5cm;"src="data:image/png;base64,'.$b2d->getBarcodePNG($this->ted, "PDF417,,5").'">';
+        $ted = "CODIGO DE VISTA PREVIA";
+        if($this->ted != null){
+            $ted = $this->ted;
+        }
+        $timbre = '<img style="width: 8cm; height: 2.5cm;"src="data:image/png;base64,'.$b2d->getBarcodePNG($ted, "PDF417,,5").'">';
             
         return $timbre;
     }

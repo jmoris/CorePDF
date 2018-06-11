@@ -71,10 +71,11 @@ class DTE {
     }
 
     public function generar($descarga = 0, $filename = 'dte.pdf'){
+        $path = 'ST_'.$this->dte['Encabezado']['IdDoc']['TipoDTE'].'F'.$this->dte['Encabezado']['IdDoc']['Folio'].'.pdf';
         if($descarga == 0){
-            $this->pdf->Output($this->dte['@attributes']['ID'].'.pdf', \Mpdf\Output\Destination::DOWNLOAD);
+            $this->pdf->Output($path, \Mpdf\Output\Destination::DOWNLOAD);
          }else if($descarga == 1){ 
-            $this->pdf->Output($this->dte['@attributes']['ID'].'.pdf', \Mpdf\Output\Destination::INLINE);
+            $this->pdf->Output($path, \Mpdf\Output\Destination::INLINE);
          }else if($descarga == 2){
             $this->pdf->Output($filename, \Mpdf\Output\Destination::FILE);
          }

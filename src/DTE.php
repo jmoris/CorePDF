@@ -150,12 +150,12 @@ class DTE {
             width: 10cm;
         }
         
-        .info-emisor .logo .max-10w {
+        .info-emisor .logo .10w .max-10w {
             width: 100%;
             max-height: 1.5cm;
             vertical-align: middle;
         }
-        .info-emisor .logo .max-5w {
+        .info-emisor .logo .5w .max-5w {
             max-width: 5cm;
             width: 100%;
             vertical-align: middle;
@@ -359,7 +359,7 @@ class DTE {
                         </div>
                     </div>
                     <div class="info"></div>';
-        }else{
+        }else if($poslogo == 2){
             $logo = '<div class="logo">
                         <div class="5w">
                             <img class="max-5w" src="'.$this->logo.'">

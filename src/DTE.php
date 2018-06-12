@@ -10,6 +10,7 @@ class DTE {
     private $ted;
     private $resolucion = [1970, 0];
     private $cedible = false;
+    private $logo;
     private $poslogo;
 
     private $no_cedible = [61, 56];
@@ -32,8 +33,9 @@ class DTE {
         'TOTAL' => ['width' => 12]
     ];
 
-    public function __construct(array $DTE, $ted = null, $cedible = false, $poslogo = 1){
+    public function __construct(array $DTE, $logo, $ted = null, $cedible = false, $poslogo = 1){
         $this->dte = $DTE;
+        $this->logo = $logo;
         $this->ted = $ted;
         $this->pdf = new \Mpdf\Mpdf(['format' => 'A4']);
         $this->pdf->SetCompression(true); // forzamos la compresion del PDF
@@ -345,13 +347,13 @@ class DTE {
         $logo = '';
         if($poslogo == 1){
             $logo = '<div class="logo 10w">
-                        <img src="https://soluciontotal.s3.sa-east-1.amazonaws.com/contribuyentes/1/1.png">
+                        <img src="'.$this->logo.'">
                         <div class="espacio-5"></div>
                         '.$this->setEmisor().'
                     </div>';
         }else{
             $logo = '<div class="logo 5w">
-                        <img src="https://soluciontotal.s3.sa-east-1.amazonaws.com/contribuyentes/1/1.png">
+                        <img src="'.$this->logo.'">
                         <div class="espacio-5"></div>
                     </div>
                     <div class="info">'.$this->setEmisor().'</div>';
@@ -359,7 +361,7 @@ class DTE {
         $html = '
             <div class="info-emisor">
                 <div class="logo">
-                    <img src="https://soluciontotal.s3.sa-east-1.amazonaws.com/contribuyentes/1/1.png">
+                    <img src="'.$this->logo.'">
                     <div class="espacio-5"></div>
                     '.$this->setEmisor().'
                 </div>

@@ -137,8 +137,15 @@ class DTE {
             width: 100%;
         }
         
-        .info-emisor .logo{
+        .info-emisor .logo-10w {
             width: 10cm;
+            border: 1px solid red;
+            height: 3cm;
+            float:left;
+        }
+
+        .info-emisor .logo-5w {
+            width: 5cm;
             border: 1px solid red;
             height: 3cm;
             float:left;
@@ -152,14 +159,14 @@ class DTE {
             float:left;
         }
         
-        .info-emisor .logo .razonsocial {
+        .info-emisor .razonsocial {
             font-size: 14px;
             font-weight: bold;
             margin:0;
             padding:0;
         }
         
-        .info-emisor .logo .masinfo {
+        .info-emisor .masinfo {
             font-size: 10px;
             font-weight: normal;
             margin:0;
@@ -334,12 +341,19 @@ class DTE {
                 $txtacuse = $this->setAcuseRecibo();
 
         $logo = '';
-            $logo = '<div class="logo">
+        if($poslogo == 1){
+            $logo = '<div class="logo-10w">
                         <img src="'.$this->logo.'">
                         <div class="espacio-5"></div>
                         '.$this->setEmisor().'
                     </div>
                     <div class="info"></div>';
+        }else if($poslogo == 2){
+            $logo = '<div class="logo-5w">
+                        <img src="'.$this->logo.'">
+                    </div>
+                    <div class="info">'.$this->setEmisor().'</div>';     
+        }   
         $html = '
             <div class="info-emisor">
                 '.$logo.'

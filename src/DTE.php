@@ -351,15 +351,19 @@ class DTE {
 
         $logo = '';
         if($poslogo == 1){
-            $logo = '<div class="logo 10w">
-                        <img class="max-10w" src="'.$this->logo.'">
-                        <div class="espacio-5"></div>
-                        '.$this->setEmisor().'
+            $logo = '<div class="logo">
+                        <div class="10w">
+                            <img class="max-10w" src="'.$this->logo.'">
+                            <div class="espacio-5"></div>
+                            '.$this->setEmisor().'
+                        </div>
                     </div>
                     <div class="info"></div>';
         }else{
-            $logo = '<div class="logo 5w">
-                        <img class="max-5w" src="'.$this->logo.'">
+            $logo = '<div class="logo">
+                        <div class="5w">
+                            <img class="max-5w" src="'.$this->logo.'">
+                        </div>
                     </div>
                     <div class="info">'.$this->setEmisor().'</div>';
         }

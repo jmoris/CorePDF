@@ -67,7 +67,7 @@ class DTE {
                             </head>
                             <body>
                             <div class="factura">';
-            $this->html .= $this->setInfo(true, $poslogo);
+            $this->html .= $this->setInfo(true, $this->poslogo);
             $this->html .= '</div>
                             </body>';
             $this->pdf->WriteHTML($this->html);      

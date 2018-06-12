@@ -139,7 +139,6 @@ class DTE {
         
         .info-emisor .logo-10w {
             width: 10cm;
-            border: 1px solid red;
             height: 3cm;
             float:left;
         }
@@ -151,7 +150,7 @@ class DTE {
         }
 
         .info-emisor .info{
-            width: 5cm;
+            width: 7cm;
             margin-left: 10px;
             vertical-align: top;
             float:left;
@@ -344,8 +343,7 @@ class DTE {
                         <img src="'.$this->logo.'">
                         <div class="espacio-5"></div>
                         '.$this->setEmisor().'
-                    </div>
-                    <div class="info"></div>';
+                    </div>';
         }else if($poslogo == 2){
             $logo = '<div class="logo-5w">
                         <img src="'.$this->logo.'">

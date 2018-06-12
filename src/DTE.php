@@ -52,7 +52,7 @@ class DTE {
                         </head>
                         <body>
                         <div class="factura">';
-        $this->html .= $this->setInfo(false);
+        $this->html .= $this->setInfo(false, $this->poslogo);
         $this->html .= '</div>
                         </body>';
         $this->pdf->WriteHTML($this->html);   
@@ -145,7 +145,7 @@ class DTE {
         }
 
         .info-emisor .logo-5w {
-            width: 5cm;
+            width: 6cm;
             border: 1px solid red;
             height: 3cm;
             float:left;
@@ -153,7 +153,7 @@ class DTE {
 
         .info-emisor .info{
             border: 1px solid red;
-            width: 5cm;
+            width: 6cm;
             margin-left: 10px;
             vertical-align: top;
             float:left;

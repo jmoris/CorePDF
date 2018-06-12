@@ -138,6 +138,7 @@ class DTE {
         }
         
         .info-emisor .logo{
+            border: 1px solid red;
             height: 3cm;
             float:left;
         }
@@ -155,6 +156,7 @@ class DTE {
             max-height: 1.5cm;
             vertical-align: middle;
         }
+
         .info-emisor .logo .5w .max-5w {
             max-width: 5cm;
             width: 100%;
@@ -162,6 +164,7 @@ class DTE {
         }
 
         .info-emisor .info{
+            border: 1px solid red;
             width: 5cm;
             margin-left: 10px;
             vertical-align: top;

@@ -10,6 +10,7 @@ class DTE {
     private $ted;
     private $resolucion = [1970, 0];
     private $cedible = false;
+    private $poslogo;
 
     private $no_cedible = [61, 56];
     private $tipo_dte = [
@@ -31,13 +32,14 @@ class DTE {
         'TOTAL' => ['width' => 12]
     ];
 
-    public function __construct(array $DTE, $ted = null, $cedible = false){
+    public function __construct(array $DTE, $ted = null, $cedible = false, $poslogo = 1){
         $this->dte = $DTE;
         $this->ted = $ted;
         $this->pdf = new \Mpdf\Mpdf(['format' => 'A4']);
         $this->pdf->SetCompression(true); // forzamos la compresion del PDF
         $this->pdf->SetDisplayMode('fullpage');
         $this->cedible = $cedible;
+        $this->poslogo = $poslogo;
     }
 
     public function construir(){
@@ -63,7 +65,7 @@ class DTE {
                             </head>
                             <body>
                             <div class="factura">';
-            $this->html .= $this->setInfo(true);
+            $this->html .= $this->setInfo(true, $poslogo);
             $this->html .= '</div>
                             </body>';
             $this->pdf->WriteHTML($this->html);      
@@ -134,11 +136,18 @@ class DTE {
         }
         
         .info-emisor .logo{
-            width: 10cm;
             height: 3cm;
             float:left;
         }
-        
+    
+        .info-emisor .logo .5w {
+            width: 5cm;
+        }
+
+        .info-emisor .logo .10w {
+            width: 10cm;
+        }
+
         .info-emisor .logo img {
             width: 100%;
             max-height: 1.5cm;
@@ -146,6 +155,7 @@ class DTE {
         }
 
         .info-emisor .info{
+            width: 5cm;
             margin-left: 10px;
             vertical-align: top;
             float:left;
@@ -326,11 +336,26 @@ class DTE {
         return $this->html;
     }
 
-    private function setInfo($acuse = false){
+    private function setInfo($acuse = false, $poslogo = 1){
         $txtacuse = '';
         if($acuse)
             if(!array_key_exists($this->dte['Encabezado']['IdDoc']['TipoDTE'], $this->no_cedible))
                 $txtacuse = $this->setAcuseRecibo();
+
+        $logo = '';
+        if($poslogo == 1){
+            $logo = '<div class="logo 10w">
+                        <img src="https://soluciontotal.s3.sa-east-1.amazonaws.com/contribuyentes/1/1.png">
+                        <div class="espacio-5"></div>
+                        '.$this->setEmisor().'
+                    </div>';
+        }else{
+            $logo = '<div class="logo 5w">
+                        <img src="https://soluciontotal.s3.sa-east-1.amazonaws.com/contribuyentes/1/1.png">
+                        <div class="espacio-5"></div>
+                    </div>
+                    <div class="info">'.$this->setEmisor().'</div>';
+        }
         $html = '
             <div class="info-emisor">
                 <div class="logo">

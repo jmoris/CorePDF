@@ -350,7 +350,8 @@ class DTE {
                         <img src="'.$this->logo.'">
                         <div class="espacio-5"></div>
                         '.$this->setEmisor().'
-                    </div>';
+                    </div>
+                    <div class="info"></div>';
         }else{
             $logo = '<div class="logo 5w">
                         <img src="'.$this->logo.'">
@@ -360,12 +361,7 @@ class DTE {
         }
         $html = '
             <div class="info-emisor">
-                <div class="logo">
-                    <img src="'.$this->logo.'">
-                    <div class="espacio-5"></div>
-                    '.$this->setEmisor().'
-                </div>
-                <div class="info"></div>
+                '.$logo.'
                 <div class="cuadro">'.$this->setCuadro().'</div>
             </div>
             <div class="espacio-5"></div>

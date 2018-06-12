@@ -149,10 +149,15 @@ class DTE {
         .info-emisor .logo .10w {
             width: 10cm;
         }
-
-        .info-emisor .logo img {
+        
+        .info-emisor .logo .max-10w {
             width: 100%;
             max-height: 1.5cm;
+            vertical-align: middle;
+        }
+        .info-emisor .logo .max-5w {
+            max-width: 5cm;
+            width: 100%;
             vertical-align: middle;
         }
 
@@ -347,15 +352,14 @@ class DTE {
         $logo = '';
         if($poslogo == 1){
             $logo = '<div class="logo 10w">
-                        <img src="'.$this->logo.'">
+                        <img class="max-10w" src="'.$this->logo.'">
                         <div class="espacio-5"></div>
                         '.$this->setEmisor().'
                     </div>
                     <div class="info"></div>';
         }else{
             $logo = '<div class="logo 5w">
-                        <img src="'.$this->logo.'">
-                        <div class="espacio-5"></div>
+                        <img class="max-5w" src="'.$this->logo.'">
                     </div>
                     <div class="info">'.$this->setEmisor().'</div>';
         }

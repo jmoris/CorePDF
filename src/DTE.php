@@ -12,6 +12,7 @@ class DTE {
     private $cedible = false;
     private $logo;
     private $poslogo;
+    private $telefono, $mail, $web;
 
     private $no_cedible = [61, 56];
     private $tipo_dte = [
@@ -99,6 +100,24 @@ class DTE {
 
     private function getResolucion(){
         return 'Resolución '.$this->resolucion[1].' de '.$this->resolucion[0];
+    }
+
+    public function setTelefono($telefono){
+        if($telefono != ''){
+            $this->telefono = '<p class="masinfo">Telefono: '.$telefono.'</p>';
+        }
+    }
+
+    public function setMail($mail){
+        if($mail != ''){
+            $this->mail = '<p class="masinfo">Mail: '.$mail.'</p>';
+        }
+    }
+
+    public function setWeb($web){
+        if($web != ''){
+            $this->web = '<p class="masinfo">Web: '.$web.'</p>';
+        }
     }
 
     private function setCss(){
@@ -386,9 +405,9 @@ class DTE {
             <p class="razonsocial">'.$this->dte['Encabezado']['Emisor']['RznSoc'].'</p>
             <p class="masinfo">'.$this->dte['Encabezado']['Emisor']['GiroEmis'].'</p>
             <p class="masinfo">'.$this->dte['Encabezado']['Emisor']['DirOrigen'].', '.$this->dte['Encabezado']['Emisor']['CmnaOrigen'].'</p>
-            <p class="masinfo">Telefono: (75) 2 412479</p>
-            <p class="masinfo">Email: contacto@soluciontotal.cl</p>
-            <p class="masinfo">Web: www.soluciontotal.cl</p>
+            '.$this->telefono.'
+            '.$this->mail.'
+            '.$this->web.'
         ';
         return $html;
     }

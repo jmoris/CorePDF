@@ -144,13 +144,13 @@ class DTE {
         }
 
         .info-emisor .logo-5w {
-            width: 5cm;
+            width: 4cm;
             height: 3cm;
             float:left;
         }
 
         .info-emisor .info{
-            width: 7cm;
+            width: 8cm;
             margin-left: 10px;
             vertical-align: top;
             float:left;

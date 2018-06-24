@@ -13,7 +13,7 @@ class DTE {
     private $logo;
     private $poslogo;
     private $telefono, $mail, $web;
-    private $copias = false;
+    private $copias;
 
     private $no_cedible = [61, 56];
     private $tipo_dte = [
@@ -35,7 +35,7 @@ class DTE {
         'TOTAL' => ['width' => 12]
     ];
 
-    public function __construct(array $DTE, $logo, $ted = null, $cedible = false, $poslogo = 1, $copias = false){
+    public function __construct(array $DTE, $logo, $ted = null, $cedible = false, $poslogo = 1, $copias = true){
         $this->dte = $DTE;
         $this->logo = $logo;
         $this->ted = $ted;
@@ -59,9 +59,10 @@ class DTE {
         $this->html .= '</div>
                         </body>';
         $this->pdf->WriteHTML($this->html);   
-        $this->pdf->AddPage();
-        if($this->copias)
+        if($this->copias){
+            $this->pdf->AddPage();
             $this->pdf->WriteHTML($this->html);
+        }
         if($this->cedible){
             $this->pdf->AddPage();
             $this->html = '<head>

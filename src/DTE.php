@@ -19,6 +19,7 @@ class DTE {
     private $tipo_dte = [
         33 => 'FACTURA ELECTRÓNICA',
         34 => 'FACTURA NO AFECTA O EXENTA ELECTRÓNICA',
+        39 => 'BOLETA ELECTRÓNICA',
         52 => 'GUÍA DE DESPACHO ELECTRÓNICA',
         56 => 'NOTA DE DÉBITO ELECTRÓNICA',
         61 => 'NOTA DE CRÉDITO ELECTRÓNICA',
@@ -90,8 +91,7 @@ class DTE {
          }
     }
 
-    private function getTipo($tipo)
-    {
+    private function getTipo($tipo){
         if (!is_numeric($tipo) and !isset($this->tipo_dte[$tipo]))
             return $tipo;
         return isset($this->tipo_dte[$tipo]) ? strtoupper($this->tipo_dte[$tipo]) : 'Documento '.$tipo;
@@ -611,7 +611,7 @@ class DTE {
                         <td class="total valor" colspan="2">$'.$this->formatNumber($neto).'</td>
                     </tr>
                     <tr>
-                        <td class="total titulo">I.V.A</td>
+                        <td class="total titulo">I.V.A( '.$this->dte['Encabezado']['Totales']['TasaIVA'].'% )</td>
                         <td class="total valor" colspan="2">$'.$this->formatNumber($iva).'</td>
                     </tr>
                     <tr>

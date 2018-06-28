@@ -541,7 +541,8 @@ class DTE {
         $neto = (isset($this->dte['Encabezado']['Totales']['MntNeto'])) ? $this->dte['Encabezado']['Totales']['MntNeto'] : 0;
         $descuento = (isset($this->dte['DscRcgGlobal'])) ? $this->dte['DscRcgGlobal']['ValorDR'] : 0;
         $exento = (isset($this->dte['Encabezado']['Totales']['MntExe'])) ? $this->dte['Encabezado']['Totales']['MntExe'] : 0;
-
+        $tasa = (isset($this->dte['Encabezado']['Totales']['TasaIVA'])) ? $this->dte['Encabezado']['Totales']['TasaIVA'] : 19;
+        
         $nro_totales = 5;
         $nro_totales += ($descuento != 0) ? 1:0; // Si el descuento != 0 se agrega en el documento, de lo contrario, se quita.
         if (!isset($detalles[0]))
@@ -611,7 +612,7 @@ class DTE {
                         <td class="total valor" colspan="2">$'.$this->formatNumber($neto).'</td>
                     </tr>
                     <tr>
-                        <td class="total titulo">I.V.A( '.$this->dte['Encabezado']['Totales']['TasaIVA'].'% )</td>
+                        <td class="total titulo">I.V.A( '.$tasa.'% )</td>
                         <td class="total valor" colspan="2">$'.$this->formatNumber($iva).'</td>
                     </tr>
                     <tr>

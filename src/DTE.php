@@ -501,14 +501,14 @@ class DTE {
     }
 
     private function setCuadro(){
+        $inferior = ($this->dte['Encabezado']['IdDoc']['TipoDTE'] != 0) ? '<p style="margin:0;padding:0;"><b>S.I.I. - '.\SolucionTotal\CorePDF\SII::getDireccionRegional($this->dte['Encabezado']['Emisor']['CmnaOrigen']).'</b></p></div>':'';
         $html = '
             <div class="cuadro-rojo">
                 <p><b>R.U.T.: '.$this->formatRut($this->dte['Encabezado']['Emisor']['RUTEmisor']).'</b></p>
                 <p><b>'.$this->getTipo($this->dte['Encabezado']['IdDoc']['TipoDTE']).'</b></p>
                 <p><b>Nº '.$this->dte['Encabezado']['IdDoc']['Folio'].'</b></p>
             </div>
-            <p style="margin:0;padding:0;"><b>S.I.I. - '.\SolucionTotal\CorePDF\SII::getDireccionRegional($this->dte['Encabezado']['Emisor']['CmnaOrigen']).'</b></p></div>
-        ';
+            '.$inferior;
 
         return $html;
     }
@@ -665,6 +665,13 @@ class DTE {
                     for($i = 0; $i < 30-count($detalles); $i++){
                         $html .= '<tr class="producto"><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>';
                     }
+                    $timbre = '';
+                    if($this->dte['Encabezado']['IdDoc']['TipoDTE'] != 0){
+                        $timbre = $this->setTimbre().'
+                            <p>Timbre Electronico SII</p>
+                            '.$this->getResolucion().'
+                            <p>Verifique documento: www.sii.cl</p>';
+                    }
 
                     $html.='<tr>
                         <td style="border-top: 1px solid black; border-left: 1px solid black; border-right: 1px solid black;" colspan="3"></td>
@@ -673,10 +680,7 @@ class DTE {
                     </tr>
                     <tr>
                         <td style="border-left: 0; border-bottom: 0; padding-right: 70px; text-align: center;" rowspan="'.$nro_totales.'" colspan="3">
-                            '.$this->setTimbre().'
-                            <p>Timbre Electronico SII</p>
-                            '.$this->getResolucion().'
-                            <p>Verifique documento: www.sii.cl</p>
+                            '.$timbre.'
                         </td>
                         <td style="padding-top: 5px;" class="total titulo">SUBTOTAL</td>
                         <td class="total valor" colspan="2">$'.$this->formatNumber($subtotal).'</td>

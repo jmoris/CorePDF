@@ -6,6 +6,7 @@ class DTE {
 
     private $html;
     private $pdf;
+    private $formato = false;
     private $dte;
     private $ted;
     private $resolucion = [1970, 0];
@@ -15,8 +16,9 @@ class DTE {
     private $telefono, $mail, $web;
     private $copias;
 
-    private $no_cedible = [61, 56];
+    private $no_cedible = [0, 61, 56, 39];
     private $tipo_dte = [
+        0 => 'COTIZACIÓN',
         33 => 'FACTURA ELECTRÓNICA',
         34 => 'FACTURA NO AFECTA O EXENTA ELECTRÓNICA',
         39 => 'BOLETA ELECTRÓNICA',
@@ -40,12 +42,20 @@ class DTE {
         $this->dte = $DTE;
         $this->logo = $logo;
         $this->ted = $ted;
-        $this->pdf = new \Mpdf\Mpdf(['format' => 'A4']);
-        $this->pdf->SetCompression(true); // forzamos la compresion del PDF
-        $this->pdf->SetDisplayMode('fullpage');
         $this->cedible = $cedible;
         $this->poslogo = $poslogo;
         $this->copias = $copias;
+        $formato = false;
+        $this->formato = $formato;
+        if(!$formato){
+            $this->pdf = new \Mpdf\Mpdf(['format' => 'A4']);
+            $this->pdf->SetCompression(true); // forzamos la compresion del PDF
+            $this->pdf->SetDisplayMode('fullpage');
+        }else{
+            $this->pdf = new \Mpdf\Mpdf(['mode' => 'utf-8', 'format' => [72, 1000], 'setAutoTopMargin' => 'pad']);
+            $this->pdf->SetCompression(true); // forzamos la compresion del PDF
+            $this->pdf->SetDisplayMode('fullpage');
+        }
     }
 
     public function construir(){
@@ -55,7 +65,7 @@ class DTE {
         $this->html .= '</style>
                         </head>
                         <body>
-                        <div class="factura">';
+                        <div class="dte">';
         $this->html .= $this->setInfo(false, $this->poslogo);
         $this->html .= '</div>
                         </body>';
@@ -72,7 +82,7 @@ class DTE {
             $this->html .= '</style>
                             </head>
                             <body>
-                            <div class="factura">';
+                            <div class="dte">';
             $this->html .= $this->setInfo(true, $this->poslogo);
             $this->html .= '</div>
                             </body>';
@@ -136,7 +146,7 @@ class DTE {
             background-color:#ffffff;
         }
 
-        .factura {
+        .dte {
             font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
             font-size: 9.5px;
             width: 100%;
@@ -347,6 +357,80 @@ class DTE {
             margin: 2px;
         }
         ';
+        return $css;
+    }
+
+    private function setCssPOS(){
+        $css = 'body { font-family: Arial, "Helvetica Neue", Helvetica, sans-serif; font-size: 80% }
+            .cuadro {
+            text-align: center;
+            }
+            .cuadro .sucursal {
+            line-height: 0.1;
+            }
+            .logo {
+                width: 80%;
+                margin: auto;
+            }
+            .total{
+                margin-top: 5px;
+                width: 100%;
+            }
+            .total .derecha {
+            text-align: right;
+            }
+            .total .izquierda {
+                text-align: left;
+            }
+            .total .margen-izq {
+                padding-left: 10px;
+            }
+            .bordes {
+            border: 3px solid black;
+            }
+            .emisor {
+            line-height: 0.1;
+            margin-left: 5px;
+            }
+            .receptor {
+            line-height: 0.1;
+            margin-left: 5px;
+            }
+            .wrap {
+            height: 5px;    
+            }
+            .wrap-min {
+            height: 1px;
+            }
+            .codigo {
+            margin-top: .5cm;
+            text-align: center;
+            line-height: 0.2;
+            }
+            .tabla {
+            width: 100%;
+            text-align: center;
+            }
+            .tabla2 {
+            width: 100%;
+            }
+            .tabla2 th {
+            text-align: center;
+            }
+            .tabla2 td {
+            font-size: 8px;
+            text-align: center;
+            }
+            @page {
+            width: 72mm;
+            margin-top: .2cm;
+            margin-bottom: .5cm;
+            margin-left: .1cm;
+            margin-right: .1cm;
+            margin-header: 2mm;
+            margin-footer: 10mm;
+            background-color:#ffffff;
+        }';
         return $css;
     }
 

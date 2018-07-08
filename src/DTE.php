@@ -418,14 +418,25 @@ class DTE {
                     width: 100%;
                     text-align: center;
                 }
+
+                .tabla th {
+                    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif; font-size: 80%; 
+                }
+
+                .tabla td {
+                    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif; font-size: 80%; 
+                }
+                
                 .tabla2 {
                     font-family: Arial, "Helvetica Neue", Helvetica, sans-serif; font-size: 80%; 
                     width: 100%;
                 }
                 .tabla2 th {
+                    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif; font-size: 80%; 
                     text-align: center;
                 }
                 .tabla2 td {
+                    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif; font-size: 80%; 
                     font-size: 8px;
                     text-align: center;
                 }

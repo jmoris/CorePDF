@@ -60,12 +60,12 @@ class DTE {
     public function construir(){
         $this->html = '<head>
                         <style>';
-        $this->html .= (!$formato)?$this->setCss():$this->setCssPOS();
+        $this->html .= (!$this->formato)?$this->setCss():$this->setCssPOS();
         $this->html .= '</style>
                         </head>
                         <body>
                         <div class="dte">';
-        $this->html .= (!$formato)?$this->setInfo(false, $this->poslogo):$this->setInfoPOS();
+        $this->html .= (!$this->formato)?$this->setInfo(false, $this->poslogo):$this->setInfoPOS();
         $this->html .= '</div>
                         </body>';
         $this->pdf->WriteHTML($this->html);   

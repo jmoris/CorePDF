@@ -382,13 +382,14 @@ class DTE {
                 }
                 .total .derecha {
                     text-align: right;
-                    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif; font-size: 80%; t;
+                    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif; font-size: 80%;
                 }
                 .total .izquierda {
                     font-family: Arial, "Helvetica Neue", Helvetica, sans-serif; font-size: 80%; 
                     text-align: left;
                 }
                 .total .margen-izq {
+                    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif; font-size: 80%;
                     padding-left: 10px;
                 }
                 .bordes {

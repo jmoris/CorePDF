@@ -360,7 +360,7 @@ class DTE {
     }
 
     private function setCssPOS(){
-        $css = 'body { font-family: Arial, "Helvetica Neue", Helvetica, sans-serif; font-size: 80% }
+        $css = '.dte { font-family: Arial, "Helvetica Neue", Helvetica, sans-serif; font-size: 80% }
                 .cuadro {
                 text-align: center;
                 }

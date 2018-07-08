@@ -360,18 +360,23 @@ class DTE {
     }
 
     private function setCssPOS(){
-        $css = '.dte { font-family: Arial, "Helvetica Neue", Helvetica, sans-serif; font-size: 80% }
+        $css = '.dte { 
+                    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif; font-size: 80%; 
+                }
                 .cuadro {
-                text-align: center;
+                    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif; font-size: 80%; 
+                    text-align: center;
                 }
                 .cuadro .sucursal {
-                line-height: 0.1;
+                    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif; font-size: 80%; 
+                    line-height: 0.1;
                 }
                 .logo {
                     width: 80%;
                     margin: auto;
                 }
                 .total{
+                    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif; font-size: 80%; 
                     margin-top: 5px;
                     width: 100%;
                 }
@@ -385,50 +390,54 @@ class DTE {
                     padding-left: 10px;
                 }
                 .bordes {
-                border: 3px solid black;
+                    border: 3px solid black;
                 }
                 .emisor {
-                line-height: 0.1;
-                margin-left: 5px;
+                    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif; font-size: 80%; 
+                    line-height: 0.1;
+                    margin-left: 5px;
                 }
                 .receptor {
-                line-height: 0.1;
-                margin-left: 5px;
+                    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif; font-size: 80%; 
+                    line-height: 0.1;
+                    margin-left: 5px;
                 }
                 .wrap {
-                height: 5px;    
+                    height: 5px;    
                 }
                 .wrap-min {
-                height: 1px;
+                    height: 1px;
                 }
                 .codigo {
-                margin-top: .5cm;
-                text-align: center;
-                line-height: 0.2;
+                    margin-top: .5cm;
+                    text-align: center;
+                    line-height: 0.2;
                 }
                 .tabla {
-                width: 100%;
-                text-align: center;
+                    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif; font-size: 80%; 
+                    width: 100%;
+                    text-align: center;
                 }
                 .tabla2 {
-                width: 100%;
+                    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif; font-size: 80%; 
+                    width: 100%;
                 }
                 .tabla2 th {
-                text-align: center;
+                    text-align: center;
                 }
                 .tabla2 td {
-                font-size: 8px;
-                text-align: center;
+                    font-size: 8px;
+                    text-align: center;
                 }
                 @page {
-                width: 72mm;
-                margin-top: .2cm;
-                margin-bottom: .5cm;
-                margin-left: .1cm;
-                margin-right: .1cm;
-                margin-header: 2mm;
-                margin-footer: 10mm;
-                background-color:#ffffff;
+                    width: 72mm;
+                    margin-top: .2cm;
+                    margin-bottom: .5cm;
+                    margin-left: .1cm;
+                    margin-right: .1cm;
+                    margin-header: 2mm;
+                    margin-footer: 10mm;
+                    background-color:#ffffff;
             }';
         return $css;
     }

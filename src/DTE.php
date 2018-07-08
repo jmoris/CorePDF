@@ -38,14 +38,13 @@ class DTE {
         'TOTAL' => ['width' => 12]
     ];
 
-    public function __construct(array $DTE, $logo, $ted = null, $cedible = false, $poslogo = 1, $copias = true){
+    public function __construct(array $DTE, $formato, $logo, $ted = null, $cedible = false, $poslogo = 1, $copias = true){
         $this->dte = $DTE;
         $this->logo = $logo;
         $this->ted = $ted;
         $this->cedible = $cedible;
         $this->poslogo = $poslogo;
         $this->copias = $copias;
-        $formato = false;
         $this->formato = $formato;
         if(!$formato){
             $this->pdf = new \Mpdf\Mpdf(['format' => 'A4']);
@@ -66,7 +65,7 @@ class DTE {
                         </head>
                         <body>
                         <div class="dte">';
-        $this->html .= $this->setInfo(false, $this->poslogo);
+        $this->html .= (!$formato)?$this->setInfo(false, $this->poslogo):$this->setInfoPOS();
         $this->html .= '</div>
                         </body>';
         $this->pdf->WriteHTML($this->html);   
@@ -363,10 +362,10 @@ class DTE {
     private function setCssPOS(){
         $css = 'body { font-family: Arial, "Helvetica Neue", Helvetica, sans-serif; font-size: 80% }
             .cuadro {
-            text-align: center;
+                text-align: center;
             }
             .cuadro .sucursal {
-            line-height: 0.1;
+                line-height: 0.1;
             }
             .logo {
                 width: 80%;
@@ -377,7 +376,7 @@ class DTE {
                 width: 100%;
             }
             .total .derecha {
-            text-align: right;
+                text-align: right;
             }
             .total .izquierda {
                 text-align: left;
@@ -386,50 +385,50 @@ class DTE {
                 padding-left: 10px;
             }
             .bordes {
-            border: 3px solid black;
+                border: 3px solid black;
             }
-            .emisor {
-            line-height: 0.1;
-            margin-left: 5px;
+            .info {
+                line-height: 0.1;
+                margin-left: 5px;
             }
             .receptor {
-            line-height: 0.1;
-            margin-left: 5px;
+                line-height: 0.1;
+                margin-left: 5px;
             }
             .wrap {
-            height: 5px;    
+                height: 5px;    
             }
             .wrap-min {
-            height: 1px;
+                height: 1px;
             }
             .codigo {
-            margin-top: .5cm;
-            text-align: center;
-            line-height: 0.2;
+                margin-top: .5cm;
+                text-align: center;
+                line-height: 0.2;
             }
             .tabla {
-            width: 100%;
-            text-align: center;
+                width: 100%;
+                text-align: center;
             }
             .tabla2 {
-            width: 100%;
+                width: 100%;
             }
             .tabla2 th {
-            text-align: center;
+                text-align: center;
             }
             .tabla2 td {
-            font-size: 8px;
-            text-align: center;
+                font-size: 8px;
+                text-align: center;
             }
             @page {
-            width: 72mm;
-            margin-top: .2cm;
-            margin-bottom: .5cm;
-            margin-left: .1cm;
-            margin-right: .1cm;
-            margin-header: 2mm;
-            margin-footer: 10mm;
-            background-color:#ffffff;
+                width: 72mm;
+                margin-top: .2cm;
+                margin-bottom: .5cm;
+                margin-left: .1cm;
+                margin-right: .1cm;
+                margin-header: 2mm;
+                margin-footer: 10mm;
+                background-color:#ffffff;
         }';
         return $css;
     }
@@ -764,4 +763,135 @@ class DTE {
         return $timbre;
     }
 
+    private function setInfoPOS(){
+        
+        $html = $this->setCuadroPOS();
+        $html .= $this->setEmisorPOS();
+        $html .= '<div class="wrap"><hr></div>';
+        $html .= $this->setReceptorPOS();
+        $html .= $this->setReferenciasPOS();
+        $html .= $this->setDetallePOS();
+        $html .= '<hr>';
+        $html .= $this->setTotalPOS();
+        $html .= $this->setCodigoPOS();
+        
+        return $html;
+    }
+
+    private function setCuadroPOS(){
+        $html = '<div class="cuadro">';
+        $html .= '<div class="bordes">';
+        $html .= '<p><b>R.U.T.: 19.587.757-2</b></p>';
+        $html .= '<p><b>FACTURA ELECTRÓNICA</b></p>';
+        $html .= '<p><b>Nº 1000</b></p>';
+        $html .= '</div>';
+        $html .= '<p class="sucursal"><b>S.I.I.- CURICÓ</p></b>';
+        $html .= '</div>';
+
+        return $html;
+    }
+
+    private function setEmisorPOS(){
+        $html = '<div class="logo">';
+        $html .= '<img src="https://soluciontotal.s3.sa-east-1.amazonaws.com/contribuyentes/1/1.png">';
+        $html .= '</div>';
+        $html .= '<div class="emisor">';
+        $html .= '<p><b>JESUS EDUARDO MORIS HERNANDEZ</b></p>';
+        $html .= '<p>Servicios integrales de informatica</p>';
+        $html .= '<p>Las araucarias #25, Teno</p>';
+        $html .= '<p>Telefono: (75) 2 412479';
+        $html .= '</div>';
+
+        return $html;
+    }
+
+    private function setReferenciasPOS(){
+        $html = '<table class="tabla2">';
+        $html .= '<thead>';
+        $html .= '<tr>';
+        $html .= '<th align="left">TIPO DOCUMENTO</th>';
+        $html .= '<th>FOLIO</th>';
+        $html .= '<th>FECHA</th>';
+        $html .= '<th>RAZON</th>';
+        $html .= '</tr>';
+        $html .= '</thead>';
+        $html .= '<tbody>';
+        $html .= '<tr>';
+        $html .= '<td align="left">NOTA DE CRÉDITO ELECTRÓNICA</td><td>1000</td><td>20/01/1970</td><td>ANULA NOTA CREDITO</td>';
+        $html .= '</tr>';
+        $html .= '</tbody>';
+        $html .= '</table>';
+
+        return $html;
+    }
+
+    private function setDetallePOS(){
+        $html = '<table class="tabla">';
+        $html .= '<thead>';
+        $html .= '<tr>';
+        $html .= '<th>CANT.</th>';
+        $html .= '<th>PRODUCTO</th>';
+        $html .= '<th>PRECIO</th>';
+        $html .= '<th>DSCTO</th>';
+        $html .= '<th>TOTAL</th>';
+        $html .= '</tr>';
+        $html .= '</thead>';
+        $html .= '<tbody>';
+        for($i = 0; $i < 10; $i++){
+            $html .= '<tr>';
+            $html .= '<td>5</td>';
+            $html .= '<td>Producto prueba</td>';
+            $html .= '<td>990</td>';
+            $html .= '<td>0</td>';
+            $html .= '<td>4.950</td>';
+            $html .= '</tr>';
+        }
+        $html .= '</tbody>';
+        $html .= '</table>';
+        return $html;
+    }
+
+    private function setTotalPOS(){
+        $html = '<table class="total">';
+        $html .= '<tr>';
+        $html .= '<td class="margen-izq" colspan="2"><b>SUBTOTAL:</b></td><td></td><td class="derecha">$</td><td class="izquierda">49.500</td>';
+        $html .= '</tr>';
+        $html .= '<tr>';
+        $html .= '<td class="margen-izq" colspan="2"><b>DESCUENTO:</b></td><td></td><td class="derecha">$</td><td class="izquierda">0</td>';
+        $html .= '</tr>';
+        $html .= '<tr>';
+        $html .= '<td class="margen-izq" colspan="2"><b>NETO:</b></td><td></td><td class="derecha">$</td><td class="izquierda">49.500</td>';
+        $html .= '</tr>';
+        $html .= '<tr>';
+        $html .= '<td class="margen-izq" colspan="2"><b>I.V.A (19%):</b></td><td></td><td class="derecha">$</td><td class="izquierda">1.805</td>';
+        $html .= '</tr>';
+        $html .= '<tr>';
+        $html .= '<td class="margen-izq" colspan="2"><b>TOTAL:</b></td><td></td><td class="derecha">$</td><td class="izquierda">58.905</td>';
+        $html .= '</tr>';
+        $html .= '</table>';
+        return $html;
+    }
+
+    private function setReceptorPOS(){
+        $html = '<div class="receptor">';
+        $html .= '<p><b>EDUARDO JAIME MORIS OLIVARES</b></p>';
+        $html .= '<p>RUT: 16.262.265-K</p>';
+        $html .= '<p>Giro: CASINO</p>';
+        $html .= '<p>Direccion: Las araucarias #25</p>';
+        $html .= '<p>Comuna: Teno</p>';
+        $html .= '<div class="wrap-min"></div>';
+        $html .= '<p><b>Fecha emisión: 09-06-2018</b></p>';
+        $html .= '</div>';
+        return $html;
+    }
+
+    private function setTimbrePOS(){
+        $html = '<div class="codigo">';
+        $html .= '<img src="http://easyinvoice.cl/wp-content/uploads/2015/02/Better_Sample_PDF417.png"/>';
+        $html .= '<p>Timbre electrónico SII</p>';
+        $html .= '<p>Resolucion 0 de 2018</p>';
+        $html .= '<p>Verifique documento en dte.soluciontotal.cl</p>';
+        $html .= '</div>';
+        return $html;
+    }
 }

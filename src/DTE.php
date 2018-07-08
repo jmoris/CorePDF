@@ -381,7 +381,7 @@ class DTE {
                     width: 100%;
                 }
                 .total .derecha {
-                    text-align: righ
+                    text-align: right;
                     font-family: Arial, "Helvetica Neue", Helvetica, sans-serif; font-size: 80%; t;
                 }
                 .total .izquierda {

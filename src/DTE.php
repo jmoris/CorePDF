@@ -409,6 +409,7 @@ class DTE {
                     height: 1px;
                 }
                 .codigo {
+                    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif; font-size: 80%; 
                     margin-top: .5cm;
                     text-align: center;
                     line-height: 0.2;
@@ -426,7 +427,7 @@ class DTE {
                 .tabla td {
                     font-family: Arial, "Helvetica Neue", Helvetica, sans-serif; font-size: 80%; 
                 }
-                
+
                 .tabla2 {
                     font-family: Arial, "Helvetica Neue", Helvetica, sans-serif; font-size: 80%; 
                     width: 100%;

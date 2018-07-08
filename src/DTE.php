@@ -60,7 +60,7 @@ class DTE {
     public function construir(){
         $this->html = '<head>
                         <style>';
-        $this->html .= $this->setCss();
+        $this->html .= (!$formato)?$this->setCss():$this->setCssPOS();
         $this->html .= '</style>
                         </head>
                         <body>
@@ -361,66 +361,66 @@ class DTE {
 
     private function setCssPOS(){
         $css = 'body { font-family: Arial, "Helvetica Neue", Helvetica, sans-serif; font-size: 80% }
-            .cuadro {
+                .cuadro {
                 text-align: center;
-            }
-            .cuadro .sucursal {
+                }
+                .cuadro .sucursal {
                 line-height: 0.1;
-            }
-            .logo {
-                width: 80%;
-                margin: auto;
-            }
-            .total{
-                margin-top: 5px;
-                width: 100%;
-            }
-            .total .derecha {
+                }
+                .logo {
+                    width: 80%;
+                    margin: auto;
+                }
+                .total{
+                    margin-top: 5px;
+                    width: 100%;
+                }
+                .total .derecha {
                 text-align: right;
-            }
-            .total .izquierda {
-                text-align: left;
-            }
-            .total .margen-izq {
-                padding-left: 10px;
-            }
-            .bordes {
+                }
+                .total .izquierda {
+                    text-align: left;
+                }
+                .total .margen-izq {
+                    padding-left: 10px;
+                }
+                .bordes {
                 border: 3px solid black;
-            }
-            .info {
+                }
+                .emisor {
                 line-height: 0.1;
                 margin-left: 5px;
-            }
-            .receptor {
+                }
+                .receptor {
                 line-height: 0.1;
                 margin-left: 5px;
-            }
-            .wrap {
+                }
+                .wrap {
                 height: 5px;    
-            }
-            .wrap-min {
+                }
+                .wrap-min {
                 height: 1px;
-            }
-            .codigo {
+                }
+                .codigo {
                 margin-top: .5cm;
                 text-align: center;
                 line-height: 0.2;
-            }
-            .tabla {
+                }
+                .tabla {
                 width: 100%;
                 text-align: center;
-            }
-            .tabla2 {
+                }
+                .tabla2 {
                 width: 100%;
-            }
-            .tabla2 th {
+                }
+                .tabla2 th {
                 text-align: center;
-            }
-            .tabla2 td {
+                }
+                .tabla2 td {
                 font-size: 8px;
                 text-align: center;
-            }
-            @page {
+                }
+                @page {
                 width: 72mm;
                 margin-top: .2cm;
                 margin-bottom: .5cm;
@@ -429,7 +429,7 @@ class DTE {
                 margin-header: 2mm;
                 margin-footer: 10mm;
                 background-color:#ffffff;
-        }';
+            }';
         return $css;
     }
 
@@ -774,7 +774,7 @@ class DTE {
         $html .= '<hr>';
         $html .= $this->setTotalPOS();
         $html .= $this->setCodigoPOS();
-        
+
         return $html;
     }
 

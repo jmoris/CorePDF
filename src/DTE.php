@@ -717,16 +717,19 @@ class DTE {
                     $html .= '<tr>
                         <td class="total titulo">EXENTO</td>
                         <td class="total valor" colspan="2">$'.$this->formatNumber($exento).'</td>
-                    </tr>
-                    <tr>
-                        <td class="total titulo">NETO</td>
-                        <td class="total valor" colspan="2">$'.$this->formatNumber($neto).'</td>
-                    </tr>
-                    <tr>
-                        <td class="total titulo">I.V.A( '.$tasa.'% )</td>
-                        <td class="total valor" colspan="2">$'.$this->formatNumber($iva).'</td>
-                    </tr>
-                    <tr>
+                    </tr>';
+                    if($this->dte['Encabezado']['IdDoc']['TipoDTE'] != 39){
+                        $html .='
+                        <tr>
+                            <td class="total titulo">NETO</td>
+                            <td class="total valor" colspan="2">$'.$this->formatNumber($neto).'</td>
+                        </tr>
+                        <tr>
+                            <td class="total titulo">I.V.A( '.$tasa.'% )</td>
+                            <td class="total valor" colspan="2">$'.$this->formatNumber($iva).'</td>
+                        </tr>';
+                    }
+                    $html .= '<tr>
                         <td class="total titulo" style="border-bottom: 1px solid black">TOTAL</td>
                         <td class="total valor"  colspan="2" style="border-bottom: 1px solid black">$'.$this->formatNumber($this->dte['Encabezado']['Totales']['MntTotal']).'</td>
                     </tr>
@@ -803,13 +806,14 @@ class DTE {
     }
 
     private function setCuadroPOS(){
+        $inferior = ($this->dte['Encabezado']['IdDoc']['TipoDTE'] != 0) ? '<p class="sucursal"><b>S.I.I. - '.\SolucionTotal\CorePDF\SII::getDireccionRegional($this->dte['Encabezado']['Emisor']['CmnaOrigen']).'</b></p>':'';
         $html = '<div class="cuadro">';
         $html .= '<div class="bordes">';
-        $html .= '<p><b>R.U.T.: 19.587.757-2</b></p>';
-        $html .= '<p><b>FACTURA ELECTRÓNICA</b></p>';
-        $html .= '<p><b>Nº 1000</b></p>';
+        $html .= '<p><b>R.U.T.: '.$this->formatRut($this->dte['Encabezado']['Emisor']['RUTEmisor']).'</b></p>';
+        $html .= '<p><b>'.$this->getTipo($this->dte['Encabezado']['IdDoc']['TipoDTE']).'</b></p>';
+        $html .= '<p><b>Nº '.$this->dte['Encabezado']['IdDoc']['Folio'].'</b></p>';
         $html .= '</div>';
-        $html .= '<p class="sucursal"><b>S.I.I.- CURICÓ</p></b>';
+        $html .= $inferior;
         $html .= '</div>';
 
         return $html;
@@ -820,36 +824,58 @@ class DTE {
         $html .= '<img src="https://soluciontotal.s3.sa-east-1.amazonaws.com/contribuyentes/1/1.png">';
         $html .= '</div>';
         $html .= '<div class="emisor">';
-        $html .= '<p><b>JESUS EDUARDO MORIS HERNANDEZ</b></p>';
-        $html .= '<p>Servicios integrales de informatica</p>';
-        $html .= '<p>Las araucarias #25, Teno</p>';
-        $html .= '<p>Telefono: (75) 2 412479';
+        $html .= '<p><b>'.$this->dte['Encabezado']['Emisor']['RznSoc'].'</b></p>';
+        $html .= '<p>'.$this->dte['Encabezado']['Emisor']['GiroEmis'].'</p>';
+        $html .= '<p>'.$this->dte['Encabezado']['Emisor']['DirOrigen'].', '.$this->dte['Encabezado']['Emisor']['CmnaOrigen'].'</p>';
+        $html .= $this->telefono;
+        $html .= $this->mail;
+        $html .= $this->web;
         $html .= '</div>';
 
         return $html;
     }
 
     private function setReferenciasPOS(){
-        $html = '<table class="tabla2">';
-        $html .= '<thead>';
-        $html .= '<tr>';
-        $html .= '<th align="left">TIPO DOCUMENTO</th>';
-        $html .= '<th>FOLIO</th>';
-        $html .= '<th>FECHA</th>';
-        $html .= '<th>RAZON</th>';
-        $html .= '</tr>';
-        $html .= '</thead>';
-        $html .= '<tbody>';
-        $html .= '<tr>';
-        $html .= '<td align="left">NOTA DE CRÉDITO ELECTRÓNICA</td><td>1000</td><td>20/01/1970</td><td>ANULA NOTA CREDITO</td>';
-        $html .= '</tr>';
-        $html .= '</tbody>';
-        $html .= '</table>';
+        $html = '';
+        $referencias = (isset($this->dte['Referencia'])) ? $this->dte['Referencia'] : [];
+        
+        if (!empty($referencias)&&!isset($referencias[0]))
+            $referencias = [$referencias];  
 
+        if(!empty($referencias)){
+            $html = '<table class="tabla2">';
+            $html .= '<thead>';
+            $html .= '<tr>';
+            $html .= '<th align="left">TIPO DOCUMENTO</th>';
+            $html .= '<th>FOLIO</th>';
+            $html .= '<th>FECHA</th>';
+            $html .= '<th>RAZON</th>';
+            $html .= '</tr>';
+            $html .= '</thead>';
+            $html .= '<tbody>';
+            foreach($referencias as $ref){
+                $html .= '
+                <tr>
+                    <td align="left">'.$this->getTipo( $ref['TpoDocRef'] ).'</td>
+                    <td>'.$ref['FolioRef'].'</td>
+                    <td>'.date('d-m-Y', strtotime($ref['FchRef'])).'</td>
+                    <td>'.$ref['RazonRef'].'</td>
+                </tr>
+                ';
+            }
+            $html .= '</tbody>';
+            $html .= '</table>';
+        }
         return $html;
     }
 
     private function setDetallePOS(){
+
+        $detalles = $this->dte['Detalle'];
+
+        if (!isset($detalles[0]))
+            $detalles = [$detalles];
+
         $html = '<table class="tabla">';
         $html .= '<thead>';
         $html .= '<tr>';
@@ -861,14 +887,21 @@ class DTE {
         $html .= '</tr>';
         $html .= '</thead>';
         $html .= '<tbody>';
-        for($i = 0; $i < 10; $i++){
-            $html .= '<tr>';
-            $html .= '<td>5</td>';
-            $html .= '<td>Producto prueba</td>';
-            $html .= '<td>990</td>';
-            $html .= '<td>0</td>';
-            $html .= '<td>4.950</td>';
-            $html .= '</tr>';
+        foreach($detalles as $detalle){
+            $subtotal += intval($detalle['MontoItem']);
+            $und = (!isset($detalle['UnmdItem'])) ? 'Und' : $detalle['UnmdItem'];
+            $cantidad = (!isset($detalle['QtyItem'])) ? 1 : $detalle['QtyItem'];
+            $precio = (!isset($detalle['PrcItem'])) ? 0 : $detalle['PrcItem'];
+            $dscto = (!isset($detalle['DescuentoPct']) ? 0 :  $detalle['DescuentoPct']); 
+
+            $html.= '<tr>
+                        <td>'.$cantidad.'</td>
+                        <td>'.$und.'</td>
+                        <td>'.$detalle['NmbItem'].'</td>
+                        <td>'.$this->formatNumber($precio).'</td>
+                        <td>'.$this->formatNumber($dscto).'%</td>
+                        <td>'.$this->formatNumber($detalle['MontoItem']).'</td>
+                    </tr>';
         }
         $html .= '</tbody>';
         $html .= '</table>';
@@ -876,44 +909,88 @@ class DTE {
     }
 
     private function setTotalPOS(){
+        $subtotal = 0;
+        $detalles = $this->dte['Detalle'];
+
+        $iva = (isset($this->dte['Encabezado']['Totales']['IVA'])) ? $this->dte['Encabezado']['Totales']['IVA'] : 0;
+        $neto = (isset($this->dte['Encabezado']['Totales']['MntNeto'])) ? $this->dte['Encabezado']['Totales']['MntNeto'] : 0;
+        $descuento = (isset($this->dte['DscRcgGlobal'])) ? $this->dte['DscRcgGlobal']['ValorDR'] : 0;
+        $exento = (isset($this->dte['Encabezado']['Totales']['MntExe'])) ? $this->dte['Encabezado']['Totales']['MntExe'] : 0;
+        $tasa = (isset($this->dte['Encabezado']['Totales']['TasaIVA'])) ? $this->dte['Encabezado']['Totales']['TasaIVA'] : 19;
+        $subtotal = $neto + $exento;
+        $total = (isset($this->dte['Encabezado']['Totales']['MntTotal'])) ? $this->dte['Encabezado']['Totales']['MntTotal'] : 0;
+
         $html = '<table class="total">';
         $html .= '<tr>';
-        $html .= '<td class="margen-izq" colspan="2"><b>SUBTOTAL:</b></td><td></td><td class="derecha">$</td><td class="izquierda">49.500</td>';
+        $html .= '<td class="margen-izq" colspan="2"><b>SUBTOTAL:</b></td><td></td><td class="derecha">$</td><td class="izquierda">'.$this->formatNumber($subtotal).'</td>';
         $html .= '</tr>';
         $html .= '<tr>';
-        $html .= '<td class="margen-izq" colspan="2"><b>DESCUENTO:</b></td><td></td><td class="derecha">$</td><td class="izquierda">0</td>';
+        $html .= '<td class="margen-izq" colspan="2"><b>EXENTO:</b></td><td></td><td class="derecha">$</td><td class="izquierda">'.$this->formatNumber($exento).'</td>';
         $html .= '</tr>';
         $html .= '<tr>';
-        $html .= '<td class="margen-izq" colspan="2"><b>NETO:</b></td><td></td><td class="derecha">$</td><td class="izquierda">49.500</td>';
+        $html .= '<td class="margen-izq" colspan="2"><b>DESCUENTO:</b></td><td></td><td class="derecha">$</td><td class="izquierda">'.$this->formatNumber($descuento).'</td>';
         $html .= '</tr>';
+        if($this->dte['Encabezado']['IdDoc']['TipoDTE'] != 39){
+            $html .= '<tr>';
+            $html .= '<td class="margen-izq" colspan="2"><b>NETO:</b></td><td></td><td class="derecha">$</td><td class="izquierda">'.$this->formatNumber($neto).'</td>';
+            $html .= '</tr>';
+            $html .= '<tr>';
+            $html .= '<td class="margen-izq" colspan="2"><b>I.V.A ('.$tasa.'%):</b></td><td></td><td class="derecha">$</td><td class="izquierda">'.$this->formatNumber($iva).'</td>';
+            $html .= '</tr>';
+        }
         $html .= '<tr>';
-        $html .= '<td class="margen-izq" colspan="2"><b>I.V.A (19%):</b></td><td></td><td class="derecha">$</td><td class="izquierda">1.805</td>';
-        $html .= '</tr>';
-        $html .= '<tr>';
-        $html .= '<td class="margen-izq" colspan="2"><b>TOTAL:</b></td><td></td><td class="derecha">$</td><td class="izquierda">58.905</td>';
+        $html .= '<td class="margen-izq" colspan="2"><b>TOTAL:</b></td><td></td><td class="derecha">$</td><td class="izquierda">'.$this->formatNumber($total).'</td>';
         $html .= '</tr>';
         $html .= '</table>';
         return $html;
     }
 
     private function setReceptorPOS(){
+        $textoguia = [
+            'TIPO TRASLADO',
+            'TIPO DESPACHO'
+        ];
+        $valorguia = [
+            (!isset($this->dte['Encabezado']['IdDoc']['IndTraslado']))?'':\SolucionTotal\CorePDF\SII::getTipoTraslado($this->dte['Encabezado']['IdDoc']['IndTraslado']),
+            (!isset($this->dte['Encabezado']['IdDoc']['TipoDespacho']))?'':\SolucionTotal\CorePDF\SII::getTipoDespacho($this->dte['Encabezado']['IdDoc']['TipoDespacho'])
+        ];
+        $textodoc = [
+            'MEDIO DE PAGO',
+            'CONDICION DE PAGO'
+        ];
+        $valordoc = [
+            (!isset($this->dte['Encabezado']['IdDoc']['MedioPago']))?'':$this->dte['Encabezado']['IdDoc']['MedioPago'],
+            (!isset($this->dte['Encabezado']['IdDoc']['FmaPago']))?'':\SolucionTotal\CorePDF\SII::getFormaPago($this->dte['Encabezado']['IdDoc']['FmaPago'])
+        ]; 
+        $opctexto = ($this->dte['Encabezado']['IdDoc']['TipoDTE']!=52) ? $textodoc : $textoguia;
+        $opcvalor = ($this->dte['Encabezado']['IdDoc']['TipoDTE']!=52) ? $valordoc : $valorguia;
+        $fecha_emision = date('d-m-Y', strtotime($this->dte['Encabezado']['IdDoc']['FchEmis']));
         $html = '<div class="receptor">';
-        $html .= '<p><b>EDUARDO JAIME MORIS OLIVARES</b></p>';
-        $html .= '<p>RUT: 16.262.265-K</p>';
-        $html .= '<p>Giro: CASINO</p>';
-        $html .= '<p>Direccion: Las araucarias #25</p>';
-        $html .= '<p>Comuna: Teno</p>';
+        $html .= '<p><b>'.$this->dte['Encabezado']['Receptor']['RznSocRecep'].'</b></p>';
+        $html .= '<p>RUT: '.$this->formatRut($this->dte['Encabezado']['Receptor']['RUTRecep']).'</p>';
+        $html .= '<p>Giro: '.$this->dte['Encabezado']['Receptor']['GiroRecep'].'</p>';
+        $html .= '<p>Direccion: '.$this->dte['Encabezado']['Receptor']['DirRecep'].'</p>';
+        $html .= '<p>Comuna: '.$this->dte['Encabezado']['Receptor']['CmnaRecep'].'</p>';
         $html .= '<div class="wrap-min"></div>';
-        $html .= '<p><b>Fecha emisión: 09-06-2018</b></p>';
+        $html .= '<p><b>'.$opctexto[0].': '.$opcvalor[0].'</p></b>';
+        $html .= '<p><b>'.$opctexto[1].': '.$opcvalor[1].'</p></b>';
+        $html .= '<p><b>Fecha emisión: '.$fecha_emision.'</b></p>';
         $html .= '</div>';
         return $html;
     }
 
     private function setTimbrePOS(){
+        $b2d = new \Milon\Barcode\DNS2D();
+        //$b2d->setStorPath(dirname(__FILE__)."/cache/");
+        $ted = "CODIGO DE VISTA PREVIA";
+        if($this->ted != null){
+            $ted = $this->ted;
+        }
+            
         $html = '<div class="codigo">';
-        $html .= '<img src="http://easyinvoice.cl/wp-content/uploads/2015/02/Better_Sample_PDF417.png"/>';
+        $html .= '<img style="width: 72mm; height: 30mm;" src="data:image/png;base64,'.$b2d->getBarcodePNG($ted, "PDF417,,5").'"/>';
         $html .= '<p>Timbre electrónico SII</p>';
-        $html .= '<p>Resolucion 0 de 2018</p>';
+        $html .= '<p>'.$this->getResolucion().'</p>';
         $html .= '<p>Verifique documento en dte.soluciontotal.cl</p>';
         $html .= '</div>';
         return $html;

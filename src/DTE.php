@@ -381,9 +381,11 @@ class DTE {
                     width: 100%;
                 }
                 .total .derecha {
-                text-align: right;
+                    text-align: righ
+                    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif; font-size: 80%; t;
                 }
                 .total .izquierda {
+                    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif; font-size: 80%; 
                     text-align: left;
                 }
                 .total .margen-izq {

@@ -773,7 +773,7 @@ class DTE {
         $html .= $this->setDetallePOS();
         $html .= '<hr>';
         $html .= $this->setTotalPOS();
-        $html .= $this->setCodigoPOS();
+        $html .= $this->setTimbrePOS();
 
         return $html;
     }

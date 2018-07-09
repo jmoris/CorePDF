@@ -65,29 +65,19 @@ class DTE {
                         </head>
                         <body>';
                         
-        $this->dteh = '<div class="dte">';
+        $this->dteh .= '<div class="dte">';
         $this->dteh .= (!$this->formato)?$this->setInfo(false, $this->poslogo):$this->setInfoPOS(false);
         $this->dteh .= '</div>';
         $this->html .= $this->dteh;
-        $this->html .= (!$this->copias)?'</body>':'';
+        $this->html .= '</body>';
         $this->pdf->WriteHTML($this->html);   
         if($this->copias){
-            if(!$this->formato){
-                $this->pdf->AddPage();
-            }else{
-                $this->html .= '<pagebreak>';
-            }
-            $this->html .= (!$this->cedible)?'</body>':'';
-            $this->pdf->WriteHTML($this->dteh);
+            $this->pdf->AddPage();
+            $this->pdf->WriteHTML($this->html);
         }
         if($this->cedible){
-            if(!$this->formato){
-                $this->pdf->AddPage();
-            }else{
-                $this->html .= '<pagebreak>';
-            }
-            
-            $this->html .= '<head>
+            $this->pdf->AddPage();
+            $this->html = '<head>
                             <style>';
             $this->html .= (!$this->formato)?$this->setCss():$this->setCssPOS();
             $this->html .= '</style>
@@ -995,7 +985,7 @@ class DTE {
     private function setAcuseReciboPOS(){
         $leyenda = ($this->dte['Encabezado']['IdDoc']['TipoDTE']==52) ? 'CEDIBLE CON SU FACTURA' : 'CEDIBLE';
         $html = '
-            <table class="acuse-recibo">
+            <table>
                 <tr>
                     <td style="padding-left: 5px; padding-top: 10px;" width="10%">Nombre</td>
                     <td style="padding-top: 10px" width="40%">: _____________________________________________________</td>

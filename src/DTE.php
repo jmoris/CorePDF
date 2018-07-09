@@ -65,7 +65,7 @@ class DTE {
                         </head>
                         <body>';
                         
-        $this->dteh .= '<div class="dte">';
+        $this->dteh = '<div class="dte">';
         $this->dteh .= (!$this->formato)?$this->setInfo(false, $this->poslogo):$this->setInfoPOS(false);
         $this->dteh .= '</div>';
         $this->html .= $this->dteh;

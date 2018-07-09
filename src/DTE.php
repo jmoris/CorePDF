@@ -63,17 +63,20 @@ class DTE {
         $this->html .= (!$this->formato)?$this->setCss():$this->setCssPOS();
         $this->html .= '</style>
                         </head>
-                        <body>
-                        <div class="dte">';
-        $this->html .= (!$this->formato)?$this->setInfo(false, $this->poslogo):$this->setInfoPOS();
-        $this->html .= '</div>
-                        </body>';
+                        <body>';
+                        
+        $this->dte .= '<div class="dte">';
+        $this->dte .= (!$this->formato)?$this->setInfo(false, $this->poslogo):$this->setInfoPOS();
+        $this->dte .= '</div>';
+        $this->html .= $this->dte;
+        $this->html .= (!$this->copias)?'</body>':'';
         $this->pdf->WriteHTML($this->html);   
         if($this->copias){
             if(!$this->formato){
                 $this->pdf->AddPage();
             }
-            $this->pdf->WriteHTML($this->html);
+            $this->html .= (!$this->cedible)?'</body>':'';
+            $this->pdf->WriteHTML($this->dte);
         }
         if($this->cedible){
             if(!$this->formato){
@@ -86,7 +89,7 @@ class DTE {
                         </head>
                         <body>
                             <div class="dte">';
-            $this->html .= (!$this->formato)?$this->setInfo(false, $this->poslogo):$this->setInfoPOS();
+            $this->html .= (!$this->formato)?$this->setInfo(true, $this->poslogo):$this->setInfoPOS(true);
             $this->html .= '</div>
                         </body>';
             $this->pdf->WriteHTML($this->html);     
@@ -794,7 +797,7 @@ class DTE {
         return $timbre;
     }
 
-    private function setInfoPOS(){
+    private function setInfoPOS($acuse){
         
         $html = $this->setCuadroPOS();
         $html .= $this->setEmisorPOS();
@@ -805,6 +808,8 @@ class DTE {
         $html .= '<hr>';
         $html .= $this->setTotalPOS();
         $html .= $this->setTimbrePOS();
+        if($acuse)
+            $html .= $this->setAcuseReciboPOS();
         return $html;
     }
 
@@ -982,6 +987,34 @@ class DTE {
         return $html;
     }
 
+    private function setAcuseReciboPOS(){
+        $leyenda = ($this->dte['Encabezado']['IdDoc']['TipoDTE']==52) ? 'CEDIBLE CON SU FACTURA' : 'CEDIBLE';
+        $html = '
+            <table class="acuse-recibo">
+                <tr>
+                    <td style="padding-left: 5px; padding-top: 10px;" width="10%">Nombre</td>
+                    <td style="padding-top: 10px" width="40%">: _____________________________________________________</td>
+                    <td style="padding-top: 10px" width="10%">RUT</td>
+                    <td style="padding-top: 10px" width="40%">: _____________________________________________________</td>
+                </tr>
+                <tr>
+                    <td style="padding-left: 5px; padding-top: 10px; padding-bottom: 5px" width="10%">Fecha</td>
+                    <td style="padding-top: 10px" width="40%">: _____________________________________________________</td>
+                    <td style="padding-top: 10px"style="padding-top: 5px; padding-bottom: 5px" width="10%">Recinto</td>
+                    <td style="padding-top: 10px" width="40%">: _____________________________________________________</td>
+                </tr>
+                <tr>
+                    <td style="padding-left: 5px;" width="80%" colspan="3">El acuse de recibo que se declara en este acto, de acuerdo a lo dispuesto en la letra b)
+                    del Art. 4°, y la letra c) del Art. 5° de la Ley 19.983, acredita que la entrega de mercaderías
+                    o servicio (s) prestado (s) ha (n) sido recibido (s).</td>
+                    <td style="padding-left: 10px"><b>Firma:</b> ____________________________________________</td>
+                </tr>
+            </table>
+            <div class="texto-cedible">'.$leyenda.'</div>
+        ';
+        return $html;
+    }
+    
     private function setTimbrePOS(){
         $b2d = new \Milon\Barcode\DNS2D();
         //$b2d->setStorPath(dirname(__FILE__)."/cache/");

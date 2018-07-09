@@ -74,6 +74,8 @@ class DTE {
         if($this->copias){
             if(!$this->formato){
                 $this->pdf->AddPage();
+            }else{
+                $this->html .= '<pagebreak>';
             }
             $this->html .= (!$this->cedible)?'</body>':'';
             $this->pdf->WriteHTML($this->dteh);
@@ -81,8 +83,11 @@ class DTE {
         if($this->cedible){
             if(!$this->formato){
                 $this->pdf->AddPage();
+            }else{
+                $this->html .= '<pagebreak>';
             }
-            $this->html = '<head>
+            
+            $this->html .= '<head>
                             <style>';
             $this->html .= (!$this->formato)?$this->setCss():$this->setCssPOS();
             $this->html .= '</style>

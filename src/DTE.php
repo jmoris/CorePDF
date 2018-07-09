@@ -65,10 +65,10 @@ class DTE {
                         </head>
                         <body>';
                         
-        $this->dte .= '<div class="dte">';
-        $this->dte .= (!$this->formato)?$this->setInfo(false, $this->poslogo):$this->setInfoPOS();
-        $this->dte .= '</div>';
-        $this->html .= $this->dte;
+        $this->dteh = '<div class="dte">';
+        $this->dteh .= (!$this->formato)?$this->setInfo(false, $this->poslogo):$this->setInfoPOS();
+        $this->dteh .= '</div>';
+        $this->html .= $this->dteh;
         $this->html .= (!$this->copias)?'</body>':'';
         $this->pdf->WriteHTML($this->html);   
         if($this->copias){
@@ -76,7 +76,7 @@ class DTE {
                 $this->pdf->AddPage();
             }
             $this->html .= (!$this->cedible)?'</body>':'';
-            $this->pdf->WriteHTML($this->dte);
+            $this->pdf->WriteHTML($this->dteh);
         }
         if($this->cedible){
             if(!$this->formato){

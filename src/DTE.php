@@ -821,7 +821,7 @@ class DTE {
 
     private function setEmisorPOS(){
         $html = '<div class="logo">';
-        $html .= '<img src="https://soluciontotal.s3.sa-east-1.amazonaws.com/contribuyentes/1/1.png">';
+        $html .= '<img src="'.$this->logo.'">';
         $html .= '</div>';
         $html .= '<div class="emisor">';
         $html .= '<p><b>'.$this->dte['Encabezado']['Emisor']['RznSoc'].'</b></p>';
@@ -879,11 +879,12 @@ class DTE {
         $html = '<table class="tabla">';
         $html .= '<thead>';
         $html .= '<tr>';
-        $html .= '<th>CANT.</th>';
-        $html .= '<th>PRODUCTO</th>';
-        $html .= '<th>PRECIO</th>';
-        $html .= '<th>DSCTO</th>';
-        $html .= '<th>TOTAL</th>';
+        $html .= '<th width="'.$this->cols['CANTIDAD']['width'].'%">CANT.</th>';
+        $html .= '<th width="'.$this->cols['DETALLE']['width'].'%">PRODUCTO</th>';
+        $html .= '<th width="'.$this->cols['UNIDAD']['width'].'%">UNIDAD</th>';
+        $html .= '<th width="'.$this->cols['P. UNITARIO']['width'].'%">PRECIO</th>';
+        $html .= '<th width="'.$this->cols['DSCTO']['width'].'%">DSCTO</th>';
+        $html .= '<th width="'.$this->cols['TOTAL']['width'].'%">TOTAL</th>';
         $html .= '</tr>';
         $html .= '</thead>';
         $html .= '<tbody>';
@@ -895,8 +896,8 @@ class DTE {
 
             $html.= '<tr>
                         <td>'.$cantidad.'</td>
-                        <td>'.$und.'</td>
                         <td>'.$detalle['NmbItem'].'</td>
+                        <td>'.$und.'</td>
                         <td>'.$this->formatNumber($precio).'</td>
                         <td>'.$this->formatNumber($dscto).'%</td>
                         <td>'.$this->formatNumber($detalle['MontoItem']).'</td>

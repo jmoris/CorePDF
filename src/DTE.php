@@ -70,22 +70,26 @@ class DTE {
                         </body>';
         $this->pdf->WriteHTML($this->html);   
         if($this->copias){
-            $this->pdf->AddPage();
+            if(!$this->formato){
+                $this->pdf->AddPage();
+            }
             $this->pdf->WriteHTML($this->html);
         }
         if($this->cedible){
-            $this->pdf->AddPage();
+            if(!$this->formato){
+                $this->pdf->AddPage();
+            }
             $this->html = '<head>
-            <style>';
-            $this->html .= $this->setCss();
+                            <style>';
+            $this->html .= (!$this->formato)?$this->setCss():$this->setCssPOS();
             $this->html .= '</style>
-                            </head>
-                            <body>
+                        </head>
+                        <body>
                             <div class="dte">';
-            $this->html .= $this->setInfo(true, $this->poslogo);
+            $this->html .= (!$this->formato)?$this->setInfo(false, $this->poslogo):$this->setInfoPOS();
             $this->html .= '</div>
-                            </body>';
-            $this->pdf->WriteHTML($this->html);      
+                        </body>';
+            $this->pdf->WriteHTML($this->html);     
         }          
     }
 
@@ -801,7 +805,6 @@ class DTE {
         $html .= '<hr>';
         $html .= $this->setTotalPOS();
         $html .= $this->setTimbrePOS();
-
         return $html;
     }
 
@@ -988,7 +991,7 @@ class DTE {
         }
             
         $html = '<div class="codigo">';
-        $html .= '<img style="width: 72mm; height: 30mm;" src="data:image/png;base64,'.$b2d->getBarcodePNG($ted, "PDF417,,5").'"/>';
+        $html .= '<img style="width: 8cm; height: 2.5cm;"src="data:image/png;base64,'.$b2d->getBarcodePNG($ted, "PDF417,,5").'">';
         $html .= '<p>Timbre electrónico SII</p>';
         $html .= '<p>'.$this->getResolucion().'</p>';
         $html .= '<p>Verifique documento en dte.soluciontotal.cl</p>';

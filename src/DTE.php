@@ -923,7 +923,7 @@ class DTE {
         $subtotal = $neto + $exento;
         $total = (isset($this->dte['Encabezado']['Totales']['MntTotal'])) ? $this->dte['Encabezado']['Totales']['MntTotal'] : 0;
 
-        $html = '<table class="total">';
+        $html = '<table class="total"><thead></thead><tbody>';
         $html .= '<tr>';
         $html .= '<td class="margen-izq" colspan="2"><b>SUBTOTAL:</b></td><td></td><td class="derecha">$</td><td class="izquierda">'.$this->formatNumber($subtotal).'</td>';
         $html .= '</tr>';
@@ -944,7 +944,7 @@ class DTE {
         $html .= '<tr>';
         $html .= '<td class="margen-izq" colspan="2"><b>TOTAL:</b></td><td></td><td class="derecha">$</td><td class="izquierda">'.$this->formatNumber($total).'</td>';
         $html .= '</tr>';
-        $html .= '</table>';
+        $html .= '</tbody></table>';
         return $html;
     }
 

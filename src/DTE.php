@@ -924,10 +924,10 @@ class DTE {
         $html .= '<td class="margen-izq" colspan="2"><b>SUBTOTAL:</b></td><td></td><td class="derecha">$</td><td class="izquierda">'.$this->formatNumber($subtotal).'</td>';
         $html .= '</tr>';
         $html .= '<tr>';
-        $html .= '<td class="margen-izq" colspan="2"><b>EXENTO:</b></td><td></td><td class="derecha">$</td><td class="izquierda">'.$this->formatNumber($exento).'</td>';
+        $html .= '<td class="margen-izq" colspan="2"><b>DESCUENTO:</b></td><td></td><td class="derecha">$</td><td class="izquierda">'.$this->formatNumber($descuento).'</td>';
         $html .= '</tr>';
         $html .= '<tr>';
-        $html .= '<td class="margen-izq" colspan="2"><b>DESCUENTO:</b></td><td></td><td class="derecha">$</td><td class="izquierda">'.$this->formatNumber($descuento).'</td>';
+        $html .= '<td class="margen-izq" colspan="2"><b>EXENTO:</b></td><td></td><td class="derecha">$</td><td class="izquierda">'.$this->formatNumber($exento).'</td>';
         $html .= '</tr>';
         if($this->dte['Encabezado']['IdDoc']['TipoDTE'] != 39){
             $html .= '<tr>';
@@ -946,16 +946,16 @@ class DTE {
 
     private function setReceptorPOS(){
         $textoguia = [
-            'TIPO TRASLADO',
-            'TIPO DESPACHO'
+            'Tipo de traslado',
+            'Tipo de despacho'
         ];
         $valorguia = [
             (!isset($this->dte['Encabezado']['IdDoc']['IndTraslado']))?'':\SolucionTotal\CorePDF\SII::getTipoTraslado($this->dte['Encabezado']['IdDoc']['IndTraslado']),
             (!isset($this->dte['Encabezado']['IdDoc']['TipoDespacho']))?'':\SolucionTotal\CorePDF\SII::getTipoDespacho($this->dte['Encabezado']['IdDoc']['TipoDespacho'])
         ];
         $textodoc = [
-            'MEDIO DE PAGO',
-            'CONDICION DE PAGO'
+            'Medio de pago',
+            'Condición de pago'
         ];
         $valordoc = [
             (!isset($this->dte['Encabezado']['IdDoc']['MedioPago']))?'':$this->dte['Encabezado']['IdDoc']['MedioPago'],
@@ -971,9 +971,9 @@ class DTE {
         $html .= '<p>Direccion: '.$this->dte['Encabezado']['Receptor']['DirRecep'].'</p>';
         $html .= '<p>Comuna: '.$this->dte['Encabezado']['Receptor']['CmnaRecep'].'</p>';
         $html .= '<div class="wrap-min"></div>';
-        $html .= '<p><b>'.$opctexto[0].': '.$opcvalor[0].'</p></b>';
-        $html .= '<p><b>'.$opctexto[1].': '.$opcvalor[1].'</p></b>';
-        $html .= '<p><b>Fecha emisión: '.$fecha_emision.'</b></p>';
+        $html .= '<p><b>'.$opctexto[0].':</b> '.$opcvalor[0].'</p>';
+        $html .= '<p><b>'.$opctexto[1].':</b> '.$opcvalor[1].'</p>';
+        $html .= '<p><b>Fecha emisión:</b> '.$fecha_emision.'</p>';
         $html .= '</div>';
         return $html;
     }

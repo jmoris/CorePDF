@@ -888,7 +888,6 @@ class DTE {
         $html .= '</thead>';
         $html .= '<tbody>';
         foreach($detalles as $detalle){
-            $subtotal += intval($detalle['MontoItem']);
             $und = (!isset($detalle['UnmdItem'])) ? 'Und' : $detalle['UnmdItem'];
             $cantidad = (!isset($detalle['QtyItem'])) ? 1 : $detalle['QtyItem'];
             $precio = (!isset($detalle['PrcItem'])) ? 0 : $detalle['PrcItem'];

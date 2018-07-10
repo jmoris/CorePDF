@@ -404,6 +404,7 @@ class DTE {
                 }
                 .emisor .giro {
                     font-family: Arial, "Helvetica Neue", Helvetica, sans-serif; font-size: 80%;
+                    word-wrap: break-word;
                 }
                 .receptor {
                     font-family: Arial, "Helvetica Neue", Helvetica, sans-serif; font-size: 80%; 

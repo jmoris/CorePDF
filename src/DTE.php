@@ -402,6 +402,9 @@ class DTE {
                     line-height: 0.1;
                     margin-left: 5px;
                 }
+                .emisor .giro {
+                    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif; font-size: 80%;
+                }
                 .receptor {
                     font-family: Arial, "Helvetica Neue", Helvetica, sans-serif; font-size: 80%; 
                     line-height: 0.1;
@@ -828,7 +831,7 @@ class DTE {
         $html .= '</div>';
         $html .= '<div class="emisor">';
         $html .= '<p><b>'.$this->dte['Encabezado']['Emisor']['RznSoc'].'</b></p>';
-        $html .= '<p>'.$this->dte['Encabezado']['Emisor']['GiroEmis'].'</p>';
+        $html .= '<p class="giro">'.$this->dte['Encabezado']['Emisor']['GiroEmis'].'</p>';
         $html .= '<p>'.$this->dte['Encabezado']['Emisor']['DirOrigen'].', '.$this->dte['Encabezado']['Emisor']['CmnaOrigen'].'</p>';
         $html .= $this->telefono;
         $html .= $this->mail;

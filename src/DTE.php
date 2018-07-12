@@ -797,7 +797,7 @@ class DTE {
         $html = $this->setCuadroPOS();
         $html .= $this->setEmisorPOS();
         $html .= '<div class="wrap"><hr></div>';
-        $html .= $this->setReceptorPOS();
+        $html .= ($this->dte['Encabezado']['IdDoc']['TipoDTE']==39)?'':$this->setReceptorPOS();
         $html .= $this->setReferenciasPOS();
         $html .= $this->setDetallePOS();
         $html .= '<hr>';

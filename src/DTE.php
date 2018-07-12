@@ -823,12 +823,13 @@ class DTE {
     }
 
     private function setEmisorPOS(){
+        $tipo = $b2dthis->dte['Encabezado']['IdDoc']['TipoDTE'];
         $html = '<div class="logo">';
         $html .= '<img src="'.$this->logo.'">';
         $html .= '</div>';
         $html .= '<div class="emisor">';
-        $html .= '<p><b>'.$this->dte['Encabezado']['Emisor']['RznSoc'].'</b></p>';
-        $html .= '<p style="word-wrap: break-word; line-height: normal;">'.$this->dte['Encabezado']['Emisor']['GiroEmis'].'</p>';
+        $html .= '<p><b>'.$this->dte['Encabezado']['Emisor'][($tipo == 39) ? 'RznSocEmisor':'RznSoc'].'</b></p>';
+        $html .= '<p style="word-wrap: break-word; line-height: normal;">'.$this->dte['Encabezado']['Emisor'][($tipo == 39) ? 'GiroEmisor' : 'GiroEmis'].'</p>';
         $html .= '<p>'.$this->dte['Encabezado']['Emisor']['DirOrigen'].', '.$this->dte['Encabezado']['Emisor']['CmnaOrigen'].'</p>';
         $html .= $this->telefono;
         $html .= $this->mail;

@@ -823,7 +823,7 @@ class DTE {
     }
 
     private function setEmisorPOS(){
-        $tipo = $b2dthis->dte['Encabezado']['IdDoc']['TipoDTE'];
+        $tipo = $this->dte['Encabezado']['IdDoc']['TipoDTE'];
         $html = '<div class="logo">';
         $html .= '<img src="'.$this->logo.'">';
         $html .= '</div>';

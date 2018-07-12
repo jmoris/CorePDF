@@ -15,6 +15,7 @@ class DTE {
     private $poslogo;
     private $telefono, $mail, $web;
     private $copias;
+    private $subtotal;
 
     private $no_cedible = [0, 61, 56, 39];
     private $tipo_dte = [
@@ -46,6 +47,7 @@ class DTE {
         $this->poslogo = $poslogo;
         $this->copias = $copias;
         $this->formato = $formato;
+        $this->subtotal = 0;
         if(!$formato){
             $this->pdf = new \Mpdf\Mpdf(['format' => 'A4']);
             $this->pdf->SetCompression(true); // forzamos la compresion del PDF
@@ -893,6 +895,7 @@ class DTE {
         $html .= '</thead>';
         $html .= '<tbody>';
         foreach($detalles as $detalle){
+            $this->subtotal += intval($detalle['MontoItem']);
             $und = (!isset($detalle['UnmdItem'])) ? 'Und' : $detalle['UnmdItem'];
             $cantidad = (!isset($detalle['QtyItem'])) ? 1 : $detalle['QtyItem'];
             $precio = (!isset($detalle['PrcItem'])) ? 0 : $detalle['PrcItem'];

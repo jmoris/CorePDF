@@ -955,6 +955,7 @@ class DTE {
     }
 
     private function setReceptorPOS(){
+        $tipo = $this->dte['Encabezado']['IdDoc']['TipoDTE'];
         $textoguia = [
             'Tipo de traslado',
             'Tipo de despacho'
@@ -977,7 +978,9 @@ class DTE {
         $html = '<div class="receptor">';
         $html .= '<p><b>'.$this->dte['Encabezado']['Receptor']['RznSocRecep'].'</b></p>';
         $html .= '<p>RUT: '.$this->formatRut($this->dte['Encabezado']['Receptor']['RUTRecep']).'</p>';
-        $html .= '<p>Giro: '.$this->dte['Encabezado']['Receptor']['GiroRecep'].'</p>';
+        if($tipo != 39){
+            $html .= '<p>Giro: '.$this->dte['Encabezado']['Receptor']['GiroRecep'].'</p>';
+        }
         $html .= '<p>Direccion: '.$this->dte['Encabezado']['Receptor']['DirRecep'].'</p>';
         $html .= '<p>Comuna: '.$this->dte['Encabezado']['Receptor']['CmnaRecep'].'</p>';
         $html .= '<div class="wrap-min"></div>';

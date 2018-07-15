@@ -801,7 +801,7 @@ class DTE {
         $html = $this->setCuadroPOS();
         $html .= $this->setEmisorPOS();
         $html .= '<div class="wrap"><hr></div>';
-        $html .= ($this->dte['Encabezado']['Receptor']['RUTRecep']=="66666666-6")?'':$this->setReceptorPOS();
+        $html .= ($this->dte['Encabezado']['Receptor']['RUTRecep']=="66666666-6"&&$this->dte['Encabezado']['IdDoc']['TipoDTE']==39)?'':$this->setReceptorPOS();
         $html .= $this->setReferenciasPOS();
         $html .= $this->setDetallePOS();
         $html .= '<hr>';

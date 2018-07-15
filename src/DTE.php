@@ -73,24 +73,26 @@ class DTE {
         $this->html .= $this->dteh;
         $this->html .= '</body>';
         $this->pdf->WriteHTML($this->html);   
-        if($this->copias){
-            $this->pdf->AddPage();
-            $this->pdf->WriteHTML($this->html);
+        if($this->dte['Encabezado']['IdDoc']['TipoDTE'] != 39){
+            if($this->copias){
+                $this->pdf->AddPage();
+                $this->pdf->WriteHTML($this->html);
+            }
+            if($this->cedible){
+                $this->pdf->AddPage();
+                $this->html = '<head>
+                                <style>';
+                $this->html .= (!$this->formato)?$this->setCss():$this->setCssPOS();
+                $this->html .= '</style>
+                            </head>
+                            <body>
+                                <div class="dte">';
+                $this->html .= (!$this->formato)?$this->setInfo(true, $this->poslogo):$this->setInfoPOS(true);
+                $this->html .= '</div>
+                            </body>';
+                $this->pdf->WriteHTML($this->html);     
+            }          
         }
-        if($this->cedible){
-            $this->pdf->AddPage();
-            $this->html = '<head>
-                            <style>';
-            $this->html .= (!$this->formato)?$this->setCss():$this->setCssPOS();
-            $this->html .= '</style>
-                        </head>
-                        <body>
-                            <div class="dte">';
-            $this->html .= (!$this->formato)?$this->setInfo(true, $this->poslogo):$this->setInfoPOS(true);
-            $this->html .= '</div>
-                        </body>';
-            $this->pdf->WriteHTML($this->html);     
-        }          
     }
 
     public function generar($descarga = 0, $filename = 'dte.pdf'){
@@ -799,7 +801,7 @@ class DTE {
         $html = $this->setCuadroPOS();
         $html .= $this->setEmisorPOS();
         $html .= '<div class="wrap"><hr></div>';
-        $html .= ($this->dte['Encabezado']['IdDoc']['TipoDTE']==39)?'':$this->setReceptorPOS();
+        $html .= ($this->dte['Encabezado']['Receptor']['RUTRecep']="66666666-6")?'':$this->setReceptorPOS();
         $html .= $this->setReferenciasPOS();
         $html .= $this->setDetallePOS();
         $html .= '<hr>';
@@ -929,7 +931,7 @@ class DTE {
 
         $html = '<table class="total"><thead></thead><tbody>';
         $html .= '<tr>';
-        $html .= '<td class="margen-izq" colspan="2"><b>SUBTOTAL:</b></td><td></td><td class="derecha">$</td><td class="izquierda">'.$this->formatNumber($subtotal).'</td>';
+        $html .= '<td class="margen-izq" colspan="2"><b>SUBTOTAL:</b></td><td></td><td class="derecha">$</td><td class="izquierda">'.$this->formatNumber($this->subtotal).'</td>';
         $html .= '</tr>';
         $html .= '<tr>';
         $html .= '<td class="margen-izq" colspan="2"><b>DESCUENTO:</b></td><td></td><td class="derecha">$</td><td class="izquierda">'.$this->formatNumber($descuento).'</td>';

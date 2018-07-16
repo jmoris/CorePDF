@@ -492,7 +492,7 @@ class DTE {
                 <div class="cuadro">'.$this->setCuadro().'</div>
             </div>
             <div class="espacio-5"></div>
-            <div class="receptor">'.$this->setReceptor().'</div>
+            <div class="receptor">'.($this->dte['Encabezado']['Receptor']['RUTRecep']=="66666666-6"&&$this->dte['Encabezado']['IdDoc']['TipoDTE']==39)?'':$this->setReceptor().'</div>
             <div class="referencias">'.$this->setReferencias().'</div>
             <div class="espacio-2"></div>
             <div class="detalle">'.$this->setDetalle().'</div>
@@ -829,7 +829,7 @@ class DTE {
     private function setEmisorPOS(){
         $tipo = $this->dte['Encabezado']['IdDoc']['TipoDTE'];
         $html = '<div class="logo">';
-        $html .= '<img src="'.$this->logo.'">';
+        $html .= '<img style="max-height: 2cm" src="'.$this->logo.'">';
         $html .= '</div>';
         $html .= '<div class="emisor">';
         $html .= '<p><b>'.$this->dte['Encabezado']['Emisor'][($tipo == 39) ? 'RznSocEmisor':'RznSoc'].'</b></p>';

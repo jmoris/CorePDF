@@ -736,12 +736,20 @@ class DTE {
                             <td class="total titulo">I.V.A( '.$tasa.'% )</td>
                             <td class="total valor" colspan="2">$'.$this->formatNumber($iva).'</td>
                         </tr>';
-                    }
-                    $html .= '<tr>
+                        $html .= '<tr>
+                        <td class="total titulo" style="border-bottom: 1px solid black">TOTAL</td>
+                        <td class="total valor"  colspan="2" style="border-bottom: 1px solid black">$'.$this->formatNumber($this->dte['Encabezado']['Totales']['MntTotal']).'</td>
+                    </tr>';
+                    }else{
+                        $html .= '
+                        <tr>
                         <td class="total titulo" style="border-bottom: 1px solid black">TOTAL</td>
                         <td class="total valor"  colspan="2" style="border-bottom: 1px solid black">$'.$this->formatNumber($this->dte['Encabezado']['Totales']['MntTotal']).'</td>
                     </tr>
-                </tbody>
+                    <tr><td></td>td></td></tr>
+                    <tr>td></td><td></td></tr>';
+                    }
+                $html .= '</tbody>
             </table>
         ';
         return $html;
